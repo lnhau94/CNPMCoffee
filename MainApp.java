@@ -21,5 +21,6 @@ public class MainApp extends Application {
         root.getChildren().add(new Label("Code quài không chạy"));
         stage.setScene(sc);
         stage.show();
+        //Đại nè
     }
 }
