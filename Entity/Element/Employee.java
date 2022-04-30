@@ -1,60 +1,60 @@
 package Main.Entity.Element;
 
 public class Employee {
-    private String EmployeeID;
-    private String EmployeeName;
-    private int EmployeePhone;
-    private int EmployeePosition;
-    private int EmployeeWorkType;
-
-    public Employee(String employeeID, String employeeName, int employeePhone, int employeePosition, int employeeWorkType) {
-        EmployeeID = employeeID;
-        EmployeeName = employeeName;
-        EmployeePhone = employeePhone;
-        EmployeePosition = employeePosition;
-        EmployeeWorkType = employeeWorkType;
-    }
+    private String employeeID;
+    private String employeeName;
+    private String employeePhone;
+    private String position;
+    private String type;
 
     public Employee() {
     }
 
+    public Employee(String employeeID, String employeeName, String employeePhone, String position, String type) {
+        this.employeeID = employeeID;
+        this.employeeName = employeeName;
+        this.employeePhone = employeePhone;
+        this.position = position;
+        this.type = type;
+    }
+
     public String getEmployeeID() {
-        return EmployeeID;
+        return employeeID;
     }
 
     public void setEmployeeID(String employeeID) {
-        EmployeeID = employeeID;
+        this.employeeID = employeeID;
     }
 
     public String getEmployeeName() {
-        return EmployeeName;
+        return employeeName;
     }
 
     public void setEmployeeName(String employeeName) {
-        EmployeeName = employeeName;
+        this.employeeName = employeeName;
     }
 
-    public int getEmployeePhone() {
-        return EmployeePhone;
+    public String getEmployeePhone() {
+        return employeePhone;
     }
 
-    public void setEmployeePhone(int employeePhone) {
-        EmployeePhone = employeePhone;
+    public void setEmployeePhone(String employeePhone) {
+        this.employeePhone = employeePhone;
     }
 
-    public int getEmployeePosition() {
-        return EmployeePosition;
+    public String getPosition() {
+        return position;
     }
 
-    public void setEmployeePosition(int employeePosition) {
-        EmployeePosition = employeePosition;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public int getEmployeeWorkType() {
-        return EmployeeWorkType;
+    public String getType() {
+        return type;
     }
 
-    public void setEmployeeWorkType(int employeeWorkType) {
-        EmployeeWorkType = employeeWorkType;
+    public void setType(String type) {
+        this.type = type;
     }
 }
