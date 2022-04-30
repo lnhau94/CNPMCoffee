@@ -2,10 +2,12 @@ package Main.Admin.IngredientsManager.Controller;
 
 import Main.Entity.Element.Employee;
 import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,7 +31,6 @@ public class AdminEmployeeController implements Initializable {
     private ObservableList<Employee> EmployeeList;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        table.setEditable(true);
         EmployeeList = FXCollections.observableArrayList(
                 new Employee("EXP001","Nguyen Huu Dai",9,1,1),
                 new Employee("EXP002","Huyen",8,1,1),

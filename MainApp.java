@@ -1,10 +1,9 @@
 package Main;
 
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -16,11 +15,10 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        VBox root = new VBox();
-        Scene sc = new Scene(root,300,300);
-        root.getChildren().add(new Label("Code quài không chạy"));
-        stage.setScene(sc);
+        Parent root = FXMLLoader.load(getClass().getResource("./Admin/IngredientsManager/View/Admin.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("Application.css").toExternalForm());
+        stage.setScene(scene);
         stage.show();
-        //Đại nè
     }
 }
