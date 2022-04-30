@@ -1,26 +1,21 @@
 package Main.Entity.Element;
-//[EmployeeID] as ('EMP' + right(replicate('0', 4) + cast(ID as varchar(4)), 4)) persisted not null,
-//        EmployeeName nvarchar(30) not null,
-//        EmployeePhone varchar(12) not null,
-//        WorkPositionID varchar(5) not null,
-//        WorkTypeID varchar(5) not null
+
 public class Employee {
     private String EmployeeID;
-    private String EmployName;
-    private int EmployPhone;
-    private int WorkPositionID;
-    private int WorkTypeID;
+    private String EmployeeName;
+    private int EmployeePhone;
+    private int EmployeePosition;
+    private int EmployeeWorkType;
 
-    public Employee(String employeeID, String employName, int employPhone, int workPositionID, int workTypeID) {
+    public Employee(String employeeID, String employeeName, int employeePhone, int employeePosition, int employeeWorkType) {
         EmployeeID = employeeID;
-        EmployName = employName;
-        EmployPhone = employPhone;
-        WorkPositionID = workPositionID;
-        WorkTypeID = workTypeID;
+        EmployeeName = employeeName;
+        EmployeePhone = employeePhone;
+        EmployeePosition = employeePosition;
+        EmployeeWorkType = employeeWorkType;
     }
 
     public Employee() {
-
     }
 
     public String getEmployeeID() {
@@ -31,35 +26,35 @@ public class Employee {
         EmployeeID = employeeID;
     }
 
-    public String getEmployName() {
-        return EmployName;
+    public String getEmployeeName() {
+        return EmployeeName;
     }
 
-    public void setEmployName(String employName) {
-        EmployName = employName;
+    public void setEmployeeName(String employeeName) {
+        EmployeeName = employeeName;
     }
 
-    public int getEmployPhone() {
-        return EmployPhone;
+    public int getEmployeePhone() {
+        return EmployeePhone;
     }
 
-    public void setEmployPhone(int employPhone) {
-        EmployPhone = employPhone;
+    public void setEmployeePhone(int employeePhone) {
+        EmployeePhone = employeePhone;
     }
 
-    public int getWorkPositionID() {
-        return WorkPositionID;
+    public int getEmployeePosition() {
+        return EmployeePosition;
     }
 
-    public void setWorkPositionID(int workPositionID) {
-        WorkPositionID = workPositionID;
+    public void setEmployeePosition(int employeePosition) {
+        EmployeePosition = employeePosition;
     }
 
-    public int getWorkTypeID() {
-        return WorkTypeID;
+    public int getEmployeeWorkType() {
+        return EmployeeWorkType;
     }
 
-    public void setWorkTypeID(int workTypeID) {
-        WorkTypeID = workTypeID;
+    public void setEmployeeWorkType(int employeeWorkType) {
+        EmployeeWorkType = employeeWorkType;
     }
 }
