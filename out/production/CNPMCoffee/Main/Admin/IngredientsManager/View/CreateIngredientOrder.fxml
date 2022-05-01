@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="449.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.CreateIngredientOrder">
+   <children>
+      <Label fx:id="header" contentDisplay="CENTER" layoutY="-1.0" prefHeight="30.0" prefWidth="685.0" text="Choose Ingredients" textAlignment="CENTER" />
+      <TextField layoutX="14.0" layoutY="36.0" prefHeight="26.0" prefWidth="220.0" promptText="Search...">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+      <ImageView fitHeight="18.0" fitWidth="20.0" layoutX="209.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icon/search.png" />
+         </image>
+      </ImageView>
+      <ImageView styleClass="button-icon" fitHeight="37.0" fitWidth="34.0" layoutX="19.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icon/backnow.png" />
+         </image>
+      </ImageView>
+      <TableView layoutX="471.0" layoutY="72.0" prefHeight="321.0" prefWidth="204.0">
+        <columns>
+          <TableColumn prefWidth="129.3699951171875" text="ID and Name" />
+          <TableColumn prefWidth="73.5" text="Quantity" />
+        </columns>
+      </TableView>
+      <TableView layoutX="16.0" layoutY="72.0" prefHeight="321.0" prefWidth="447.0">
+        <columns>
+          <TableColumn prefWidth="44.336814880371094" text="ID" />
+          <TableColumn prefWidth="148.49735641479492" text="Name" />
+            <TableColumn prefWidth="100.00263977050781" text="Import Price" />
+            <TableColumn minWidth="0.0" prefWidth="73.5" text="Category" />
+            <TableColumn prefWidth="87.0" text="Supplier" />
+        </columns>
+      </TableView>
+      <ImageView styleClass="button-icon" fitHeight="37.0" fitWidth="34.0" layoutX="631.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icon/next.png" />
+         </image>
+      </ImageView>
+   </children>
+    <stylesheets>
+        <URL value="@Css/WarehouseApplication.css" />
+    </stylesheets>
+</AnchorPane>

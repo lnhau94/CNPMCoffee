@@ -38,9 +38,9 @@ public class AdminEmployeeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         EmployeeList = FXCollections.observableArrayList(
-                new Employee("EXP001","Nguyen Huu Dai",9,1,1),
-                new Employee("EXP002","Huyen",8,1,1),
-                new Employee("EXP003","Hau",7,1,1)
+                new Employee("EXP001","Nguyen Huu Dai","9","1","1"),
+                new Employee("EXP002","Huyen","8","1","1"),
+                new Employee("EXP003","Hau","7","1","1")
         );
         idColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("EmployeeID"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("EmployeeName"));
