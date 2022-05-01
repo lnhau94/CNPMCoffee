@@ -12,9 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,15 +38,15 @@ public class AdminEmployeeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         EmployeeList = FXCollections.observableArrayList(
-                new Employee("EXP001","Nguyen Huu Dai",9,1,1),
-                new Employee("EXP002","Huyen",8,1,1),
-                new Employee("EXP003","Hau",7,1,1)
+                new Employee("EXP001","Nguyen Huu Dai","8","8","8"),
+                new Employee("EXP002","Huyen","9","9","9"),
+                new Employee("EXP003","Hau","9","9","9")
         );
-        idColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("EmployeeID"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("EmployeeName"));
-        phoneColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("EmployeePhone"));
-        PositionColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("EmployeePosition"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("EmployeeWorkType"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeePhone"));
+        PositionColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("position"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("type"));
         table.setItems(EmployeeList);
     }
     public void changeSceneAddEnvent(ActionEvent e) throws IOException{
@@ -57,6 +57,18 @@ public class AdminEmployeeController implements Initializable {
         Scene scene = new Scene(EmployeeAddViewParent);
         stage.setScene(scene);
     }
+    public void changeSceneEditEvent(ActionEvent e)throws  IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.Employee.Edit.fxml"));
+        Pane EmployeeAddViewParentEdit = loader.load();
+        AdminEmployeeEditController controller= loader.getController();
+        Employee selected = table.getSelectionModel().getSelectedItem();
+        controller.handleEvent(selected);
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
+        dialog.show();
+    }
+
     public void GoBack(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 //        FXMLLoader loader = new FXMLLoader();
