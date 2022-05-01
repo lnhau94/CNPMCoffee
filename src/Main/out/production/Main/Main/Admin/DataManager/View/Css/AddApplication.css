@@ -1,0 +1,29 @@
+.header{
+    -fx-background-color: #5F50F1;
+    -fx-text-fill: #fff;
+    -fx-alignment: center;
+    -fx-font-weight: 800;
+}
+.LabelTilte{
+    -fx-alignment: center;
+    -fx-background-radius: 10;
+    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #cfbaf0, #b9fbc0);
+    -fx-text-fill: #fff;
+    -fx-font-size: 16;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(three-pass-box, #48cae4,5,0,1,0);
+}
+.TextFieldInput{
+    -fx-background-radius: 10;
+}
+.TextFieldInput:hover{
+    -fx-border-radius: 10;;
+    -fx-border-color: green;
+}
+.dialog{
+    -fx-background-color: linear-gradient(to right,yellow, magenta);
+}
+.dialog .button{
+    -fx-background-color: green;
+    -fx-text-fill: #fff;
+}
