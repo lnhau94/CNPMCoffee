@@ -1,19 +1,30 @@
 package Main.Entity.Element;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Product {
     private String productId;
     private String productName;
     private String categoryName;
 
+    private ArrayList<ProductPrice> priceList;
+
     public Product() {
+        priceList = new ArrayList<>();
     }
 
     public Product(String productId, String productName, String categoryName) {
         this.productId = productId;
         this.productName = productName;
         this.categoryName = categoryName;
+    }
+
+    public Product(String productId, String productName, String categoryName, ArrayList<ProductPrice> priceList) {
+        this.productId = productId;
+        this.productName = productName;
+        this.categoryName = categoryName;
+        this.priceList = priceList;
     }
 
     public String getProductId() {
@@ -38,5 +49,13 @@ public class Product {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public ArrayList<ProductPrice> getPriceList() {
+        return priceList;
+    }
+
+    public void setPriceList(ArrayList<ProductPrice> priceList) {
+        this.priceList = priceList;
     }
 }

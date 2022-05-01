@@ -286,3 +286,4 @@ alter table IncomeDetails add
 alter table DailySales add reportId varchar(10),
 	constraint FK_DAILYSALES_SALESREPORT foreign key (reportId)
 		references SaleReports(reportID)
+
