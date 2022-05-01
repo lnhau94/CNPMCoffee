@@ -18,7 +18,7 @@ public class AdminController  {
         Scene scene = new Scene(EmployeeViewParent);
         stage.setScene(scene);
     }
-    public void changSceneProduct(ActionEvent e) throws  IOException{
+    public void changeSceneProduct(ActionEvent e) throws  IOException{
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Admin.Product.fxml"));
@@ -26,7 +26,7 @@ public class AdminController  {
         Scene scene = new Scene(ProductViewParent);
         stage.setScene(scene);
     }
-    public void changSceneCategory(ActionEvent e) throws  IOException{
+    public void changeSceneCategory(ActionEvent e) throws  IOException{
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Admin.Category.fxml"));
@@ -34,7 +34,7 @@ public class AdminController  {
         Scene scene = new Scene(CategoryViewParent);
         stage.setScene(scene);
     }
-    public void changSceneAccount(ActionEvent e) throws  IOException{
+    public void changeSceneAccount(ActionEvent e) throws  IOException{
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Admin.Account.fxml"));

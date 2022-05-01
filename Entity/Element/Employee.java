@@ -18,6 +18,7 @@ public class Employee {
         this.type = type;
     }
 
+
     public String getEmployeeID() {
         return employeeID;
     }
