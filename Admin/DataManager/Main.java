@@ -1,6 +1,5 @@
 package Main.Admin.DataManager;
 
-import Main.Entity.DataAccess.DAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

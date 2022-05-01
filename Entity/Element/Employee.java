@@ -57,6 +57,4 @@ public class Employee {
     public void setType(String type) {
         this.type = type;
     }
-
-
 }

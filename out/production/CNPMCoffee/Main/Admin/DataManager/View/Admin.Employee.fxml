@@ -30,7 +30,7 @@
                </ImageView>
            </graphic>
        </Button>
-       <Button layoutX="434.0" layoutY="418.0" mnemonicParsing="false" onAction="#changeSceneEditEvent" styleClass="button-admin">
+       <Button layoutX="434.0" layoutY="418.0" mnemonicParsing="false" styleClass="button-admin">
            <graphic>
                <ImageView fitHeight="46.0" fitWidth="49.0" layoutX="-27.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                    <image>
