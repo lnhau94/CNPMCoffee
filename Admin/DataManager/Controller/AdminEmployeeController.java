@@ -12,9 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -57,6 +57,18 @@ public class AdminEmployeeController implements Initializable {
         Scene scene = new Scene(EmployeeAddViewParent);
         stage.setScene(scene);
     }
+    public void changeSceneEditEvent(ActionEvent e)throws  IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.Employee.Edit.fxml"));
+        Pane EmployeeAddViewParentEdit = loader.load();
+        AdminEmployeeEditController controller= loader.getController();
+        Employee selected = table.getSelectionModel().getSelectedItem();
+        controller.handleEvent(selected);
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
+        dialog.show();
+    }
+
     public void GoBack(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 //        FXMLLoader loader = new FXMLLoader();
