@@ -18,30 +18,6 @@ public class AdminController  {
         Scene scene = new Scene(EmployeeViewParent);
         stage.setScene(scene);
     }
-    public void changSceneProduct(ActionEvent e) throws  IOException{
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Admin.Product.fxml"));
-        Parent ProductViewParent = loader.load();
-        Scene scene = new Scene(ProductViewParent);
-        stage.setScene(scene);
-    }
-    public void changSceneCategory(ActionEvent e) throws  IOException{
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Admin.Category.fxml"));
-        Parent CategoryViewParent = loader.load();
-        Scene scene = new Scene(CategoryViewParent);
-        stage.setScene(scene);
-    }
-    public void changSceneAccount(ActionEvent e) throws  IOException{
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../View/Admin.Account.fxml"));
-        Parent AccountViewParent = loader.load();
-        Scene scene = new Scene(AccountViewParent);
-        stage.setScene(scene);
-    }
 
 
 }

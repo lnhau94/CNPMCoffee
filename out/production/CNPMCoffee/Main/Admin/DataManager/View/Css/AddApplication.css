@@ -20,10 +20,3 @@
     -fx-border-radius: 10;;
     -fx-border-color: green;
 }
-.dialog{
-    -fx-background-color: linear-gradient(to right,yellow, magenta);
-}
-.dialog .button{
-    -fx-background-color: green;
-    -fx-text-fill: #fff;
-}

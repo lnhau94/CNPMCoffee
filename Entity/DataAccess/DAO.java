@@ -3,8 +3,7 @@ package Main.Entity.DataAccess;
 import java.sql.*;
 
 public class DAO {
-    private String connectURL = "jdbc:sqlserver://;" +
-                                "serverName=localhost;" +
+    private String connectURL = "jdbc:sqlserver://;serverName=localhost;" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     private String DBuser = "admin";
@@ -21,13 +20,6 @@ public class DAO {
             result = stmt.executeQuery(sqlQuery);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
-            try {
-                stmt.close();
-                connect.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
         return result;
     }
