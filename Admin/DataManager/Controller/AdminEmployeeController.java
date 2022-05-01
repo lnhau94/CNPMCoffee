@@ -29,24 +29,24 @@ public class AdminEmployeeController implements Initializable {
     @FXML
     private TableColumn<Employee, String> nameColumn;
     @FXML
-    private TableColumn<Employee, Integer> phoneColumn;
+    private TableColumn<Employee, String> phoneColumn;
     @FXML
-    private TableColumn<Employee, Integer> PositionColumn;
+    private TableColumn<Employee, String> PositionColumn;
     @FXML
-    private TableColumn<Employee, Integer> typeColumn;
+    private TableColumn<Employee, String> typeColumn;
     private ObservableList<Employee> EmployeeList;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         EmployeeList = FXCollections.observableArrayList(
-                new Employee("EXP001","Nguyen Huu Dai","8","8","8"),
-                new Employee("EXP002","Huyen","9","9","9"),
-                new Employee("EXP003","Hau","9","9","9")
+                new Employee("EXP001","Nguyen Huu Dai","9","1","1"),
+                new Employee("EXP002","Huyen","8","1","1"),
+                new Employee("EXP003","Hau","7","1","1")
         );
         idColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeID"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
-        phoneColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeePhone"));
-        PositionColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("position"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("type"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeePhone"));
+        PositionColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("position"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("type"));
         table.setItems(EmployeeList);
     }
     public void changeSceneAddEnvent(ActionEvent e) throws IOException{
