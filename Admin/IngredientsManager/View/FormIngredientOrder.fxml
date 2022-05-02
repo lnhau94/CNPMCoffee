@@ -25,7 +25,7 @@
       <Label layoutX="313.0" layoutY="126.0" text="Supplier" />
       <TextField disable="true" layoutX="423.0" layoutY="58.0" />
       <TextField layoutX="423.0" layoutY="120.0" promptText="Enter supplier'name" />
-      <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="20.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true" styleClass="button-icon">
+      <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="20.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true" styleClass="button-bc">
          <image>
             <Image url="@../../../Icon/backnow.png" />
          </image>

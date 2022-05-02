@@ -23,7 +23,7 @@
             <Image url="@../../../Icon/search.png" />
          </image>
       </ImageView>
-      <ImageView styleClass="button-icon" fitHeight="37.0" fitWidth="34.0" layoutX="19.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView styleClass=".button-bc" fitHeight="37.0" fitWidth="34.0" layoutX="19.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Icon/backnow.png" />
          </image>
@@ -43,7 +43,7 @@
             <TableColumn prefWidth="87.0" text="Supplier" />
         </columns>
       </TableView>
-      <ImageView styleClass="button-icon" fitHeight="37.0" fitWidth="34.0" layoutX="631.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView styleClass="button-bc" fitHeight="37.0" fitWidth="34.0" layoutX="631.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Icon/next.png" />
          </image>

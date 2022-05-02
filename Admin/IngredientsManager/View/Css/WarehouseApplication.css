@@ -8,6 +8,21 @@
     -fx-effect: dropshadow(three-pass-box, #48cae4,3,1,1,0);
     -fx-font-family: Arial;
 }
+
+.button-admin{
+    -fx-background-color: transparent;
+
+}
+.button-admin:hover{
+    -fx-effect: dropshadow(three-pass-box, #5F50F1,10,0,0,0);
+}
+.button-bc{
+    -fx-background-color: transparent;
+}
+.button-bc:hover{
+    -fx-opacity: 0.8;
+}
+
 .table-view{
     -fx-effect: dropshadow(three-pass-box, #111,10,0,0,0);
 }
@@ -19,21 +34,4 @@
 .table-view .column-header .label{
     -fx-text-fill: #fff;
     -fx-text-alignment: center;
-}
-
-.button-icon{
-    -fx-background-color: transparent;
-    -fx-text-fill: #fff;
-    -fx-font-size: 16px;
-    -fx-effect: dropshadow(three-pass-box, #48cae4,3,1,1,0);
-}
-.button-icon:hover{
-    -fx-opacity: 0.8;
-}
-.button-bc{
-    -fx-background-color: transparent;
-}
-.button-bc:hover,
-.label-icon:hover{
-    -fx-opacity: 0.8;
 }
