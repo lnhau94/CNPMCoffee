@@ -4,6 +4,8 @@ import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Order;
 import Main.Entity.Element.OrderDetail;
 import Main.Entity.Element.Product;
+import Main.Sales.Sales.View.OrderFactory;
+import javafx.stage.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,25 +59,14 @@ public class SalesApplicationModel {
         currentOrders = new Order();
         currentChoices = new ArrayList<>();
 
-        OrderDetail test = new OrderDetail();
-        test.setProductChoice(getProductList().get(1));
-        test.setSize("H");
-        test.setQuantity(1);
-        getCurrentChoices().add(test);
+    }
 
-        test = new OrderDetail();
-        test.setProductChoice(getProductList().get(1));
-        test.setPrice(10000);
-        test.setQuantity(1);
-        test.setSize("M");
-        getCurrentChoices().add(test);
+    public void updateChoice(int i,OrderDetail ord){
+        currentChoices.set(i, ord);
+    }
 
-        test = new OrderDetail();
-        test.setProductChoice(getProductList().get(1));
-        test.setPrice(10000);
-        test.setQuantity(1);
-        test.setSize("M");
-        getCurrentChoices().add(test);
+    public void addItem(OrderDetail od){
+        this.currentChoices.add(od);
     }
 
     public void save(){

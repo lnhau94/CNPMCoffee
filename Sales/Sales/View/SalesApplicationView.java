@@ -5,6 +5,7 @@ import Main.Entity.Element.Product;
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,8 +18,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -41,6 +44,7 @@ public class SalesApplicationView{
     public SalesApplicationView(SalesApplicationControl controller){
         this.controller = controller;
         initGUI();
+
     }
 
     private void initGUI(){
@@ -78,11 +82,7 @@ public class SalesApplicationView{
         for (Product p : this.controller.getModel().getProductList()) {
             MenuItem tmp = new MenuItem(p);
             tmp.setOnMouseClicked(mouseEvent -> {
-                OrderDetail choice = OrderFactory.choiceItem(p, mainScene.getWindow());
-                if(choice.getQuantity()>0){
-                    controller.getModel().getCurrentChoices().add(choice);
-                    updateOrder();
-                }
+                controller.addNewItem(p);
             });
             menu.add(tmp,i,j);
             i++;
@@ -115,8 +115,8 @@ public class SalesApplicationView{
 
         orderFootter =  new FlowPane();
         orderPnl.setTop(orderTittle);
-        orderPnl.setCenter(orderBody);
         orderPnl.setBottom(orderFootter);
+        orderPnl.setCenter(orderBody);
         root.setRight(orderPnl);
     }
 
@@ -136,9 +136,20 @@ public class SalesApplicationView{
         qtyColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        indexColumn.setPrefWidth(30);
+        nameColumn.setPrefWidth(110);
+        sizeColumn.setPrefWidth(40);
+        qtyColumn.setPrefWidth(80);
+        priceColumn.setPrefWidth(100);
+
+        orderBody.setOnMouseClicked(mouseEvent -> {
+            if(orderBody.getSelectionModel().getSelectedIndex()>=0){
+                this.controller.updateItem(orderBody.getSelectionModel().getSelectedIndex());
+            }
+        });
+
 
         orderBody.getColumns().addAll(indexColumn,nameColumn,sizeColumn,qtyColumn,priceColumn);
-
         updateOrder();
 
     }

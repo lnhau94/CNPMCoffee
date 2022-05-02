@@ -1,6 +1,7 @@
 package Main;
 
 import Main.Sales.Sales.Control.SalesApplicationControl;
+import Main.Sales.Sales.View.SalesApplicationView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
