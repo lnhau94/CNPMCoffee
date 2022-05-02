@@ -1,6 +1,7 @@
 package Main.Sales.Sales.Control;
 
 import Main.Entity.DataAccess.DAO;
+import Main.Entity.Element.OrderDetail;
 import Main.Sales.Sales.Model.SalesApplicationModel;
 import Main.Sales.Sales.View.SalesApplicationView;
 import javafx.fxml.FXML;
@@ -32,6 +33,12 @@ public class SalesApplicationControl {
 
     public void pay(){
         System.out.println("Paid");
+        OrderDetail test = new OrderDetail();
+        test.setProductChoice(this.getModel().getProductList().get(1));
+        test.setSize("H");
+        test.setQuantity(1);
+        this.getModel().getCurrentChoices().add(test);
+        this.view.updateOrder();
     }
 
     public void setView(SalesApplicationView view) {
