@@ -1,0 +1,42 @@
+.label{
+    -fx-border-color: rgba(150, 79, 26, 0.96);
+    -fx-text-fill: rgba(86, 37, 3, 0.96);
+    -fx-border-radius: 5;
+    -fx-font-weight: 600;
+    -fx-font-size: 14;
+    -fx-pref-width: 140;
+    -fx-padding: 5,0,0,0;
+    -fx-effect: dropshadow(three-pass-box, rgba(222, 189, 165, 0.96),5,0,2,0);
+}
+.combo-box{
+    -fx-background-color: rgba(245, 142, 69, 0.96);
+    -fx-padding: 4,0,0,0;
+}
+#cont{
+    -fx-background-color: rgba(229, 164, 117, 0.2);
+    -fx-pref-width: 150;
+}
+.root{
+    -fx-pref-width: 300;
+}
+
+.button{
+    -fx-background-color: White;
+    -fx-text-fill: rgba(150, 79, 26, 0.96);
+    -fx-padding: 2,0,0,0;
+    -fx-border-radius: 10;
+    -fx-font-weight: 700;
+    -fx-font-size: 14;
+}
+
+#control{
+    -fx-alignment: center;
+    -fx-background-color: rgba(150, 79, 26, 0.96);
+}
+.text-field{
+    -fx-background-color: White;
+    -fx-text-fill: rgba(150, 79, 26, 0.96);
+    -fx-padding: 3,0,0,0;
+    -fx-border-radius: 10;
+    -fx-font-weight: 600;
+}
