@@ -49,13 +49,13 @@ public class AdminEmployeeController implements Initializable {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("type"));
         table.setItems(EmployeeList);
     }
-    public void changeSceneAddEnvent(ActionEvent e) throws IOException{
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(this.getClass().getResource("../CNPMCoffee/Admin/IngredientsManager/View/Admin.Employee.fxml"));
-        Parent EmployeeAddViewParent = FXMLLoader.load(getClass().getResource("../View/Admin.Employee.Add.fxml"));
-        Scene scene = new Scene(EmployeeAddViewParent);
-        stage.setScene(scene);
+    public void changeSceneAddEvent(ActionEvent e) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.Employee.Add.fxml"));
+        Pane EmployeeAddViewParent = loader.load();
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane) EmployeeAddViewParent);
+        dialog.show();
     }
     public void changeSceneEditEvent(ActionEvent e)throws  IOException{
         FXMLLoader loader = new FXMLLoader();
@@ -68,7 +68,15 @@ public class AdminEmployeeController implements Initializable {
         dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
         dialog.show();
     }
-
+    public void changeSceneDeleteEvent(ActionEvent e)throws  IOException{
+        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
+        Pane CategoryDeleteParentView = loader.load();
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane)  CategoryDeleteParentView);
+        dialog.show();
+    }
     public void GoBack(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 //        FXMLLoader loader = new FXMLLoader();
