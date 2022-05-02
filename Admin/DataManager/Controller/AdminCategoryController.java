@@ -16,13 +16,31 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AdminCategoryController {
-    public void changeSceneEditEvent(ActionEvent e)throws  IOException{
+    public void changeSceneAddEvent(ActionEvent e)throws  IOException{
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("../View/Admin.Category.Add.fxml"));
         Pane CategoryAddParentView = loader.load();
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane((DialogPane)  CategoryAddParentView);
+        dialog.show();
+    }
+    public void changeSceneEditEvent(ActionEvent e)throws  IOException{
+        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.Category.Edit.fxml"));
+        Pane CategoryEditParentView = loader.load();
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane)  CategoryEditParentView);
+        dialog.show();
+    }
+    public void changeSceneDeleteEvent(ActionEvent e)throws  IOException{
+        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
+        Pane CategoryDeleteParentView = loader.load();
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane)  CategoryDeleteParentView);
         dialog.show();
     }
     public void GoBack(ActionEvent e) throws IOException {

@@ -7,7 +7,7 @@
 .LabelTilte{
     -fx-alignment: center;
     -fx-background-radius: 10;
-    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #cfbaf0, #b9fbc0);
+    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #ff006e, #4a4e69);
     -fx-text-fill: #fff;
     -fx-font-size: 16;
     -fx-font-weight: 700;
@@ -20,10 +20,15 @@
     -fx-border-radius: 10;;
     -fx-border-color: green;
 }
-.dialog{
-    -fx-background-color: linear-gradient(to right,yellow, magenta);
-}
+
 .dialog .button{
-    -fx-background-color: green;
+    -fx-alignment: center;
+    -fx-background-radius: 10px;
+    -fx-background-color: #fca311;
     -fx-text-fill: #fff;
+    -fx-font-weight: 600;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+}
+.dialog .button:hover{
+    -fx-background-color: tomato;
 }
