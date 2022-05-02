@@ -1,25 +1,44 @@
 package Main.Entity.Element;
 
 public class OrderDetail {
-    private String productId;
+    private Product productChoice;
     private String size;
     private int quantity;
+
+    private int price;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(String productId, String size, int quantity) {
-        this.productId = productId;
+    public OrderDetail(Product productChoice, String size, int quantity) {
+        this.productChoice = productChoice;
         this.size = size;
         this.quantity = quantity;
+        this.price = price;
     }
 
-    public String getProductId() {
-        return productId;
+
+    public OrderDetail(Product productChoice, String size, int quantity, int price) {
+        this.productChoice = productChoice;
+        this.size = size;
+        this.quantity = quantity;
+        this.price = price;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public Product getProductChoice() {
+        return productChoice;
+    }
+
+    public void setProductChoice(Product productChoice) {
+        this.productChoice = productChoice;
     }
 
     public String getSize() {
