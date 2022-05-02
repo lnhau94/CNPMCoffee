@@ -2,7 +2,9 @@ package Main.Sales.Sales.Control;
 
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.OrderDetail;
+import Main.Entity.Element.Product;
 import Main.Sales.Sales.Model.SalesApplicationModel;
+import Main.Sales.Sales.View.OrderFactory;
 import Main.Sales.Sales.View.SalesApplicationView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +41,22 @@ public class SalesApplicationControl {
         test.setSize("H");
         test.setQuantity(1);
         this.getModel().getCurrentChoices().add(test);
+        this.view.updateOrder();
+    }
+
+    public void addNewItem(Product p){
+        OrderDetail choice = OrderFactory.choiceItem(p, this.getView().getWindow());
+        if(choice.getQuantity()>0){
+            this.model.addItem(choice);
+            this.view.updateOrder();
+        }
+    }
+
+    public void updateItem(int i){
+        this.model.updateChoice(i,
+                OrderFactory.updateChoiceItem(
+                        this.model.getCurrentChoices().get(i),
+                        this.getView().getWindow()));
         this.view.updateOrder();
     }
 

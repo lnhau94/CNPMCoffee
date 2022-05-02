@@ -8,5 +8,5 @@
 /dataSources.local.xml
 **/out/
 **/.idea/
-**/out/
-**/.idea/
+/out/
+.DS_Store
