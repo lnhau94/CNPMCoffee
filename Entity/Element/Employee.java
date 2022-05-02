@@ -18,7 +18,6 @@ public class Employee {
         this.type = type;
     }
 
-
     public String getEmployeeID() {
         return employeeID;
     }
@@ -58,4 +57,6 @@ public class Employee {
     public void setType(String type) {
         this.type = type;
     }
+
+
 }
