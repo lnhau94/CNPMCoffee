@@ -6,17 +6,7 @@ import Main.Entity.Element.Product;
 import Main.Sales.Sales.Model.SalesApplicationModel;
 import Main.Sales.Sales.View.OrderFactory;
 import Main.Sales.Sales.View.SalesApplicationView;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Window;
-
-import java.io.File;
-import java.io.IOException;
 
 public class SalesApplicationControl {
 
@@ -35,7 +25,7 @@ public class SalesApplicationControl {
     }
 
     public void cash(){
-        this.model.createNewOrder();
+        this.model.payCurrentOrder();
         this.view.updateOrder();
     }
 

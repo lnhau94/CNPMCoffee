@@ -193,6 +193,7 @@ public class SalesApplicationView{
 
     public void updateOrder(){
         orderBody.setItems(FXCollections.observableList(this.controller.getModel().getCurrentChoices()));
+        orderBody.refresh();
     }
 
     private void createOrderTittle(){

@@ -4,8 +4,6 @@ import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Order;
 import Main.Entity.Element.OrderDetail;
 import Main.Entity.Element.Product;
-import Main.Sales.Sales.View.OrderFactory;
-import javafx.stage.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +64,24 @@ public class SalesApplicationModel {
     }
 
     public void addItem(OrderDetail od){
-        this.currentChoices.add(od);
+        boolean flag = false;
+        for(OrderDetail orderDetail : currentChoices){
+            if(orderDetail.getProductChoice().getProductId().equals(od.getProductChoice().getProductId())
+                    && orderDetail.getSize().equals(od.getSize())){
+                orderDetail.setQuantity(orderDetail.getQuantity()+od.getQuantity());
+                orderDetail.setPrice(orderDetail.getPrice()+od.getPrice());
+                flag=true;
+            }
+        }
+
+        if(!flag) {
+            this.currentChoices.add(od);
+        }
     }
 
-    public void save(){
-
+    public void payCurrentOrder(){
+        System.out.println("Save");
+        createNewOrder();
     }
 
 }
