@@ -1,12 +1,14 @@
 .button{
+    -fx-alignment: center;
     -fx-background-color: #5F50F1;
     -fx-text-fill: #fff;
     -fx-background-radius: 10;
     -fx-font-size: 14;
     -fx-font-weight: 700;
-    -fx-effect: dropshadow(three-pass-box, #48cae4,5,0,1,0);
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
 
 }
+
 #menu-drink-text{
     -fx-alignment: center;
     -fx-background-radius: 10;
@@ -29,6 +31,17 @@
 .label{
     -fx-text-fill: #fff;
     -fx-font-weight: 800;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
 }
 
+.text-field{
+    -fx-alignment: center;
+    -fx-background-color: #FFF;
+    -fx-text-fill: #5F50F1;
+    -fx-background-radius: 10;
+    -fx-pref-width: 300;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+}
 

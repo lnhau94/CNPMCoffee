@@ -5,7 +5,6 @@ import Main.Entity.Element.Product;
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,15 +14,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.awt.*;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class SalesApplicationView{
 
@@ -34,10 +35,17 @@ public class SalesApplicationView{
     TableView<OrderDetail> orderBody;
     FlowPane orderTittle;
     FlowPane orderFootter;
+
+    TextField search;
     private Scene mainScene;
     private ArrayList<Button> buttons;
+    ScrollPane srcViewMenu;
 
-    private String[] cates = {"Trà sữa", "Cà phê"};
+    private String[] cates = {"ALL","Trà Xanh","Trà sữa", "Cà phê"};
+
+    private String filerCondition ="ALL";
+
+    private ArrayList<MenuItem> itemList;
 
     private SalesApplicationControl controller;
 
@@ -52,17 +60,28 @@ public class SalesApplicationView{
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainScene = new Scene(root,d.getWidth(),d.getHeight()-100);
         mainScene.getStylesheets().add(getClass().getResource("SalesStyle.css").toExternalForm());
-        createMenu();
+
         createControlPnl();
         createSearchBar();
+        prepareMenuGUI();
+        prepareMenuItem();
         createFilterButtons();
         createOrderPnl();
     }
 
     private void createSearchBar(){
-        TextField search = new TextField();
+        search = new TextField();
         search.setPromptText("Search Drink!");
+        search.textProperty().addListener(observable -> menuFilter());
         controlPnl.getChildren().add(search);
+        try {
+            ImageView searchIcon = new ImageView(new Image(new FileInputStream("Icon/search.png")));
+            searchIcon.setFitWidth(20);
+            searchIcon.setFitHeight(20);
+            controlPnl.getChildren().add(searchIcon);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void createControlPnl(){
@@ -73,33 +92,20 @@ public class SalesApplicationView{
         root.setTop(controlPnl);
     }
 
-    private void createMenu(){
-        int i = 0;
-        int j = 0;
-        menu = new GridPane();
-        menu.setHgap(10);
-        menu.setVgap(10);
+    private void prepareMenuItem(){
+        itemList = new ArrayList<>();
         for (Product p : this.controller.getModel().getProductList()) {
             MenuItem tmp = new MenuItem(p);
             tmp.setOnMouseClicked(mouseEvent -> {
                 controller.addNewItem(p);
             });
-            menu.add(tmp,i,j);
-            i++;
-            if(i==5){
-                j++;
-                i=0;
-            }
+            itemList.add(tmp);
         }
-        try {
-            Image img = new Image(new FileInputStream("Icon/menubackground.jpg"));
-            menu.setBackground(new Background(new BackgroundImage(
-                                img,null,null,null,
-                        new BackgroundSize(menu.getWidth(),menu.getHeight(),true,true,true,true))));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        ScrollPane srcViewMenu= new ScrollPane(menu);
+        menuFilter();
+    }
+
+    private void prepareMenuGUI(){
+        srcViewMenu= new ScrollPane();
         srcViewMenu.setFitToHeight(true);
         srcViewMenu.setFitToWidth(true);
         srcViewMenu.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -107,17 +113,48 @@ public class SalesApplicationView{
         root.setCenter(srcViewMenu);
     }
 
+    private void createMenuView(){
+        menu = new GridPane();
+        menu.setHgap(10);
+        menu.setVgap(10);
+        for (int i=0;i<5;i++){
+            ColumnConstraints column = new ColumnConstraints();
+            column.setPercentWidth(20);
+            column.setPrefWidth(300);
+            column.setMinWidth(150);
+            column.setHgrow(Priority.ALWAYS);
+            menu.getColumnConstraints().add(column);
+        }
+        try {
+            Image img = new Image(new FileInputStream("Icon/menubackground.jpg"));
+            menu.setBackground(new Background(new BackgroundImage(
+                    img,null,null,null,
+                    new BackgroundSize(srcViewMenu.getWidth(),srcViewMenu.getHeight(),false,true,true,true))));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        srcViewMenu.setContent(menu);
+    }
+
     private void createOrderPnl(){
         orderPnl = new BorderPane();
         orderPnl.setPrefSize(350,300);
         createOrderTittle();
         createOrderBody();
+        createOrderFooter();
 
-        orderFootter =  new FlowPane();
         orderPnl.setTop(orderTittle);
         orderPnl.setBottom(orderFootter);
         orderPnl.setCenter(orderBody);
         root.setRight(orderPnl);
+    }
+
+    private void createOrderFooter(){
+        orderFootter =  new FlowPane();
+        orderFootter.setPrefSize(100,100);
+        Button cashbtn = new Button("Cash!!");
+        cashbtn.setOnAction(actionEvent -> controller.cash());
+        orderFootter.getChildren().add(cashbtn);
     }
 
     private void createOrderBody(){
@@ -184,12 +221,37 @@ public class SalesApplicationView{
         buttons = new ArrayList<>();
         for(int i=0;i< cates.length;i++) {
             buttons.add( new Button(cates[i]));
-            buttons.get(i).setOnAction(actionEvent -> controller.pay());
+            buttons.get(i).setOnAction(actionEvent -> {
+                filerCondition = ((Button)actionEvent.getSource()).getText();
+                menuFilter();
+            });
             controlPnl.getChildren().add(buttons.get(i));
         }
     }
     public Scene getScreen(){
         return this.mainScene;
+    }
+
+    private void menuFilter(){
+        createMenuView();
+        String searchString = search.getText().toLowerCase(Locale.ROOT);
+        List<MenuItem> currentList;
+        if(filerCondition.equals("ALL")){
+            currentList = itemList.stream().filter(menuItem ->
+                            menuItem.getProduct().getProductName().toLowerCase(Locale.ROOT).contains(searchString))
+                            .collect(Collectors.toList());
+        }
+        else {
+            currentList = itemList.stream().filter(menuItem ->
+                            filerCondition.equals(menuItem.getProduct().getCategoryName())
+                                    && menuItem.getProduct().getProductName().toLowerCase(Locale.ROOT).contains(searchString))
+                            .collect(Collectors.toList());
+
+        }
+        for (int i = 0; i < currentList.size(); i++) {
+            menu.add(currentList.get(i), (int) i % 5, (int) i / 5);
+        }
+
     }
 
 }

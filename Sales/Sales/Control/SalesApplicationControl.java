@@ -34,13 +34,8 @@ public class SalesApplicationControl {
         return this.view.getScreen();
     }
 
-    public void pay(){
-        System.out.println("Paid");
-        OrderDetail test = new OrderDetail();
-        test.setProductChoice(this.getModel().getProductList().get(1));
-        test.setSize("H");
-        test.setQuantity(1);
-        this.getModel().getCurrentChoices().add(test);
+    public void cash(){
+        this.model.createNewOrder();
         this.view.updateOrder();
     }
 
