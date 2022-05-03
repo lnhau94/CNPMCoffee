@@ -40,7 +40,7 @@ public class MenuItem extends VBox {
                     "    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, rgba(112,51,8,0.2), rgba(194,91,32,0.5));"+
                     "    -fx-font-size: 16;" +
                     "    -fx-font-weight: 700;" +
-                    "    -fx-effect: dropshadow(three-pass-box, rgba(229,164,117,0.96),5,0,1,0);";
+                    "    -fx-effect: dropshadow(three-pass-box, #ffffff,5,0,4,2);";
 
     public MenuItem (Product product){
         this.product = product;
@@ -72,5 +72,13 @@ public class MenuItem extends VBox {
         priceLbl.setStyle(label2CSS);
         nameLbl.setStyle(labelCSS);
         this.getChildren().add(priceLbl);
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
