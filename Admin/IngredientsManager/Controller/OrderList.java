@@ -1,4 +1,4 @@
 package Main.Admin.IngredientsManager.Controller;
 
-public class IngredientOrder {
+public class OrderList extends MasterController{
 }

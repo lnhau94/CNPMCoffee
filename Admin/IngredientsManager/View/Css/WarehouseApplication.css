@@ -13,15 +13,11 @@
     -fx-background-color: transparent;
 
 }
-.button-admin:hover{
+.button-admin:hover,
+.btn-confirm:hover{
     -fx-effect: dropshadow(three-pass-box, #5F50F1,10,0,0,0);
 }
-.button-bc{
-    -fx-background-color: transparent;
-}
-.button-bc:hover{
-    -fx-opacity: 0.8;
-}
+
 .table-view{
     -fx-effect: dropshadow(three-pass-box, #111,10,0,0,0);
 }
@@ -35,11 +31,16 @@
     -fx-text-alignment: center;
 }
 
-.title-form {
+.title-form,
+ .btn-confirm {
     -fx-font-weight: 900;
     -fx-background-color: linear-gradient(to right, #7474bf, #348ac7);;
     -fx-padding: 4px 8px;
     -fx-text-fill: #fff;
     -fx-border: solid;
     -fx-background-radius: 6px;
+}
+
+.btn-confirm {
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
 }
