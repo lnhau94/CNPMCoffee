@@ -47,19 +47,41 @@ public class SalesApplicationModel {
     }
 
     public SalesApplicationModel(){
-        //this.productList = DAO.getAllProduct();
-        this.productList =  new ArrayList<>();
+
         dao = new DAO();
+        this.productList = dao.getAllProduct();
         createNewOrder();
     }
 
     public void createNewOrder(){
         currentOrders = new Order();
         currentChoices = new ArrayList<>();
+
     }
 
-    public void save(){
+    public void updateChoice(int i,OrderDetail ord){
+        currentChoices.set(i, ord);
+    }
 
+    public void addItem(OrderDetail od){
+        boolean flag = false;
+        for(OrderDetail orderDetail : currentChoices){
+            if(orderDetail.getProductChoice().getProductId().equals(od.getProductChoice().getProductId())
+                    && orderDetail.getSize().equals(od.getSize())){
+                orderDetail.setQuantity(orderDetail.getQuantity()+od.getQuantity());
+                orderDetail.setPrice(orderDetail.getPrice()+od.getPrice());
+                flag=true;
+            }
+        }
+
+        if(!flag) {
+            this.currentChoices.add(od);
+        }
+    }
+
+    public void payCurrentOrder(){
+        System.out.println("Save");
+        createNewOrder();
     }
 
 }

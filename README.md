@@ -9,7 +9,7 @@
   * Quản lý các thông tin liên quan đến cửa hàng (thông tin nhân viên, sản phẩm, ...)
 
 ### Các ngôn ngữ được sử dụng
-* Java 
+* Java
 * SQL (Sql Server)
 
 ### Các thư viện cần thiết
