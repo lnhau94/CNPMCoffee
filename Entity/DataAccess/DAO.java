@@ -12,8 +12,8 @@ public class DAO {
                                 "serverName=localhost;" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
-    private String DBuser = "admin";
-    private String DBpass = "123456";
+    private String DBuser = "sa";
+    private String DBpass = "reallyStrPwd123";
 
     private Connection connect;
     private Statement stmt;
