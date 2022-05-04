@@ -34,3 +34,12 @@
 .button-bc:hover{
     -fx-opacity: 0.8;
 }
+.button-icon{
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, #48cae4,3,1,1,0);
+}
+.button-icon:hover{
+    -fx-opacity: 0.8;
+}
