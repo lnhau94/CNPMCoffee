@@ -12,7 +12,7 @@ public class DAO {
                                 "serverName=localhost;" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
-    private String DBuser = "admin";
+    private String DBuser = "sa";
     private String DBpass = "123456";
 
     private Connection connect;
@@ -26,13 +26,6 @@ public class DAO {
             result = stmt.executeQuery(sqlQuery);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
-            try {
-                stmt.close();
-                connect.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
         return result;
     }

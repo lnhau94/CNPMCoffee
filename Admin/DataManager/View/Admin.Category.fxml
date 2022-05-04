@@ -13,8 +13,8 @@
    <children>
       <TableView fx:id="table" layoutX="157.0" layoutY="55.0" prefHeight="323.0" prefWidth="304.0" styleClass="table-view">
          <columns>
-            <TableColumn fx:id="idColumn" prefWidth="73.0" styleClass="column-header-background" text="ID" />
-            <TableColumn fx:id="nameColumn" prefWidth="241.0" styleClass="column-header-background" text="Name" />
+            <TableColumn fx:id="CategoryIdColumn" prefWidth="73.0" styleClass="column-header-background" text="ID" />
+            <TableColumn fx:id="CategoryNameColumn" prefWidth="241.0" styleClass="column-header-background" text="Name" />
          </columns>
          <stylesheets>
             <URL value="@Css/AdminApplication.css" />
