@@ -14,9 +14,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,56 +24,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminCategoryController implements Initializable {
-    public void changeSceneAddEvent(ActionEvent e) throws IOException {
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Category.Add.fxml"));
-        Pane CategoryAddParentView = loader.load();
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane) CategoryAddParentView);
-        dialog.show();
-    }
-
-    public void changeSceneEditEvent(ActionEvent e) throws IOException {
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Category.Edit.fxml"));
-        Pane CategoryEditParentView = loader.load();
-        AdminCategoryEditController controller = loader.getController();
-        Category selected = table.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-            System.out.println("Hello mấy cưng");
-        } else {
-            controller.handleEvent(selected);
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setDialogPane((DialogPane) CategoryEditParentView);
-            dialog.show();
-        }
-
-    }
-
-    public void changeSceneDeleteEvent(ActionEvent e) throws IOException {
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
-        Pane CategoryDeleteParentView = loader.load();
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane) CategoryDeleteParentView);
-        dialog.show();
-    }
-
-    public void GoBack(ActionEvent e) throws IOException {
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(this.getClass().getResource("../CNPMCoffee/Admin/IngredientsManager/View/Admin.Employee.fxml"));
-        Parent AdminViewParent = FXMLLoader.load(getClass().getResource("../View/Admin.fxml"));
-        Scene scene = new Scene(AdminViewParent);
-        stage.setScene(scene);
-    }
-
     @FXML
     TableView<Category> table;
     @FXML
@@ -83,9 +37,9 @@ public class AdminCategoryController implements Initializable {
     @FXML
     private TextField textNameCategory;
     ObservableList<Category> CategoryList;
-    public List<Category> list = new ArrayList<>();
-
+    public static List<Category> list = new ArrayList<>();
     public void getData() throws SQLException {
+        list.clear();
         DAO dao = new DAO();
         ResultSet resultSet = dao.executeQuery("SELECT * FROM Category");
         while (resultSet.next()) {
@@ -93,7 +47,6 @@ public class AdminCategoryController implements Initializable {
             list.add(category);
         }
     }
-
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             this.getData();
@@ -106,16 +59,89 @@ public class AdminCategoryController implements Initializable {
         table.setItems(CategoryList);
     }
 
-    public static void AddCategory() {
+    public void changeSceneAddEvent(ActionEvent e) throws IOException, SQLException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.Category.Add.fxml"));
+        Pane CategoryAddParentView = loader.load();
+        Dialog<ButtonType> dialogCategoryAdd = new Dialog<>();;
+        dialogCategoryAdd.setDialogPane((DialogPane) CategoryAddParentView);
+        Optional<ButtonType> ClickedButton = dialogCategoryAdd.showAndWait();
+        AdminCategoryAddController AddController = loader.getController();
+        if(ClickedButton.get()==ButtonType.APPLY){
+            AddController.AddCategory();
+            table.setItems(FXCollections.observableArrayList(list));
+            table.refresh();
+        }
+    }
+
+    public void changeSceneEditEvent(ActionEvent e) throws IOException, SQLException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Category selected = table.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader();
+        if (selected == null) {
+            loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
+            Pane CategoryEditParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) CategoryEditParentView);
+            dialog.show();
+        } else {
+            loader.setLocation(this.getClass().getResource("../View/Admin.Category.Edit.fxml"));
+            Pane CategoryEditParentView = loader.load();
+            AdminCategoryEditController controller = loader.getController();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) CategoryEditParentView);
+            Optional<ButtonType> clickButton = dialog.showAndWait();
+            if(clickButton.get() ==  ButtonType.APPLY){
+                controller.EidtCategory(selected);
+                list.add(selected);
+                table.setItems(FXCollections.observableArrayList(list));
+                table.refresh();
+            }
+
+        }
 
     }
-    public void EditCategory(){
+
+    public void changeSceneDeleteEvent(ActionEvent e) throws IOException, SQLException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        Category selected = table.getSelectionModel().getSelectedItem();
+        if(selected ==null){
+            loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
+            Pane CategoryEditParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) CategoryEditParentView);
+            dialog.showAndWait();
+        }else{
+            loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
+            Pane CategoryDeleteParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) CategoryDeleteParentView);
+            Optional<ButtonType> ClickedButton = dialog.showAndWait();
+            AdminDeleteController adminDeleteController = loader.getController();
+            if(ClickedButton.get()==ButtonType.YES){
+                adminDeleteController.DeleteCategory(selected);
+                list.remove(selected);
+                table.setItems(FXCollections.observableArrayList(list));
+                table.refresh();
+            }
+
+        }
 
     }
-    public  void DeleteCategory(){
 
+    public void GoBack(ActionEvent e) throws IOException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(this.getClass().getResource("../CNPMCoffee/Admin/IngredientsManager/View/Admin.Employee.fxml"));
+        Parent AdminViewParent = FXMLLoader.load(getClass().getResource("../View/Admin.fxml"));
+        Scene scene = new Scene(AdminViewParent);
+        stage.setScene(scene);
     }
-    public  void SaveData(){
 
-    }
+
+
+
+
 }

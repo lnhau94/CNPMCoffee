@@ -13,7 +13,7 @@
         <children>
             <Label prefHeight="43.0" prefWidth="420.0" styleClass="header" text="Edit" />
             <Label layoutX="38.0" layoutY="113.0" prefHeight="39.0" prefWidth="129.0" styleClass="LabelTilte" text="Category Name" />
-            <TextField fx:id="textName" layoutX="189.0" layoutY="111.0" prefHeight="44.0" prefWidth="202.0" promptText="Enter CategoryName" styleClass="TextFieldInput" />
+            <TextField fx:id="textNameCategory" layoutX="189.0" layoutY="111.0" prefHeight="44.0" prefWidth="202.0" promptText="Enter CategoryName" styleClass="TextFieldInput" />
         </children>
     </AnchorPane>
 </content>
