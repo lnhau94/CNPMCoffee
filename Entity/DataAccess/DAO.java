@@ -29,7 +29,11 @@ public class DAO {
         }
         return result;
     }
-
+    public void execute(String sqlQuery) throws SQLException {
+        connect = DriverManager.getConnection(connectURL,DBuser,DBpass);
+        stmt= connect.createStatement();
+        stmt.execute(sqlQuery);
+    }
     public boolean insert(String sqlQuery){
         boolean flag = false;
         try {
