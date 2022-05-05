@@ -41,6 +41,14 @@
     -fx-background-radius: 6px;
 }
 
+.title-form{
+    -fx-alignment: center;
+}
+
 .btn-confirm {
     -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+}
+
+.txt-field-input {
+    -fx-background-radius: 12px;
 }
