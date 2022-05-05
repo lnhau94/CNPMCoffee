@@ -1,0 +1,23 @@
+#header{
+   -fx-background-color: #5F50F1;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: Bold;
+    -fx-font-size: 18px;
+}
+.TextField {
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 20;
+}
+.button-menu{
+    -fx-background-color: ;
+}
+.button-menu:hover{
+    -fx-effect: dropshadow(three-pass-box, #5F50F1,10,0,0,0);
+}
+.background{
+    -fx-background-color: #CCCCCC;
+}
+.title{
+    -fx-background-color: #CCFFFF;
+}
