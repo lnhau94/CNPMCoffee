@@ -12,7 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="537.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.IngredientOrder">
+<AnchorPane prefHeight="537.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.IngredientOrderController">
    <children>
       <Label fx:id="header" contentDisplay="CENTER" prefHeight="30.0" prefWidth="832.0" text="Warehouse Management" textAlignment="CENTER" />
       <TextField layoutX="14.0" layoutY="44.0" prefHeight="26.0" prefWidth="274.0" promptText="Search...">
@@ -33,7 +33,7 @@
          </opaqueInsets>
       </TableView>
       <Button layoutX="14.0" layoutY="398.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="button-admin" />
-      <Button layoutX="352.0" layoutY="41.0" mnemonicParsing="false" styleClass="button-admin" text="Import Confirmation">
+      <Button fx:id="incomeCfmBtn" layoutX="352.0" layoutY="41.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="Import Confirmation">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                <image>
@@ -42,7 +42,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="528.0" layoutY="40.0" mnemonicParsing="false" styleClass="button-admin" text="Ordered  List">
+      <Button fx:id="orderListBtn" layoutX="528.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="Ordered  List">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -51,7 +51,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="671.0" layoutY="40.0" mnemonicParsing="false" styleClass="button-admin" text="New Order">
+      <Button fx:id="newOrderBtn" layoutX="671.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="New Order">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -69,11 +69,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="37.0" fitWidth="34.0" layoutX="14.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../Icon/backnow.png" />
-         </image>
-      </ImageView>
       <Button layoutX="282.0" layoutY="471.0" mnemonicParsing="false" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
@@ -97,6 +92,15 @@
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Icon/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="3.0" layoutY="488.0" mnemonicParsing="false" styleClass="button-admin">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Icon/backnow.png" />
                </image>
             </ImageView>
          </graphic>

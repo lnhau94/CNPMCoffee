@@ -30,7 +30,7 @@
             <TableColumn prefWidth="94.97027587890625" text="Supplier" />
         </columns>
       </TableView>
-      <Button layoutX="13.0" layoutY="527.0" mnemonicParsing="false" styleClass="button-admin">
+      <Button fx:id="backWarehouseBtn" layoutX="13.0" layoutY="527.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,7 +39,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="852.0" layoutY="523.0" mnemonicParsing="false" styleClass="button-admin">
+      <Button fx:id="frmIngredientOrder" layoutX="852.0" layoutY="523.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="button-bc">
                <image>

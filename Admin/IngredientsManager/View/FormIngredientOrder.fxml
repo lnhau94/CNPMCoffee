@@ -47,12 +47,16 @@
          </font>
       </Label>
       <DatePicker layoutX="519.0" layoutY="101.0" prefHeight="26.0" prefWidth="193.0" promptText="Choose Date" />
-      <Button layoutX="85.0" layoutY="433.0" mnemonicParsing="false" styleClass="button-admin" />
-      <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="14.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true" styleClass="button-bc">
-         <image>
-            <Image url="@../../../Icon/backnow.png" />
-         </image>
-      </ImageView>
+      <Button layoutX="345.0" layoutY="487.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" styleClass="btn-confirm" text="Send" />
+      <Button layoutX="5.0" layoutY="480.0" mnemonicParsing="false" styleClass="button-admin">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="button-bc">
+               <image>
+                  <Image url="@../../../Icon/backnow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
     <stylesheets>
         <URL value="@Css/WarehouseApplication.css" />

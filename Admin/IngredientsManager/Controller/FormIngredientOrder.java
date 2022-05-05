@@ -1,4 +1,4 @@
 package Main.Admin.IngredientsManager.Controller;
 
-public class FormIngredientOrder {
+public class FormIngredientOrder extends MasterController{
 }
