@@ -10,6 +10,13 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String employeeName, String employeePhone, String position, String type) {
+        this.employeeName = employeeName;
+        this.employeePhone = employeePhone;
+        this.position = position;
+        this.type = type;
+    }
+
     public Employee(String employeeID, String employeeName, String employeePhone, String position, String type) {
         this.employeeID = employeeID;
         this.employeeName = employeeName;

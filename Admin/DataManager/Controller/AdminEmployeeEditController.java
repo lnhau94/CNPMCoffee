@@ -19,4 +19,7 @@ public class AdminEmployeeEditController {
         textPosition.setText(employee.getPosition());
         textWorkType.setText(employee.getType());
     }
+    public void EditEmployee(Employee employee){
+
+    }
 }
