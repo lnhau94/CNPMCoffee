@@ -22,7 +22,10 @@ public class ScreenTranfer {
             put("cfmDetailBtn", "Admin/IngredientsManager/View/ConfirmDetail.fxml");
             put("orderDetailBtn", "Admin/IngredientsManager/View/OrderDetail.fxml");
             put("frmIngredientOrder", "Admin/IngredientsManager/View/FormIngredientOrder.fxml");
-
+            put("backAdminBtn", "Admin/DataManager/View/Admin.fxml");
+            put("addIngredientBtn", "Admin/IngredientsManager/View/IngredientAdd.fxml");
+            put("editIngredientBtn", "Admin/IngredientsManager/View/IngredientEdit.fxml");
+            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete.fxml");
         }
     };
 
