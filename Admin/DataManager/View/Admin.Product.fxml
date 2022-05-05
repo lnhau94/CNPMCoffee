@@ -19,8 +19,8 @@
             <TableColumn prefWidth="293.0" text="ProductName" />
             <TableColumn prefWidth="264.0" text="Category" />
             <TableColumn prefWidth="171.0" text="Size S" />
-            <TableColumn prefWidth="142.0" text="Size L" />
-            <TableColumn prefWidth="124.0" text="Size XL" />
+            <TableColumn prefWidth="142.0" text="Size M" />
+            <TableColumn prefWidth="124.0" text="Size L" />
          </columns>
       </TableView>
       <Label fx:id="header" alignment="CENTER" layoutX="-3.0" layoutY="1.0" prefHeight="34.0" prefWidth="1090.0" text="Manage" />
