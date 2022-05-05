@@ -47,7 +47,6 @@ public class SalesApplicationModel {
     }
 
     public SalesApplicationModel(){
-
         dao = new DAO();
         this.productList = dao.getAllProduct();
         createNewOrder();
@@ -60,7 +59,12 @@ public class SalesApplicationModel {
     }
 
     public void updateChoice(int i,OrderDetail ord){
-        currentChoices.set(i, ord);
+        if(ord.getQuantity()==0){
+            currentChoices.remove(i);
+        }else{
+            currentChoices.set(i, ord);
+        }
+
     }
 
     public void addItem(OrderDetail od){
@@ -73,7 +77,6 @@ public class SalesApplicationModel {
                 flag=true;
             }
         }
-
         if(!flag) {
             this.currentChoices.add(od);
         }
