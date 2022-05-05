@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Main.Admin.SalaryCalculate.Controller.Salarytable"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Button layoutX="14.0" layoutY="48.0" mnemonicParsing="false" styleClass="button-menu" text="Bảng lương" onAction="#changeSceneSalarytable" />
+        <Button layoutX="14.0" layoutY="95.0" mnemonicParsing="false" styleClass="button-menu" text="Chấm công" onAction="#changeSceneTimekeeping" />
+        <TableView layoutX="104.0" layoutY="14.0" prefHeight="363.0" prefWidth="690.0">
+            <columns>
+                <TableColumn prefWidth="72.66668701171875" text="ID" />
+                <TableColumn prefWidth="227.33331298828125" text="Tên nhân viên" />
+                <TableColumn prefWidth="93.33331298828125" text="Loại nhân viên" />
+                <TableColumn prefWidth="87.0" text="Lương" />
+                <TableColumn prefWidth="79.99993896484375" text="Tổng giờ làm" />
+                <TableColumn prefWidth="127.0" text="Tổng lương" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
