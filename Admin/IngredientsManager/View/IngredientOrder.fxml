@@ -19,14 +19,14 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TableView layoutX="15.0" layoutY="97.0" prefHeight="363.0" prefWidth="802.0">
+      <TableView fx:id="table" layoutX="15.0" layoutY="97.0" prefHeight="363.0" prefWidth="802.0">
         <columns>
-          <TableColumn prefWidth="80.27553462982178" text="ID" />
-          <TableColumn prefWidth="353.72447204589844" text="Name" />
-            <TableColumn prefWidth="103.76336669921875" text="Import Price" />
-            <TableColumn prefWidth="91.66812133789062" text="Category" />
-            <TableColumn prefWidth="93.255126953125" text="Producer" />
-            <TableColumn prefWidth="80.7449951171875" text="Quantity" />
+          <TableColumn fx:id="idCol" prefWidth="80.27553462982178" text="ID" />
+          <TableColumn fx:id="nameCol" prefWidth="353.72447204589844" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="103.76336669921875" text="Import Price" />
+            <TableColumn fx:id="typeCol" prefWidth="91.66812133789062" text="Category" />
+            <TableColumn fx:id="producerCol" prefWidth="93.255126953125" text="Producer" />
+            <TableColumn fx:id="storageCol" prefWidth="80.7449951171875" text="Storage" />
         </columns>
          <opaqueInsets>
             <Insets />
