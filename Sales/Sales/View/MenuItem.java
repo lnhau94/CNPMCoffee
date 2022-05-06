@@ -2,11 +2,9 @@ package Main.Sales.Sales.View;
 
 import Main.Entity.Element.Product;
 import Main.Entity.Element.ProductPrice;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -15,32 +13,34 @@ import java.io.FileNotFoundException;
 
 
 public class MenuItem extends VBox {
-    private ImageView image;
-    private Label nameLbl;
-    private Label priceLbl;
 
     private Product product;
 
-    private String labelCSS =
-            "-fx-background-color: transparent;" +
-                    "-fx-alignment: center;" +
-                    "    -fx-text-fill: #fff;" +
-                    "    -fx-font-size: 14px;" +
-                    "    -fx-effect: dropshadow(three-pass-box, #48cae4,3,1,1,0);";
-    private String label2CSS =
-                    "-fx-background-color: transparent;" +
-                    "-fx-alignment: center;" +
-                    "    -fx-text-fill: #fff;" +
-                    "    -fx-font-size: 12px;" +
-                    "    -fx-effect: dropshadow(three-pass-box, #48cae4,3,1,1,0);";
+    private String nameLabelCSS =
+            "   -fx-background-color: transparent;" +
+                    "   -fx-alignment: center;" +
+                    "   -fx-text-fill: #fff ;"  +
+                    "   -fx-effect: dropshadow(three-pass-box, #5F50F1,3,1,1,0); "+
+                    "    -fx-font-size: 16px; ";
+    private String categoryLabelCSS =
+            "   -fx-background-color: transparent;" +
+                    "   -fx-alignment: center;" +
+                    "   -fx-text-fill: #fff ;"  +
+                    "   -fx-effect: dropshadow(three-pass-box, #5F50F1,3,1,1,0); "+
+                    "    -fx-font-size: 14px; ";
+    private String pricelabelCSS =
+                    "   -fx-background-color: transparent;" +
+                    "   -fx-alignment: center;" +
+                    "   -fx-text-fill: #fff ;"  +
+                    "   -fx-effect: dropshadow(three-pass-box, #646060,2,1,1,0); "+
+                    "   -fx-font-size: 14px; ";
     private String boxCSS =
-                    "    -fx-alignment: center;" +
-                    "    -fx-background-radius: 5;" +
-                    "    -fx-background-color:  rgba(255, 148, 77, 0.3);" +
-                    "    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, rgba(112,51,8,0.2), rgba(194,91,32,0.5));"+
-                    "    -fx-font-size: 16;" +
-                    "    -fx-font-weight: 700;" +
-                    "    -fx-effect: dropshadow(three-pass-box, #ffffff,5,0,4,2);";
+                    "   -fx-alignment: center;" +
+                    "   -fx-background-radius: 5;" +
+                    "   -fx-background-color: rgba(244,245,245,0.2) ;" +
+                    "   -fx-font-size: 16;" +
+                    "   -fx-font-weight: 700;" +
+                    "   -fx-effect: dropshadow(three-pass-box, #48cae4,5,0,4,2);";
 
     public MenuItem (Product product){
         this.product = product;
@@ -50,28 +50,35 @@ public class MenuItem extends VBox {
 
     private void initGUI(){
         this.setSpacing(5);
-        nameLbl = new Label(product.getProductName() + " - "+product.getCategoryName());
+        Label nameLbl = new Label(product.getProductName());
+        Label categoryLbl = new Label(product.getCategoryName());
         this.getChildren().add(nameLbl);
+        this.getChildren().add(categoryLbl);
+        this.setMinHeight(200);
         this.setPrefSize(200,200);
+        ImageView image = new ImageView();
         try {
-            image =  new ImageView(new Image(new FileInputStream("Icon/nguyenlieu.png")));
+            image.setImage(new Image(new FileInputStream("Icon/nguyenlieu.png")));
             image.setX(0);
             image.setY(0);
             image.setFitHeight(100);
             image.setFitWidth(100);
-            this.getChildren().add(image);
+            //this.getChildren().add(image);
         } catch (FileNotFoundException e) {
             System.out.println("Not found image for "+this.product.getProductName());
         }
 
         String price="";
         for(ProductPrice pp : product.getPriceList()){
-            price += pp.getSize() + "-" + pp.getPrice() + "\t";
+            price += String.format("%2s %6s\n",pp.getSize(),pp.getPrice());
         }
-        priceLbl = new Label(price);
-        priceLbl.setStyle(label2CSS);
-        nameLbl.setStyle(labelCSS);
-        this.getChildren().add(priceLbl);
+        Label priceLbl = new Label(price);
+        HBox content = new HBox(image,priceLbl);
+        content.setSpacing(5);
+        priceLbl.setStyle(pricelabelCSS);
+        nameLbl.setStyle(nameLabelCSS);
+        categoryLbl.setStyle(categoryLabelCSS);
+        this.getChildren().add(content);
     }
 
     public Product getProduct() {

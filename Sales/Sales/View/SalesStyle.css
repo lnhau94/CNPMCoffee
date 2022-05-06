@@ -45,3 +45,7 @@
     -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
 }
 
+#searchIcon{
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+}
+
