@@ -2,8 +2,6 @@ package Main.Admin.IngredientsManager.Controller;
 
 import Main.Admin.IngredientsManager.Model.IngredientApplicationModel;
 import Main.Entity.Element.Ingredient;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +13,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -30,7 +26,7 @@ public class IngredientOrderController extends MasterController implements Initi
         {
 
             put("editIngredientBtn", "Admin/IngredientsManager/View/IngredientEdit.fxml");
-            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete.fxml");
+            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete1.fxml");
         }
     };
 
@@ -48,7 +44,6 @@ public class IngredientOrderController extends MasterController implements Initi
     private TableColumn<Ingredient, String> producerCol;
     @FXML
     private TableColumn<Ingredient, Integer> priceCol;
-
 
 
     private IngredientApplicationModel model;
@@ -93,21 +88,68 @@ public class IngredientOrderController extends MasterController implements Initi
 
         Ingredient i = table.getSelectionModel().getSelectedItem();
 
-        File file = new File("Admin/IngredientsManager/View/IngredientEdit.fxml");
-
+        File file;
         FXMLLoader fx = new FXMLLoader();
-        IngredientAddController controller;
-        try {
-            fx.setLocation(file.toURI().toURL());
-            stage.setScene(new Scene(fx.load()));
-            controller = fx.getController();
 
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+        if(i != null) {
+            file = new File("Admin/IngredientsManager/View/IngredientEdit.fxml");
+            IngredientEditController controller;
+            try {
+                fx.setLocation(file.toURI().toURL());
+                stage.setScene(new Scene(fx.load()));
+                controller = fx.getController();
+                controller.getChosenItem(i);
+                stage.showAndWait();
+                this.model.updateItem(table.getSelectionModel().getSelectedIndex(), controller.getI());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else {
+            file = new File("Admin/DataManager/View/Alert.fxml");
+            try {
+                fx.setLocation(file.toURI().toURL());
+                stage.setScene(new Scene(fx.load()));
+                stage.showAndWait();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        stage.showAndWait();
+    }
 
-        this.model.addItem(controller.getI());
+    public void openRemoveStage(ActionEvent e) {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(((Node)e.getSource()).getScene().getWindow());
+        Ingredient i = table.getSelectionModel().getSelectedItem();
+        File file;
+        FXMLLoader fx = new FXMLLoader();
+        if(i != null) {
+            file = new File("Admin/IngredientsManager/View/IngredientDelete.fxml");
+            IngredientDeleteController controller;
+            try {
+                fx.setLocation(file.toURI().toURL());
+                stage.setScene(new Scene(fx.load()));
+                controller = fx.getController();
+                stage.showAndWait();
+                if(controller.isRemove()) {
+//                    System.out.println("hello");
+                    this.model.removeItem(i);
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        } else {
+            file = new File("Admin/DataManager/View/Alert.fxml");
+            try {
+                fx.setLocation(file.toURI().toURL());
+                stage.setScene(new Scene(fx.load()));
+                stage.showAndWait();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
     }
 
 

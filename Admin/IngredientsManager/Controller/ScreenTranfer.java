@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -26,7 +25,7 @@ public class ScreenTranfer {
             put("backAdminBtn", "Admin/DataManager/View/Admin.fxml");
             put("addIngredientBtn", "Admin/IngredientsManager/View/IngredientAdd.fxml");
             put("editIngredientBtn", "Admin/IngredientsManager/View/IngredientEdit.fxml");
-            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete.fxml");
+            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete1.fxml");
         }
     };
 

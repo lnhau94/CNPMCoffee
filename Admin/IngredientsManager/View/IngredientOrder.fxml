@@ -87,7 +87,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="removeIngredientBtn" layoutX="524.0" layoutY="468.0" mnemonicParsing="false" styleClass="button-admin">
+      <Button layoutX="524.0" layoutY="468.0" mnemonicParsing="false" onAction="#openRemoveStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>

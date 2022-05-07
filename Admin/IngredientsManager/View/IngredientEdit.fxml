@@ -17,7 +17,7 @@
       <TextField fx:id="typeTxtField" layoutX="226.0" layoutY="103.0" prefHeight="38.0" prefWidth="198.0" styleClass="txt-field-input" />
       <TextField fx:id="priceTxtField" layoutX="226.0" layoutY="166.0" prefHeight="38.0" prefWidth="198.0" styleClass="txt-field-input" />
       <TextField fx:id="producerTxtField" layoutX="226.0" layoutY="227.0" prefHeight="38.0" prefWidth="198.0" styleClass="txt-field-input" />
-      <Button layoutX="395.0" layoutY="275.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="70.0" styleClass="btn-confirm" text="Apply" />
+      <Button layoutX="395.0" layoutY="275.0" mnemonicParsing="false" onAction="#editItem" prefHeight="24.0" prefWidth="70.0" styleClass="btn-confirm" text="Apply" />
    </children>
    <stylesheets>
       <URL value="@Css/WarehouseApplication.css" />

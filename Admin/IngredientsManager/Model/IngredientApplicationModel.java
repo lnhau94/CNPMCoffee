@@ -41,8 +41,12 @@ public class IngredientApplicationModel {
         System.out.println(this.getIngredientList().size());
     }
 
-    public void editItem(Ingredient i) {
+    public void updateItem(int index, Ingredient i) {
+        this.getIngredientList().set(index, i);
+    }
 
+    public void removeItem(Ingredient i) {
+        this.getIngredientList().remove(i);
     }
 
 
