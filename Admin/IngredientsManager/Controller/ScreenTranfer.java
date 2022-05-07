@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -41,5 +42,6 @@ public class ScreenTranfer {
     public static void switchScene(ActionEvent e){
         ((Stage) ((Node)e.getSource()).getScene().getWindow()).setScene(getScene((Button) e.getSource()));
     }
+
 
 }

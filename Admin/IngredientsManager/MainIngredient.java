@@ -1,6 +1,8 @@
 package Main.Admin.IngredientsManager;
 
 import Main.Admin.IngredientsManager.Controller.IngredientOrderController;
+import Main.Admin.IngredientsManager.Model.IngredientApplicationModel;
+import Main.Entity.Element.Ingredient;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,8 +21,6 @@ public class MainIngredient extends Application {
         try {
             fx.setLocation(new File("Admin/IngredientsManager/View/IngredientOrder.fxml").toURI().toURL());
             root = fx.load();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,6 +31,13 @@ public class MainIngredient extends Application {
     }
 
     public static void main(String[] args) {
+
+        IngredientApplicationModel model = new IngredientApplicationModel();
+        System.out.println(model.getIngredientList().size());
+        Ingredient i = new Ingredient("dai", "dai", 12, "dai");
+        model.addItem(i);
+
         launch(args);
+
     }
 }
