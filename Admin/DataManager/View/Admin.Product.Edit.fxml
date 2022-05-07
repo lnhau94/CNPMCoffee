@@ -22,12 +22,12 @@
                 <Label layoutX="172.0" layoutY="174.0" prefHeight="51.0" prefWidth="157.0" styleClass="labeltitlePrice" stylesheets="@Css/Application.css" text="Price">
 
                 </Label>
-                <TextField layoutX="212.0" layoutY="48.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
-                <TextField layoutX="230.0" layoutY="250.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
-                <ComboBox layoutX="212.0" layoutY="108.0" prefHeight="36.0" prefWidth="195.0" styleClass="TextFieldInput" />
+                <TextField fx:id="textNameProductEdit" layoutX="212.0" layoutY="48.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
+                <TextField fx:id="PriceSEdit" layoutX="230.0" layoutY="250.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
+                <ComboBox fx:id="CategoryList" layoutX="212.0" layoutY="108.0" prefHeight="36.0" prefWidth="195.0" styleClass="TextFieldInput" />
                 <Label layoutX="54.0" layoutY="251.0" prefHeight="36.0" prefWidth="106.0" styleClass="pricewithsize" stylesheets="@Css/Application.css" text="Size S" />
-                <TextField layoutX="230.0" layoutY="306.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
-                <TextField layoutX="230.0" layoutY="367.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
+                <TextField fx:id="PriceMEdit" layoutX="230.0" layoutY="306.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
+                <TextField fx:id="PriceLEdit" layoutX="230.0" layoutY="367.0" prefHeight="38.0" prefWidth="198.0" styleClass="TextFieldInput" />
                 <Label layoutX="54.0" layoutY="307.0" prefHeight="36.0" prefWidth="106.0" styleClass="pricewithsize" stylesheets="@Css/Application.css" text="Size M" />
                 <Label layoutX="54.0" layoutY="368.0" prefHeight="36.0" prefWidth="106.0" styleClass="pricewithsize" stylesheets="@Css/Application.css" text="Size L" />
             </children></AnchorPane>
