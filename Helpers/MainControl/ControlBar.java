@@ -1,14 +1,13 @@
-package Main;
+package Main.Helpers.MainControl;
 
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -17,7 +16,7 @@ import java.net.MalformedURLException;
 
 public class ControlBar extends FlowPane {
 
-    MenuItem saleBtn, discardBtn, dataManagerBtn, salaryManagerBtn, ingredientManagerBtn;
+    MenuItem saleMenuItem, discardMenuItem, dataManagerMenuItem, salaryManagerMenuItem, ingredientManagerMenuItem;
     Scene salesScreen;
     Scene discardScreen;
     Scene dataManagerScreen;
@@ -25,6 +24,7 @@ public class ControlBar extends FlowPane {
     Scene salaryManagerScreen;
     Scene loginScreen;
     Stage owner;
+    Menu logoutMenu;
 
     public ControlBar(Stage stage){
         this.owner = stage;
@@ -32,15 +32,15 @@ public class ControlBar extends FlowPane {
         createHandleEvent();
     }
     private void initGUI(){
-        saleBtn = new MenuItem("Sale");
-        discardBtn = new MenuItem("Discard");
-        dataManagerBtn = new MenuItem("Data");
-        salaryManagerBtn = new MenuItem("Salary");
-        ingredientManagerBtn = new MenuItem("Ingredients");
+        saleMenuItem = new MenuItem("Sale");
+        discardMenuItem = new MenuItem("Discard");
+        dataManagerMenuItem = new MenuItem("Data");
+        salaryManagerMenuItem = new MenuItem("Salary");
+        ingredientManagerMenuItem = new MenuItem("Ingredients");
         salesScreen = new SalesApplicationControl().getView();
         try {
-            dataManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("Admin/DataManager/View/Admin.fxml")));
-            ingredientManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("Admin/IngredientsManager/View/IngredientOrder.fxml")));
+            dataManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/DataManager/View/Admin.fxml")));
+            ingredientManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/IngredientsManager/View/IngredientOrder.fxml")));
             //salaryManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("Admin/DataManager/View/Admin.fxml")));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -51,16 +51,19 @@ public class ControlBar extends FlowPane {
         Menu mainMenu = new Menu("...");
         mainMenu.setId("mainMenu");
         Menu saleMenu = new Menu("Sales");
-        saleMenu.getItems().add(saleBtn);
-        saleMenu.getItems().add(discardBtn);
+        saleMenu.getItems().add(saleMenuItem);
+        saleMenu.getItems().add(discardMenuItem);
 
         Menu adminMenu = new Menu("Admin");
-        adminMenu.getItems().add(dataManagerBtn);
-        adminMenu.getItems().add(ingredientManagerBtn);
-        adminMenu.getItems().add(salaryManagerBtn);
+        adminMenu.getItems().add(dataManagerMenuItem);
+        adminMenu.getItems().add(ingredientManagerMenuItem);
+        adminMenu.getItems().add(salaryManagerMenuItem);
+
+        logoutMenu = new Menu("Exit");
 
         mainMenu.getItems().add(saleMenu);
         mainMenu.getItems().add(adminMenu);
+        mainMenu.getItems().add(logoutMenu);
 
         menuBar.getMenus().add(mainMenu);
 
@@ -73,28 +76,39 @@ public class ControlBar extends FlowPane {
 
     public void prepareCSS(){
         try {
-            this.getScene().getStylesheets().add(new File("Controlbar.css").toURI().toURL().toExternalForm());
+            this.getScene().getStylesheets().add(new File("Helpers/MainControl/Controlbar.css").toURI().toURL().toExternalForm());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private void changeLocation(int locale){
+        owner.centerOnScreen();
+
+        this.getScene().getWindow().setX(owner.getX()+owner.getWidth()+locale);
+        this.getScene().getWindow().setY(owner.getY());
+
+
+    }
+
     private void createHandleEvent(){
 
-        saleBtn.setOnAction(e->{
+        saleMenuItem.setOnAction(e->{
             owner.setScene(salesScreen);
-            owner.centerOnScreen();
+            changeLocation(-50);
         });
         //discardBtn
-        dataManagerBtn.setOnAction(e->{
+        dataManagerMenuItem.setOnAction(e->{
             owner.setScene(dataManagerScreen);
-            owner.centerOnScreen();
+            changeLocation(0);
+
         });
         //salaryManagerBtn
-        ingredientManagerBtn.setOnAction(e->{
+        ingredientManagerMenuItem.setOnAction(e->{
             owner.setScene(ingredientManagerScreen);
-            owner.centerOnScreen();
+            changeLocation(0);
         });
+        logoutMenu.setOnAction(e->owner.close());
     }
 
 }
