@@ -251,12 +251,10 @@ public class SalesApplicationView{
                             filerCondition.equals(menuItem.getProduct().getCategoryName())
                                     && menuItem.getProduct().getProductName().toLowerCase(Locale.ROOT).contains(searchString))
                             .collect(Collectors.toList());
-
         }
         for (int i = 0; i < currentList.size(); i++) {
             menu.add(currentList.get(i), (int) i % 5, (int) i / 5);
         }
-
     }
 
 }

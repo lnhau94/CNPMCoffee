@@ -13,8 +13,8 @@ public class DAO {
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     private String DBuser = "sa";
-//    private String DBpass = "123456";
-    private String DBpass = "reallyStrongPwd123";
+    private String DBpass = "123456";
+//    private String DBpass = "reallyStrongPwd123";
 
     private Connection connect;
     private Statement stmt;
