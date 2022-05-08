@@ -1,10 +1,15 @@
 package Main.Admin.IngredientsManager;
 
 import Main.Admin.IngredientsManager.Controller.IngredientOrderController;
+import Main.Admin.IngredientsManager.Model.IngredientApplicationModel;
+import Main.Entity.Element.Ingredient;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -19,15 +24,20 @@ public class MainIngredient extends Application {
         try {
             fx.setLocation(new File("Admin/IngredientsManager/View/IngredientOrder.fxml").toURI().toURL());
             root = fx.load();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        IngredientOrderController controller = fx.getController();
+        
         stage.setScene(new Scene(root));
         stage.show();
+//        stage.initModality(Modality.APPLICATION_MODAL);
+//        stage.setScene(new Scene(new Label("Demo")));
+//        stage.show();
+
+//        Stage inner = new Stage(){{setScene(new Scene(new Label("Inner"))); }};
+        //inner.show(); // Try replacing with showAndWait
+//        inner.showAndWait();
+//        System.out.println("Done");
     }
 
     public static void main(String[] args) {

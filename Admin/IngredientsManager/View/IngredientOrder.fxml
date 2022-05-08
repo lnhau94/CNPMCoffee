@@ -69,7 +69,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addIngredientBtn" layoutX="282.0" layoutY="471.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <Button fx:id="addIngredientBtn" layoutX="282.0" layoutY="471.0" mnemonicParsing="false" onAction="#openAddStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -78,7 +78,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="editIngredientBtn" layoutX="405.0" layoutY="469.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <Button layoutX="405.0" layoutY="469.0" mnemonicParsing="false" onAction="#openEditStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -87,7 +87,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="removeIngredientBtn" layoutX="524.0" layoutY="468.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <Button layoutX="524.0" layoutY="468.0" mnemonicParsing="false" onAction="#openRemoveStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>

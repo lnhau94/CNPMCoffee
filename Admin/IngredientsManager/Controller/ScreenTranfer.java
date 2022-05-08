@@ -25,7 +25,7 @@ public class ScreenTranfer {
             put("backAdminBtn", "Admin/DataManager/View/Admin.fxml");
             put("addIngredientBtn", "Admin/IngredientsManager/View/IngredientAdd.fxml");
             put("editIngredientBtn", "Admin/IngredientsManager/View/IngredientEdit.fxml");
-            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete.fxml");
+            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete1.fxml");
         }
     };
 
@@ -41,5 +41,6 @@ public class ScreenTranfer {
     public static void switchScene(ActionEvent e){
         ((Stage) ((Node)e.getSource()).getScene().getWindow()).setScene(getScene((Button) e.getSource()));
     }
+
 
 }

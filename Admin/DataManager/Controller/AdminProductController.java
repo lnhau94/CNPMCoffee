@@ -1,5 +1,4 @@
 package Main.Admin.DataManager.Controller;
-
 import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Category;
@@ -25,9 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AdminProductController implements Initializable {
     @FXML
@@ -44,9 +41,9 @@ public class AdminProductController implements Initializable {
     private TableColumn<ProductInTable, Integer> productPriceByMTableColumn;
     @FXML
     private TableColumn<ProductInTable, Integer> productPriceByLTableColumn;
-    ObservableList<ProductInTable> productInTables;
+     ObservableList<ProductInTable> productInTables;
     public static List<ProductInTable> productInTableList = new ArrayList<>();
-    List<Product> productList = new ArrayList<>();
+
     ArrayList<ProductPrice> productPriceArrayList = new ArrayList<>();
     public void GetDataProduct() throws SQLException {
         productInTableList.clear();
@@ -90,31 +87,67 @@ public class AdminProductController implements Initializable {
     public void changeSceneAddEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("../View/Admin.Product.Add.fxml"));
-        Pane EmployeeAddViewParent = loader.load();
+        Pane ProductAddViewParent = loader.load();
         Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane) EmployeeAddViewParent);
-        dialog.show();
-        this.GetDataProduct();
-        productInTableList.forEach((element)->{
-            System.out.println(element.getProductID()+element.getPriceByS());
-        });
+        dialog.setDialogPane((DialogPane) ProductAddViewParent);
+        Optional<ButtonType> ClickedButton = dialog.showAndWait();
+        AdminProductAddController AddController = loader.getController();
+        if(ClickedButton.get()==ButtonType.APPLY){
+            AddController.AddProduct();
+            productTableView.setItems(FXCollections.observableArrayList(productInTableList));
+            productTableView.refresh();
+        }
     }
-    public void changeSceneEditEvent(ActionEvent e) throws IOException{
+    public void changeSceneEditEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Product.Edit.fxml"));
-        Pane EmployeeEditViewParent = loader.load();
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane) EmployeeEditViewParent);
-        dialog.show();
+        ProductInTable selected = productTableView.getSelectionModel().getSelectedItem();
+        if (selected==null){
+            loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
+            Pane EditParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) EditParentView);
+            dialog.showAndWait();
+        }else{
+            loader.setLocation(this.getClass().getResource("../View/Admin.Product.Edit.fxml"));
+            Pane ProductEditViewParent = loader.load();
+            AdminProductEditController adminProductEditController = loader.getController();
+            adminProductEditController.handleEvent(selected);
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) ProductEditViewParent);
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if(clickedButton.get() == ButtonType.APPLY){
+                adminProductEditController.EditProduct(selected);
+                productTableView.setItems(FXCollections.observableArrayList(productInTableList));
+                productTableView.refresh();
+            }
+        }
+
     }
-    public void changeSceneDeleteEvent(ActionEvent e)throws IOException {
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+    public void changeSceneDeleteEvent(ActionEvent e) throws IOException, SQLException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
-        Pane CategoryDeleteParentView = loader.load();
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane)  CategoryDeleteParentView);
-        dialog.show();
+        ProductInTable selected = productTableView.getSelectionModel().getSelectedItem();
+        if(selected ==null){
+            loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
+            Pane CategoryEditParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) CategoryEditParentView);
+            dialog.showAndWait();
+        }else{
+            loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
+            Pane CategoryDeleteParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) CategoryDeleteParentView);
+            Optional<ButtonType> ClickedButton = dialog.showAndWait();
+            AdminDeleteController adminDeleteController = loader.getController();
+            if(ClickedButton.get()==ButtonType.YES){
+                adminDeleteController.DeleteProduct(selected);;
+                productTableView.setItems(FXCollections.observableArrayList(productInTableList));
+                productTableView.refresh();
+            }
+
+        }
+
     }
     public void GoBack(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
