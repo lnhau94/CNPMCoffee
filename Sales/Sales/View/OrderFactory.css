@@ -50,3 +50,7 @@
     -fx-border-radius: 10;
     -fx-font-weight: 700;
 }
+
+#maincont{
+    -fx-padding: 5,0,0,0;
+}
