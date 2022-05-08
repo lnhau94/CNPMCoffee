@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="522.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.FormIngredientOrder">
+<AnchorPane prefHeight="522.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.OrderDetailController">
    <children>
       <Label fx:id="header" layoutY="-4.0" prefHeight="32.0" prefWidth="832.0" styleClass="header" text="Order Detail" />
       <Label layoutX="38.0" layoutY="74.0" text="Employee's Name" />
