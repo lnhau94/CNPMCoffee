@@ -1,0 +1,36 @@
+
+.menu{
+    -fx-background-color: #97e1ea;
+    -fx-effect: dropshadow(three-pass-box, #035980,5,0,4,2);
+}
+.label{
+    -fx-pref-width: 100;
+    -fx-alignment: center;
+    -fx-background-radius: 10px;
+    -fx-background-color: #fca311;
+    -fx-text-fill: #fff;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+    -fx-padding: 5,0,0,0;
+}
+
+.menu-item{
+    -fx-background-color: #035980;
+}
+
+.menu-item:cell-selection{
+    -fx-background-color: tomato;
+}
+
+#mainMenu{
+    -fx-pref-width: 35;
+}
+
+.root{
+    -fx-background-color: #97e1ea;
+    -fx-pref-width: 50;
+    -fx-min-width: 50;
+    -fx-max-width: 250;
+    -fx-max-height: 50;
+    -fx-hgap: 5;
+}
