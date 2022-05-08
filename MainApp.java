@@ -1,5 +1,6 @@
 package Main;
 
+import Main.Helpers.MainControl.ControlBar;
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import Main.Sales.Sales.View.SalesApplicationView;
 import javafx.application.Application;
