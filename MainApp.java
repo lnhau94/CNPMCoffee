@@ -1,5 +1,6 @@
 package Main;
 
+import Main.Admin.IngredientsManager.Controller.MasterController;
 import Main.Helpers.MainControl.ControlBar;
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import javafx.application.Application;
@@ -40,6 +41,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.initStyle(StageStyle.TRANSPARENT);
+        MasterController.start();
         SalesApplicationControl control = new SalesApplicationControl();
         //stage.setScene(control.getView());
         stage.setScene(new Scene(FXMLLoader.load(new File("Helpers/SignIn/SignIn.fxml").toURI().toURL())));
