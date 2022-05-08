@@ -1,6 +1,8 @@
 package Main.Admin.IngredientsManager;
 
 import Main.Admin.IngredientsManager.Controller.IngredientOrderController;
+import Main.Admin.IngredientsManager.Controller.MasterController;
+import Main.Admin.IngredientsManager.Controller.ScreenTranfer;
 import Main.Admin.IngredientsManager.Model.IngredientApplicationModel;
 import Main.Entity.Element.Ingredient;
 import javafx.application.Application;
@@ -27,20 +29,12 @@ public class MainIngredient extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
         stage.setScene(new Scene(root));
         stage.show();
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.setScene(new Scene(new Label("Demo")));
-//        stage.show();
-
-//        Stage inner = new Stage(){{setScene(new Scene(new Label("Inner"))); }};
-        //inner.show(); // Try replacing with showAndWait
-//        inner.showAndWait();
-//        System.out.println("Done");
     }
 
     public static void main(String[] args) {
+        MasterController.start();
         launch(args);
     }
 }

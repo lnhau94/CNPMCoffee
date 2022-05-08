@@ -11,23 +11,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="577.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.CreateIngredientOrder">
+<AnchorPane prefHeight="577.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.CreateIngredientOrderController">
    <children>
       <Label fx:id="header" contentDisplay="CENTER" layoutY="-1.0" prefHeight="30.0" prefWidth="915.0" text="Choose Ingredients" textAlignment="CENTER" />
-      <TableView layoutX="604.0" layoutY="83.0" prefHeight="435.0" prefWidth="303.0">
+      <TableView fx:id="tableOrder" layoutX="604.0" layoutY="83.0" prefHeight="435.0" prefWidth="303.0">
         <columns>
-          <TableColumn minWidth="0.0" prefWidth="69.83612060546875" text="ID" />
-            <TableColumn prefWidth="138.55047607421875" text="Name" />
-          <TableColumn minWidth="0.0" prefWidth="93.0" text="Quantity" />
+          <TableColumn fx:id="idColOrd" minWidth="0.0" prefWidth="69.83612060546875" text="ID" />
+            <TableColumn fx:id="nameColOrd" prefWidth="138.55047607421875" text="Name" />
+          <TableColumn fx:id="qtyCol" minWidth="0.0" prefWidth="93.0" text="Quantity" />
         </columns>
       </TableView>
-      <TableView layoutX="11.0" layoutY="85.0" prefHeight="436.0" prefWidth="578.0">
+      <TableView fx:id="tableChoose" layoutX="11.0" layoutY="85.0" onMouseClicked="#addItem" prefHeight="436.0" prefWidth="578.0">
         <columns>
-          <TableColumn prefWidth="44.336814880371094" text="ID" />
-          <TableColumn prefWidth="225.8831787109375" text="Name" />
-            <TableColumn prefWidth="108.61686706542969" text="Import Price" />
-            <TableColumn minWidth="0.0" prefWidth="104.48748779296875" text="Category" />
-            <TableColumn prefWidth="94.97027587890625" text="Supplier" />
+          <TableColumn fx:id="idCol" prefWidth="44.336814880371094" text="ID" />
+          <TableColumn fx:id="nameCol" prefWidth="225.8831787109375" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="108.61686706542969" text="Import Price" />
+            <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="104.48748779296875" text="Category" />
+            <TableColumn fx:id="producerCol" prefWidth="94.97027587890625" text="Producer" />
         </columns>
       </TableView>
       <Button fx:id="backWarehouseBtn" layoutX="13.0" layoutY="527.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
@@ -62,6 +62,14 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button layoutX="805.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="26.0" prefWidth="95.0" styleClass="btn-confirm" text="Remove">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Icon/delete.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
     <stylesheets>
         <URL value="@Css/WarehouseApplication.css" />
