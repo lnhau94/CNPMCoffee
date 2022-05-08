@@ -58,7 +58,7 @@ public class SalesApplicationView{
     private void initGUI(){
         root = new BorderPane();
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        mainScene = new Scene(root,d.getWidth(),d.getHeight()-100);
+        mainScene = new Scene(root,d.getWidth(),d.getHeight()-50);
         mainScene.getStylesheets().add(getClass().getResource("SalesStyle.css").toExternalForm());
 
         createControlPnl();

@@ -24,6 +24,7 @@
 
 #mainMenu{
     -fx-pref-width: 35;
+    -fx-background-color: #035980;
 }
 
 .root{
