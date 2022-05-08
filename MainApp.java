@@ -1,5 +1,6 @@
 package Main;
 
+import Main.Admin.IngredientsManager.Controller.MasterController;
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import Main.Sales.Sales.View.SalesApplicationView;
 import javafx.application.Application;
@@ -40,6 +41,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         SalesApplicationControl control = new SalesApplicationControl();
         stage.setScene(control.getView());
