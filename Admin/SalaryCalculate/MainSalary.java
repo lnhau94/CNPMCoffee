@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MainSalary extends Application {
 
@@ -21,6 +23,23 @@ public class MainSalary extends Application {
         primaryStage.show();
     }
     public static void main(String[] args) {
+
+        DAO sql = new DAO();
+//        sql.executeQuery("SELECT * FROM category");
+        ResultSet rs = sql.executeQuery("SELECT * FROM category");
+        while(true){
+            try {
+                if (!rs.next()) break;
+                else {
+                    String s = rs.getString(2);
+                    System.out.println(s);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
         launch(args);
+
     }
 }
