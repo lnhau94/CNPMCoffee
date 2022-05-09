@@ -8,9 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500" prefWidth="500" styleClass="dialog" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Main.Admin.DataManager.Controller.AdminProductAddController"
-fx:id="dialogCategoryAdd ">
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500" prefWidth="500" styleClass="dialog" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.DataManager.Controller.AdminProductAddController">
     <header>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450" prefWidth="480.0" stylesheets="@Css/AddApplication.css">
             <children>
@@ -24,12 +22,12 @@ fx:id="dialogCategoryAdd ">
                 <Label layoutX="172.0" layoutY="174.0" prefHeight="51.0" prefWidth="157.0" styleClass="labeltitlePrice" stylesheets="@Css/Application.css" text="Price">
 
                 </Label>
-                <TextField layoutX="212.0" layoutY="48.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter ProductName" styleClass="TextFieldInput" />
-                <TextField layoutX="230.0" layoutY="250.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter Price" styleClass="TextFieldInput" />
-            <ComboBox layoutX="212.0" layoutY="108.0" prefHeight="36.0" prefWidth="195.0" promptText="Select Category" styleClass="TextFieldInput" />
+                <TextField fx:id="textName" layoutX="212.0" layoutY="48.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter ProductName" styleClass="TextFieldInput" />
+                <TextField fx:id="PriceByS" layoutX="230.0" layoutY="250.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter Price" styleClass="TextFieldInput" />
+            <ComboBox fx:id="CategoryList" layoutX="212.0" layoutY="108.0" prefHeight="36.0" prefWidth="195.0" promptText="Select Category" styleClass="TextFieldInput" />
             <Label layoutX="54.0" layoutY="251.0" prefHeight="36.0" prefWidth="106.0" styleClass="pricewithsize" stylesheets="@Css/Application.css" text="Size S" />
-            <TextField layoutX="230.0" layoutY="306.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter Price" styleClass="TextFieldInput" />
-            <TextField layoutX="230.0" layoutY="367.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter Price" styleClass="TextFieldInput" />
+            <TextField fx:id="PriceByM" layoutX="230.0" layoutY="306.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter Price" styleClass="TextFieldInput" />
+            <TextField fx:id="PriceByL" layoutX="230.0" layoutY="367.0" prefHeight="38.0" prefWidth="198.0" promptText="Enter Price" styleClass="TextFieldInput" />
             <Label layoutX="54.0" layoutY="307.0" prefHeight="36.0" prefWidth="106.0" styleClass="pricewithsize" stylesheets="@Css/Application.css" text="Size M" />
             <Label layoutX="54.0" layoutY="368.0" prefHeight="36.0" prefWidth="106.0" styleClass="pricewithsize" stylesheets="@Css/Application.css" text="Size L" />
             </children></AnchorPane>

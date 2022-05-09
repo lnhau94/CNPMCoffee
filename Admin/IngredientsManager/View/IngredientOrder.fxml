@@ -19,14 +19,14 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TableView layoutX="15.0" layoutY="97.0" prefHeight="363.0" prefWidth="802.0">
+      <TableView fx:id="table" layoutX="15.0" layoutY="97.0" prefHeight="363.0" prefWidth="802.0">
         <columns>
-          <TableColumn prefWidth="80.27553462982178" text="ID" />
-          <TableColumn prefWidth="353.72447204589844" text="Name" />
-            <TableColumn prefWidth="103.76336669921875" text="Import Price" />
-            <TableColumn prefWidth="91.66812133789062" text="Category" />
-            <TableColumn prefWidth="93.255126953125" text="Producer" />
-            <TableColumn prefWidth="80.7449951171875" text="Quantity" />
+          <TableColumn fx:id="idCol" prefWidth="80.27553462982178" text="ID" />
+          <TableColumn fx:id="nameCol" prefWidth="353.72447204589844" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="103.76336669921875" text="Import Price" />
+            <TableColumn fx:id="typeCol" prefWidth="91.66812133789062" text="Category" />
+            <TableColumn fx:id="producerCol" prefWidth="93.255126953125" text="Producer" />
+            <TableColumn fx:id="storageCol" prefWidth="80.7449951171875" text="Storage" />
         </columns>
          <opaqueInsets>
             <Insets />
@@ -69,7 +69,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addIngredientBtn" layoutX="282.0" layoutY="471.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <Button fx:id="addIngredientBtn" layoutX="282.0" layoutY="471.0" mnemonicParsing="false" onAction="#openAddStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -78,7 +78,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="editIngredientBtn" layoutX="405.0" layoutY="469.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <Button layoutX="405.0" layoutY="469.0" mnemonicParsing="false" onAction="#openEditStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -87,7 +87,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="removeIngredientBtn" layoutX="524.0" layoutY="468.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <Button layoutX="524.0" layoutY="468.0" mnemonicParsing="false" onAction="#openRemoveStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>

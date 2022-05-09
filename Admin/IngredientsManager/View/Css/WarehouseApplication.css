@@ -31,17 +31,13 @@
     -fx-text-alignment: center;
 }
 
-.title-form,
- .btn-confirm {
+.title-form {
+    -fx-background-color: linear-gradient(to left, #acb6e5, #86fde8);
+    -fx-text-fill: #333;
     -fx-font-weight: 900;
-    -fx-background-color: linear-gradient(to right, #7474bf, #348ac7);;
     -fx-padding: 4px 8px;
-    -fx-text-fill: #fff;
     -fx-border: solid;
     -fx-background-radius: 6px;
-}
-
-.title-form{
     -fx-alignment: center;
 }
 
@@ -51,4 +47,14 @@
 
 .txt-field-input {
     -fx-background-radius: 12px;
+}
+
+.btn-confirm,
+.label-form {
+    -fx-font-weight: 900;
+    -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #ff6b6b, #556270);;
+    -fx-padding: 4px 8px;
+    -fx-text-fill: #fff;
+    -fx-border: solid;
+    -fx-background-radius: 6px;
 }

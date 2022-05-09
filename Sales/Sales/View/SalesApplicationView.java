@@ -58,7 +58,7 @@ public class SalesApplicationView{
     private void initGUI(){
         root = new BorderPane();
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        mainScene = new Scene(root,d.getWidth(),d.getHeight()-100);
+        mainScene = new Scene(root,d.getWidth(),d.getHeight()-50);
         mainScene.getStylesheets().add(getClass().getResource("SalesStyle.css").toExternalForm());
 
         createControlPnl();
@@ -78,6 +78,7 @@ public class SalesApplicationView{
             ImageView searchIcon = new ImageView(new Image(new FileInputStream("Icon/search.png")));
             searchIcon.setFitWidth(20);
             searchIcon.setFitHeight(20);
+            searchIcon.setId("searchIcon");
             controlPnl.getChildren().add(searchIcon);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -87,7 +88,7 @@ public class SalesApplicationView{
     private void createControlPnl(){
         controlPnl = new FlowPane();
         controlPnl.setPrefSize(100,50);
-        controlPnl.setHgap(5);
+        controlPnl.setHgap(10);
         controlPnl.setAlignment(Pos.CENTER_LEFT);
         root.setTop(controlPnl);
     }
@@ -120,16 +121,18 @@ public class SalesApplicationView{
         for (int i=0;i<5;i++){
             ColumnConstraints column = new ColumnConstraints();
             column.setPercentWidth(20);
-            column.setPrefWidth(300);
+            column.setPrefWidth(400);
             column.setMinWidth(150);
             column.setHgrow(Priority.ALWAYS);
             menu.getColumnConstraints().add(column);
+            //menu.setBackground(null);
         }
         try {
-            Image img = new Image(new FileInputStream("Icon/menubackground.jpg"));
+            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+            Image img = new Image(new FileInputStream("Icon/background.jpg"));
             menu.setBackground(new Background(new BackgroundImage(
                     img,null,null,null,
-                    new BackgroundSize(srcViewMenu.getWidth(),srcViewMenu.getHeight(),false,true,true,true))));
+                    new BackgroundSize(d.getWidth()-350,d.getHeight(),false,false,false,false))));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -168,7 +171,8 @@ public class SalesApplicationView{
         indexColumn.setCellValueFactory(data -> new SimpleStringProperty(
                 String.valueOf(controller.getModel().getCurrentChoices().indexOf(data.getValue())+1)));
 
-        nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProductChoice().getProductName()));
+        nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()
+                                                    .getProductChoice().getProductName()));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
         qtyColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -247,12 +251,10 @@ public class SalesApplicationView{
                             filerCondition.equals(menuItem.getProduct().getCategoryName())
                                     && menuItem.getProduct().getProductName().toLowerCase(Locale.ROOT).contains(searchString))
                             .collect(Collectors.toList());
-
         }
         for (int i = 0; i < currentList.size(); i++) {
             menu.add(currentList.get(i), (int) i % 5, (int) i / 5);
         }
-
     }
 
 }

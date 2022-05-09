@@ -89,12 +89,12 @@ public class AdminCategoryController implements Initializable {
             loader.setLocation(this.getClass().getResource("../View/Admin.Category.Edit.fxml"));
             Pane CategoryEditParentView = loader.load();
             AdminCategoryEditController controller = loader.getController();
+            controller.handleEvent(selected);
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane((DialogPane) CategoryEditParentView);
             Optional<ButtonType> clickButton = dialog.showAndWait();
             if(clickButton.get() ==  ButtonType.APPLY){
                 controller.EidtCategory(selected);
-                list.add(selected);
                 table.setItems(FXCollections.observableArrayList(list));
                 table.refresh();
             }
