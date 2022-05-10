@@ -142,6 +142,4 @@ public class IngredientOrderController extends MasterController implements Initi
 
     }
 
-
-
 }
