@@ -1,12 +1,11 @@
 package Main.Admin.DataManager.Controller;
 import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
-import Main.Entity.Element.Category;
 import Main.Entity.Element.Product;
 import Main.Entity.Element.ProductPrice;
-import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +28,8 @@ import java.util.*;
 public class AdminProductController implements Initializable {
     @FXML
     private TableView<ProductInTable> productTableView;
+    @FXML
+    private TextField txtSearchName;
     @FXML
     private TableColumn<ProductInTable, String> productIDTableColumn;
     @FXML
@@ -75,6 +76,7 @@ public class AdminProductController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        SearchNameAutoFill();
         productInTables= FXCollections.observableArrayList(productInTableList);
                 productIDTableColumn.setCellValueFactory(new PropertyValueFactory<ProductInTable, String>("productID"));
                 productNameTableColumn.setCellValueFactory(new PropertyValueFactory<ProductInTable, String>("productName"));
@@ -119,6 +121,8 @@ public class AdminProductController implements Initializable {
                 adminProductEditController.EditProduct(selected);
                 productTableView.setItems(FXCollections.observableArrayList(productInTableList));
                 productTableView.refresh();
+            }else if(clickedButton.get()==ButtonType.CLOSE){
+                dialog.close();
             }
         }
 
@@ -148,6 +152,34 @@ public class AdminProductController implements Initializable {
 
         }
 
+    }
+    public void SearchName(ActionEvent e) throws SQLException {
+        this.GetDataProduct();
+        List<ProductInTable> productArray = new ArrayList<>();
+        String pattern = ".*" + txtSearchName.getText() + ".*";
+       for(ProductInTable o : productInTableList){
+           if(o.getProductName().toLowerCase().matches(pattern.toLowerCase())){
+               productArray.add(o);
+           }
+       }
+        productTableView.setItems(FXCollections.observableArrayList(productArray));
+        productTableView.refresh();
+    }
+    public void SearchNameAutoFill(){
+        this.txtSearchName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                List<ProductInTable> productArray = new ArrayList<>();
+                String pattern = ".*" + t1 + ".*";
+                for(ProductInTable o : productInTableList){
+                    if(o.getProductName().toLowerCase().matches(pattern.toLowerCase())){
+                        productArray.add(o);
+                    }
+                }
+                productTableView.setItems(FXCollections.observableArrayList(productArray));
+                productTableView.refresh();
+            }
+    });
     }
     public void GoBack(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
