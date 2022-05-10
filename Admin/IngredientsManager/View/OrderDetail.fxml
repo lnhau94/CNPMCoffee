@@ -12,21 +12,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="522.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.OrderDetailController">
+<AnchorPane prefHeight="640.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.OrderDetailController">
    <children>
-      <Label fx:id="header" layoutY="-4.0" prefHeight="32.0" prefWidth="832.0" styleClass="header" text="Order Detail" />
-      <Label layoutX="38.0" layoutY="74.0" text="Employee's Name" />
-      <Label layoutX="38.0" layoutY="105.0" text="Employee's ID" />
-      <Label layoutX="38.0" layoutY="138.0" text="Phone Number" />
-      <TextField editable="false" layoutX="180.0" layoutY="70.0" prefHeight="26.0" prefWidth="223.0" text="Thanh Huyền" />
-      <TextField editable="false" layoutX="179.0" layoutY="101.0" prefHeight="26.0" prefWidth="223.0" text="035" />
-      <TextField editable="false" layoutX="180.0" layoutY="132.0" prefHeight="26.0" prefWidth="223.0" text="0909 889889" />
-      <Label layoutX="461.0" layoutY="73.0" text="Order Number" />
-      <Label layoutX="461.0" layoutY="104.0" text="Date" />
-      <Label layoutX="461.0" layoutY="137.0" text="Supplier" />
-      <TextField editable="false" layoutX="579.0" layoutY="70.0" prefHeight="26.0" prefWidth="223.0" text="PD12" />
-      <TextField editable="false" layoutX="579.0" layoutY="132.0" prefHeight="26.0" prefWidth="223.0" text="Dalat Farm" />
-      <TableView layoutX="16.0" layoutY="202.0" prefHeight="272.0" prefWidth="799.0">
+      <Label fx:id="header" layoutY="-4.0" prefHeight="32.0" prefWidth="1041.0" styleClass="header" text="Order Detail" />
+      <Label layoutX="55.0" layoutY="72.0" text="Employee's Name" />
+      <Label layoutX="55.0" layoutY="103.0" text="Employee's ID" />
+      <Label layoutX="55.0" layoutY="136.0" text="Phone Number" />
+      <TextField editable="false" layoutX="197.0" layoutY="68.0" prefHeight="26.0" prefWidth="279.0" text="Thanh Huyền" />
+      <TextField editable="false" layoutX="196.0" layoutY="99.0" prefHeight="26.0" prefWidth="279.0" text="035" />
+      <TextField editable="false" layoutX="197.0" layoutY="130.0" prefHeight="26.0" prefWidth="279.0" text="0909 889889" />
+      <Label layoutX="583.0" layoutY="71.0" text="Order Number" />
+      <Label layoutX="583.0" layoutY="102.0" text="Date" />
+      <Label layoutX="583.0" layoutY="135.0" text="Supplier" />
+      <TextField editable="false" layoutX="701.0" layoutY="68.0" prefHeight="26.0" prefWidth="279.0" text="PD12" />
+      <TextField editable="false" layoutX="701.0" layoutY="130.0" prefHeight="26.0" prefWidth="279.0" text="Dalat Farm" />
+      <TableView layoutX="16.0" layoutY="202.0" prefHeight="388.0" prefWidth="1013.0">
          <columns>
             <TableColumn prefWidth="52.24338150024414" text="ID" />
             <TableColumn prefWidth="223.5" text="Name" />
@@ -37,18 +37,18 @@
             <TableColumn prefWidth="85.0" text="Supplier" />
          </columns>
       </TableView>
-      <Label layoutX="9.0" layoutY="38.0" styleClass="title-form" text="Order Information">
+      <Label layoutX="9.0" layoutY="39.0" prefHeight="25.0" prefWidth="194.0" styleClass="title-form" text="Order Information">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="9.0" layoutY="164.0" styleClass="title-form" text="Ingredients Information">
+      <Label layoutX="9.0" layoutY="164.0" prefHeight="25.0" prefWidth="191.0" styleClass="title-form" text="Ingredients Information">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker editable="false" layoutX="579.0" layoutY="101.0" prefHeight="26.0" prefWidth="223.0" />
-      <Button fx:id="orderListBtn" layoutX="7.0" layoutY="480.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <DatePicker editable="false" layoutX="701.0" layoutY="99.0" prefHeight="26.0" prefWidth="279.0" />
+      <Button fx:id="orderListBtn" layoutX="-2.0" layoutY="608.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="button-bc">
                <image>
@@ -57,7 +57,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="369.0" layoutY="482.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="78.0" styleClass="btn-confirm" text="Excel">
+      <Button layoutX="500.0" layoutY="602.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="94.0" styleClass="btn-confirm" text="Excel">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
