@@ -14,6 +14,12 @@ public class IncomeReport extends Report{
         Status = status;
     }
 
+    public IncomeReport(String reportId, Date orderDate, String employeeIdCreate, String supplier, String status) {
+        super(reportId, orderDate, employeeIdCreate);
+        this.supplier = supplier;
+        Status = status;
+    }
+
     public IncomeReport() {
     }
 

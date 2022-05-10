@@ -86,6 +86,10 @@ public class IngredientApplicationModel {
         this.getCurrentChoices().remove(incomeDetail);
     }
 
+    public boolean checkChooseItem() {
+        return this.getCurrentChoices().isEmpty();
+    }
+
     public void saveIncomeReport() {
 
     }

@@ -16,6 +16,12 @@ public class Report {
         this.employeeIdConfirm = employeeIdConfirm;
     }
 
+    public Report(String reportId, Date orderDate, String employeeIdCreate) {
+        this.reportId = reportId;
+        this.orderDate = orderDate;
+        this.employeeIdCreate = employeeIdCreate;
+    }
+
     public Report() {
     }
 
