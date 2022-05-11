@@ -489,7 +489,8 @@ public class ReportCancelDay extends SceneController implements Initializable {
         try {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=CNPM";
             String user = "sa";
-            String pass = "123456";
+//            String pass = "123456";
+            String pass = "reallyStrongPwd123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();

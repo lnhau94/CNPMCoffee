@@ -61,7 +61,8 @@ public class ReportEndDay extends SceneController implements Initializable {
         try {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=CNPM";
             String user = "sa";
-            String pass = "123456";
+//            String pass = "123456";
+            String pass = "reallyStrongPwd123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();
@@ -121,13 +122,12 @@ public class ReportEndDay extends SceneController implements Initializable {
         time = formatter.format(date); 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
-        valueTotalRevenue = getData("select sum(TotalPrice) from Tester1 t where OrderDate = ('%s') group by OrderDate", time);
+        valueTotalRevenue = getData("select sum(TotalPrice) from Orders od where OrderDate = ('%s') group by OrderDate", time);
         if (valueTotalRevenue.compareToIgnoreCase("") == 0) {
             valueTotalRevenue = "0";
         }
         totalRevenue.setText(valueTotalRevenue);
-        valueTotalOrder = getData("select count(OrderID) from Tester1 t where OrderDate = ('%s') group by OrderDate", time);
+        valueTotalOrder = getData("select count(OrderID) from Orders od where OrderDate = ('%s') group by OrderDate", time);
         if (valueTotalOrder.compareToIgnoreCase("") == 0) {
             valueTotalOrder = "0";
         }
