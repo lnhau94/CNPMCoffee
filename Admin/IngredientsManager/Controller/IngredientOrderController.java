@@ -115,8 +115,8 @@ public class IngredientOrderController extends MasterController implements Initi
         File file;
         FXMLLoader fx = new FXMLLoader();
         if(i != null) {
-            file = new File("Admin/IngredientsManager/View/IngredientDelete.fxml");
-            IngredientDeleteController controller;
+            file = new File("Admin/IngredientsManager/View/DeleteItemView.fxml");
+            DeleteItemController controller;
             try {
                 fx.setLocation(file.toURI().toURL());
                 stage.setScene(new Scene(fx.load()));

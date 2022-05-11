@@ -70,6 +70,7 @@
                </image>
             </ImageView>
          </graphic></Button>
+      <Label disable="true" layoutX="689.0" layoutY="60.0" text="Edit quantity by double click on the cell" />
    </children>
     <stylesheets>
         <URL value="@Css/WarehouseApplication.css" />

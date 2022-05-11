@@ -18,25 +18,28 @@
       <Label fx:id="header" contentDisplay="CENTER" prefHeight="30.0" prefWidth="1041.0" text="Warehouse Management" textAlignment="CENTER" />
       <TableView fx:id="table" layoutX="16.0" layoutY="104.0" prefHeight="468.0" prefWidth="1012.0">
          <columns>
-            <TableColumn fx:id="idCol" prefWidth="99.1408863067627" text="Product ID" />
-            <TableColumn fx:id="nameCol" prefWidth="300.85913848876953" text="ProductName" />
-            <TableColumn fx:id="priceCol" prefWidth="116.76510620117188" text="Ingredient ID" />
-            <TableColumn fx:id="priceCol1" prefWidth="335.99169921875" text="Ingredient Name" />
-            <TableColumn fx:id="priceCol11" prefWidth="159.381103515625" text="Quantity Ingredient" />
+            <TableColumn fx:id="productIdCol" prefWidth="99.1408863067627" text="Product ID" />
+            <TableColumn fx:id="productNameCol" prefWidth="300.85913848876953" text="ProductName" />
+            <TableColumn fx:id="ingredientIdCol" prefWidth="116.76510620117188" text="Ingredient ID" />
+            <TableColumn fx:id="ingredientNameCol" prefWidth="335.99169921875" text="Ingredient Name" />
+            <TableColumn fx:id="ingredientQtyCol" prefWidth="159.381103515625" text="Quantity Ingredient" />
          </columns>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TableView>
-      <Button layoutX="4.0" layoutY="596.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="button-admin">
+      <Button fx:id="backWarehouseBtn" layoutX="4.0" layoutY="596.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="35.0" prefWidth="35.0" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Icon/backnow.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="addIngredientBtn" layoutX="397.0" layoutY="582.0" mnemonicParsing="false" styleClass="button-admin">
+      <Button fx:id="addIngredientBtn" layoutX="397.0" layoutY="582.0" mnemonicParsing="false" onAction="#openAddStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,8 +47,11 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button layoutX="520.0" layoutY="580.0" mnemonicParsing="false" styleClass="button-admin">
+      <Button layoutX="520.0" layoutY="580.0" mnemonicParsing="false" onAction="#openEditStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -53,8 +59,11 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button layoutX="639.0" layoutY="579.0" mnemonicParsing="false" styleClass="button-admin">
+      <Button layoutX="639.0" layoutY="579.0" mnemonicParsing="false" onAction="#openRemoveStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -62,15 +71,18 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="backAdminBtn" layoutX="3.0" layoutY="488.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" />
-      <ComboBox layoutX="27.0" layoutY="45.0" prefHeight="41.0" prefWidth="322.0" promptText="Choose Product" />
-      <Label layoutX="808.0" layoutY="54.0" prefHeight="21.0" prefWidth="83.0" text="Thành phẩm:">
+      <ComboBox fx:id="comboBoxProductName" layoutX="27.0" layoutY="45.0" prefHeight="41.0" prefWidth="322.0" promptText="Choose Product" />
+      <Label layoutX="783.0" layoutY="55.0" prefHeight="21.0" prefWidth="83.0" text="Thành phẩm:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="900.0" layoutY="56.0" prefHeight="21.0" prefWidth="83.0" text="...">
+      <Label fx:id="result" layoutX="873.0" layoutY="56.0" prefHeight="21.0" prefWidth="156.0">
          <font>
             <Font size="15.0" />
          </font>

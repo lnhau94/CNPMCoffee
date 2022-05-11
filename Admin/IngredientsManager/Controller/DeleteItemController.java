@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
-public class IngredientDeleteController extends MasterController {
+public class DeleteItemController extends MasterController {
     private Ingredient i;
 
     private boolean isRemove;

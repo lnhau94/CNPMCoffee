@@ -110,10 +110,11 @@ public class ConfirmDetailController extends MasterController implements Initial
         textFieldSupplier.setText("Dalat Trung Nguyen");
 //        Convert date sql to String
 //        Then convert String to LocalDate
-        Date date = new Date(2022, 9, 5);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date(2022-1900,1,2);
+        //Date date = new Date(2022, 11, 5);
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = dateFormat.format(date);
-//        System.out.println("Converted String " + strDate);
+        System.out.println("Converted String " + strDate);
         this.date.setText(strDate);
     }
 

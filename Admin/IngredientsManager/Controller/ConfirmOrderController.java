@@ -53,23 +53,21 @@ public class ConfirmOrderController extends MasterController implements Initiali
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(((Node)e.getSource()).getScene().getWindow());
         stage.setX(300);
-        stage.setY(150);
+        stage.setY(50);
         File file;
         FXMLLoader loader = new FXMLLoader();
-        ConfirmDetailController controller;
         if(id != null) {
             this.model.getIncomeDetails(id);
             file = new File("Admin/IngredientsManager/View/ConfirmDetail.fxml");
             try {
                 loader.setLocation(file.toURI().toURL());
                 stage.setScene(new Scene(loader.load()));
-                controller = loader.getController();
                 stage.showAndWait();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Message");
             alert.setHeaderText("Fail");
             alert.setContentText("Select row, please");
