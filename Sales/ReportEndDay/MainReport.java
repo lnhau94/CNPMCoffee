@@ -1,4 +1,4 @@
-package Main.Sales.Discard.ReportEndDay;
+package Main.Sales.ReportEndDay;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,15 +14,14 @@ public class MainReport extends Application {
     
     public void start(Stage primaryStage){
         try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../ReportEndDay/View/ReportEndDay.fxml"));
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(new File("Sales/Discard/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL());
-//            Parent root = (Parent) fxmlLoader.load();
-//            Scene scene = new Scene(root);
-//            scene.getStylesheets().add(getClass().getResource("../ReportEndDay/View/CSS/ReportEndDay.css").toExternalForm());
-//            scene.getStylesheets().add(getClass().getResource("Sales/Discard/ReportEndDay/View/CSS/ReportEndDay.css").toExternalForm());
+            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../ReportEndDay/View/ReportEndDay.fxml"));
+            //Parent root = (Parent) fxmlLoader.load();
+            Parent root = FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL());
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
             primaryStage.setTitle("Report");
-            primaryStage.setScene(new Scene(fxmlLoader.load()));
+            primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
-package Main.Sales.Discard.ReportEndDay.Control;
+package Main.Sales.ReportEndDay.Control;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -15,19 +16,19 @@ public class SceneController {
     public Parent root;
 
     public void screenReportEndDay(ActionEvent event) throws IOException {
-        root = FXMLLoader.load((getClass().getResource("../ReportEndDay/View/ReportEndDay.fxml")));
+        root = FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL());
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("../ReportEndDay/View/CSS/ReportEndDay.css").toExternalForm());
+        scene.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
     public void screenReportCancelEndDay(ActionEvent event) throws IOException {
-        root = FXMLLoader.load((getClass().getResource("../ReportEndDay/View/ReportCancelEndDay.fxml")));
+        root = FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportCancelEndDay.fxml").toURI().toURL());
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("../ReportEndDay/View/CSS/ReportCancelEndDay.css").toExternalForm());
+        scene.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportCancelEndDay.css").toURI().toURL().toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
