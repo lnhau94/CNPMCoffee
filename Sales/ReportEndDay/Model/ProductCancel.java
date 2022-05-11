@@ -1,4 +1,4 @@
-package Main.Sales.Discard.ReportEndDay.Model;
+package Main.Sales.ReportEndDay.Model;
 
 public class ProductCancel {
     private String idProduct;
