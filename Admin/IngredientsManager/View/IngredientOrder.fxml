@@ -12,28 +12,28 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="537.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.IngredientOrderController">
+<AnchorPane prefHeight="640.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.IngredientOrderController">
    <children>
-      <Label fx:id="header" contentDisplay="CENTER" prefHeight="30.0" prefWidth="832.0" text="Warehouse Management" textAlignment="CENTER" />
-      <TextField layoutX="14.0" layoutY="44.0" prefHeight="26.0" prefWidth="274.0" promptText="Search...">
+      <Label fx:id="header" contentDisplay="CENTER" prefHeight="30.0" prefWidth="1046.0" text="Warehouse Management" textAlignment="CENTER" />
+      <TextField layoutX="14.0" layoutY="44.0" prefHeight="30.0" prefWidth="281.0" promptText="Search...">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TableView fx:id="table" layoutX="15.0" layoutY="97.0" prefHeight="363.0" prefWidth="802.0">
+      <TableView fx:id="table" layoutX="15.0" layoutY="97.0" prefHeight="467.0" prefWidth="1015.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="80.27553462982178" text="ID" />
-          <TableColumn fx:id="nameCol" prefWidth="353.72447204589844" text="Name" />
-            <TableColumn fx:id="priceCol" prefWidth="103.76336669921875" text="Import Price" />
-            <TableColumn fx:id="typeCol" prefWidth="91.66812133789062" text="Category" />
-            <TableColumn fx:id="producerCol" prefWidth="93.255126953125" text="Producer" />
-            <TableColumn fx:id="storageCol" prefWidth="80.7449951171875" text="Storage" />
+          <TableColumn fx:id="nameCol" prefWidth="368.05589294433594" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="121.944091796875" text="Import Price" />
+            <TableColumn fx:id="typeCol" prefWidth="183.05474853515625" text="Category" />
+            <TableColumn fx:id="producerCol" prefWidth="124.3302001953125" text="Producer" />
+            <TableColumn fx:id="storageCol" prefWidth="136.66265869140625" text="Storage" />
         </columns>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TableView>
       <Button layoutX="14.0" layoutY="398.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="button-admin" />
-      <Button fx:id="incomeCfmBtn" layoutX="352.0" layoutY="41.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="Import Confirmation">
+      <Button fx:id="incomeCfmBtn" layoutX="409.0" layoutY="41.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="Import Confirmation">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                <image>
@@ -42,7 +42,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="orderListBtn" layoutX="528.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="Ordered  List">
+      <Button fx:id="orderListBtn" layoutX="612.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="Ordered  List">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -51,7 +51,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="newOrderBtn" layoutX="671.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="New Order">
+      <Button fx:id="newOrderBtn" layoutX="771.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="47.0" prefWidth="131.0" styleClass="button-admin" text="New Order">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -60,7 +60,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="283.0" layoutY="41.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="36.0" styleClass="button-admin">
+      <Button layoutX="296.0" layoutY="44.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="36.0" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -69,7 +69,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addIngredientBtn" layoutX="282.0" layoutY="471.0" mnemonicParsing="false" onAction="#openAddStage" styleClass="button-admin">
+      <Button fx:id="addIngredientBtn" layoutX="404.0" layoutY="580.0" mnemonicParsing="false" onAction="#openAddStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -78,7 +78,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="405.0" layoutY="469.0" mnemonicParsing="false" onAction="#openEditStage" styleClass="button-admin">
+      <Button layoutX="527.0" layoutY="578.0" mnemonicParsing="false" onAction="#openEditStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -87,7 +87,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="524.0" layoutY="468.0" mnemonicParsing="false" onAction="#openRemoveStage" styleClass="button-admin">
+      <Button layoutX="646.0" layoutY="577.0" mnemonicParsing="false" onAction="#openRemoveStage" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -96,11 +96,20 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="backAdminBtn" layoutX="3.0" layoutY="488.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
+      <Button fx:id="backAdminBtn" layoutX="10.0" layoutY="587.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Icon/backnow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="recipeBtn" layoutX="904.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="47.0" prefWidth="125.0" styleClass="button-admin" text="Recipes">
+         <graphic>
+            <ImageView fitHeight="42.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Icon/recipe.png" />
                </image>
             </ImageView>
          </graphic>

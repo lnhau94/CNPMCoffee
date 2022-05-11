@@ -106,7 +106,6 @@ public class CreateIngredientOrderController extends MasterController implements
         if(i != null) {
             IncomeDetail incomeDetail = new IncomeDetail(i, 1);
             this.model.addChosenItem(incomeDetail);
-            System.out.println("hello");
         }
     }
 
@@ -129,8 +128,20 @@ public class CreateIngredientOrderController extends MasterController implements
                 throw new RuntimeException(ex);
             }
         }
-
-
 //        System.out.println(model.getCurrentChoices().get(tableOrder.getSelectionModel().getSelectedIndex()).getOrderQty());
+    }
+
+    public void checkChoose(ActionEvent e) {
+        if(this.model.checkChooseItem()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Message");
+            alert.setHeaderText("Fail");
+            alert.setContentText("You have not chosen any items to order");
+            alert.showAndWait();
+        }
+        else {
+            screenTranfer.switchScene(e);
+        }
+
     }
 }

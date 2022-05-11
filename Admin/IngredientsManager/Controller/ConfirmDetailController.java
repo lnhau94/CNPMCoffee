@@ -5,12 +5,15 @@ import Main.Entity.Element.IncomeDetail;
 import Main.Entity.Element.IncomeReport;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.Date;
@@ -18,7 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
-public class OrderDetailController extends MasterController implements Initializable {
+public class ConfirmDetailController extends MasterController implements Initializable {
     @FXML
     private TextField textFieldName;
     @FXML
@@ -45,9 +48,7 @@ public class OrderDetailController extends MasterController implements Initializ
     private TableColumn<IncomeDetail, Integer> qtyCol;
     @FXML
     private TableColumn<IncomeDetail, Integer> receiveQtyCol;
-
     private IncomeReportsApplicationModel model;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,8 +67,41 @@ public class OrderDetailController extends MasterController implements Initializ
                 .getIngredientChoice().getProducer()));
         qtyCol.setCellValueFactory(new PropertyValueFactory<IncomeDetail, Integer>("orderQty"));
         receiveQtyCol.setCellValueFactory(new PropertyValueFactory<IncomeDetail, Integer>("receiveQty"));
-        this.getDetails(this.model.getIncomeDetails());
 
+        this.getDetails(this.model.getIncomeDetails());
+        this.editableCols();
+
+    }
+
+    public void editableCols() {
+        receiveQtyCol.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer integer) {
+                return String.valueOf(integer);
+            }
+            @Override
+            public Integer fromString(String s) {
+                int value = model.getIncomeDetails().get(table.getSelectionModel().getSelectedIndex()).getReceiveQty();
+                try {
+                    value = Integer.parseInt(s);
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Enter number please");
+                    alert.show();
+                }
+                return value;
+            }
+        }));
+
+//        receiveQtyCol.setOnEditCommit(e -> e.getTableView().getItems().get(
+//                e.getTablePosition().getRow()).setReceiveQty(e.getNewValue()));
+        receiveQtyCol.setOnEditCommit(e -> {e.getTableView().getItems().get(
+                e.getTablePosition().getRow()).setReceiveQty(e.getNewValue());
+            System.out.println(model.getIncomeDetails().get(table.getSelectionModel().getSelectedIndex())
+                    .getReceiveQty());
+        });
+
+        this.table.setEditable(true);
     }
 
     public void displayChosenItem(IncomeReport i) {
@@ -76,14 +110,22 @@ public class OrderDetailController extends MasterController implements Initializ
         textFieldSupplier.setText("Dalat Trung Nguyen");
 //        Convert date sql to String
 //        Then convert String to LocalDate
-        Date date = new Date(2030, 9, 5);
+        Date date = new Date(2022-1900,1,2);
+        //Date date = new Date(2022, 11, 5);
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = dateFormat.format(date);
-//        System.out.println("Converted String " + strDate);
+        System.out.println("Converted String " + strDate);
         this.date.setText(strDate);
     }
 
     public void getDetails(ObservableList<IncomeDetail> incomeDetails) {
         this.table.setItems(incomeDetails);
     }
+
+    public void confirmOrder(ActionEvent e) {
+        this.model.updateRecQtyOfOrder();
+        ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
+    }
+
+
 }

@@ -185,6 +185,15 @@ create table IncomeDetails
 	constraint PK_INCOMEDETAILS primary key (reportID,ingredientID)
 )
 
+-- Bảng lưu trữ các hàng đã hủy theo ngày
+create table ProductCancel
+(
+	ProductID varchar(5) not null,
+	ProductName nvarchar(30) not null,
+	ProductQty int not null,
+	ProductDate date
+)
+
 
 --Tạo khóa chính cho bảng WorkPosition
 alter table WorkPosition add constraint PK_WorkPosition primary key (WorkPositionID);

@@ -66,8 +66,8 @@ public class FormIngredientOrderController extends MasterController implements I
 
     public void sendOrder(ActionEvent e) {
         this.model.getIncomeReport().setStatus("Waiting");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MMM-dd");
-        this.model.getIncomeReport().setOrderDate(Date.valueOf(this.date.getValue().format(formatter)));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+//        this.model.getIncomeReport().setOrderDate(Date.valueOf(this.date.getValue().format(formatter)));
         this.model.getIncomeReport().setEmployeeIdCreate(this.textFieldID.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Message");

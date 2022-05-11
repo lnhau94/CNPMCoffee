@@ -13,8 +13,7 @@
     -fx-background-color: transparent;
 
 }
-.button-admin:hover,
-.btn-confirm:hover{
+.button-admin:hover {
     -fx-effect: dropshadow(three-pass-box, #5F50F1,10,0,0,0);
 }
 
@@ -52,9 +51,18 @@
 .btn-confirm,
 .label-form {
     -fx-font-weight: 900;
-    -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #ff6b6b, #556270);;
+    -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #f7971e, #ffd200);
     -fx-padding: 4px 8px;
     -fx-text-fill: #fff;
     -fx-border: solid;
+    -fx-background-radius: 6px;
+}
+
+.btn-confirm:hover {
+    -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #ff6b6b, #556270);
+}
+
+.combo-box {
+    -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #f7971e, #ffd200);
     -fx-background-radius: 6px;
 }
