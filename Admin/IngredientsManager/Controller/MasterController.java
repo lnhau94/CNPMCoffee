@@ -20,8 +20,8 @@ public class MasterController {
 
     public static void start() {
         MasterController.model = new IngredientApplicationModel();
-        MasterController.inRModel = new IncomeReportsApplicationModel();
         MasterController.recipesModel = new RecipesModel();
+        MasterController.inRModel = new IncomeReportsApplicationModel();
         MasterController.screenTranfer = new ScreenTranfer();
     }
 

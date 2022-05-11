@@ -28,13 +28,13 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView layoutX="14.0" layoutY="86.0" prefHeight="503.0" prefWidth="1014.0">
+      <TableView fx:id="table" layoutX="14.0" layoutY="86.0" onMouseClicked="#chooseItem" prefHeight="503.0" prefWidth="1014.0">
         <columns>
-          <TableColumn prefWidth="129.9797019958496" text="Number Order" />
-          <TableColumn prefWidth="150.52033233642578" text="Emplyee's ID" />
-            <TableColumn prefWidth="316.69677734375" text="Employee's Name" />
-            <TableColumn prefWidth="222.009033203125" text="Date" />
-            <TableColumn prefWidth="194.4046630859375" text="Status" />
+          <TableColumn fx:id="numberOrdCol" prefWidth="129.9797019958496" text="Number Order" />
+          <TableColumn fx:id="idEmployeeCol" prefWidth="150.52033233642578" text="Emplyee's ID" />
+            <TableColumn fx:id="nameEmployeeCol" prefWidth="316.69677734375" text="Employee's Name" />
+            <TableColumn fx:id="dateCol" prefWidth="222.009033203125" text="Date" />
+            <TableColumn fx:id="statusCol" prefWidth="194.4046630859375" text="Status" />
         </columns>
       </TableView>
       <Button fx:id="backWarehouseBtn" layoutY="596.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
