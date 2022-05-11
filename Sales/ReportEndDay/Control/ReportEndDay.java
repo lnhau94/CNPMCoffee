@@ -1,4 +1,4 @@
-package Main.Sales.Discard.ReportEndDay.Control;
+package Main.Sales.ReportEndDay.Control;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import Main.Entity.DataAccess.DAO;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -59,10 +60,12 @@ public class ReportEndDay extends SceneController implements Initializable {
         ResultSet rs = null;
         Connection cnn = null;
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=CNPM";
-            String user = "sa";
+            String url = "jdbc:sqlserver://;" +
+                    "serverName=localhost;" +
+                    "databaseName=CNPM;" +
+                    "encrypt=true;trustServerCertificate=true";
+            String user = "admin";
             String pass = "123456";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();
             rs = state.executeQuery(yourQuery);
@@ -77,8 +80,10 @@ public class ReportEndDay extends SceneController implements Initializable {
 
     public String getData(String yourQuery, String date) {
         String value = "";
-        ResultSet rs = loadData(String.format(yourQuery, date));
+        ResultSet rs =null;
         try {
+            rs = loadData(String.format(yourQuery, date));
+            //rs = new DAO().executeQuery("Select * from Orders");
             while (rs.next()) {
                 try {
                     value = rs.getString(1);
@@ -122,12 +127,12 @@ public class ReportEndDay extends SceneController implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        valueTotalRevenue = getData("select sum(TotalPrice) from Tester1 t where OrderDate = ('%s') group by OrderDate", time);
+        valueTotalRevenue = getData("select sum(TotalPrice) from Orders t where OrderDate = ('%s') group by OrderDate", time);
         if (valueTotalRevenue.compareToIgnoreCase("") == 0) {
             valueTotalRevenue = "0";
         }
         totalRevenue.setText(valueTotalRevenue);
-        valueTotalOrder = getData("select count(OrderID) from Tester1 t where OrderDate = ('%s') group by OrderDate", time);
+        valueTotalOrder = getData("select count(OrderID) from Orders t where OrderDate = ('%s') group by OrderDate", time);
         if (valueTotalOrder.compareToIgnoreCase("") == 0) {
             valueTotalOrder = "0";
         }
