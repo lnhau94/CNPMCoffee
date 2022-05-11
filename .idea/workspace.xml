@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cda18079-58cd-47ad-b200-6df2401e5646" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mssql_jdbc_10_2_0_jre8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CNPM.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/CeateId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminAccountAddController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminAccountController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminAccountEditController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminCategoryAddController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminCategoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminCategoryEditController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminDeleteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminEmployeeAddController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminEmployeeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminEmployeeEditController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminProductAddController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminProductController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AdminProductEditController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Controller/AlertController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/Model/ProductInTable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Account.Add.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Account.Edit.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Account.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Category.Add.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Category.Edit.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Category.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Delete.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Employee.Add.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Employee.Edit.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Employee.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Product.Add.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Product.Edit.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.Product.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Admin.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Alert.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Css/AddApplication.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Css/AdminApplication.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/DataManager/View/Css/Application.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/ConfirmDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/ConfirmOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/CreateIngredientOrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/FormIngredientOrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/IngredientAddController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/IngredientDeleteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/IngredientEditController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/IngredientOrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/MasterController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/OrderDetailController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/OrderList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Controller/ScreenTranfer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/MainIngredient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/Model/IngredientApplicationModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/Alert.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/ConfirmDetail.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/ConfirmOrder.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/CreateIngredientOrder.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/Css/WarehouseApplication.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/FormIngredientOrder.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/IngredientAdd.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/IngredientDelete.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/IngredientEdit.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/IngredientOrder.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/OrderDetail.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/IngredientsManager/View/OrderList.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/Controller/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/Controller/EmployeeList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/Controller/Salarytable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/Controller/Timekeeping.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/MainSalary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/View/CSS/Salary.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/View/Employee.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/View/EmployeeList.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/View/Salarytable.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/SalaryCalculate/View/Timekeeping.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPM.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Admin/DataManager/Controller/AdminAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Admin/DataManager/Controller/AdminAccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/Controller/Salarytable.java" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/Controller/Salarytable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/Controller/Timekeeping.java" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/Controller/Timekeeping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/MainSalary.java" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/MainSalary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/View/CSS/Salary.css" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/View/CSS/Salary.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/View/Salarytable.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/View/Salarytable.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/View/Timekeeping.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Admin/SalaryCalculate/View/Timekeeping.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNPMCoffee/Entity/DataAccess/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/CNPMCoffee/Entity/DataAccess/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/DataAccess/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/DataAccess/DAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/IncomeDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/IncomeReport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/Ingredient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/OrderDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/PositionType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/ProductPrice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/ProductRecipe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/Report.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/WorkPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entity/Element/WorkType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/MainControl/ControlBar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/MainControl/Controlbar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/SignIn/Alert.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/SignIn/Alert.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/SignIn/AlertController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/SignIn/SignIn.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/SignIn/SignIn.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/SignIn/SignIn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/Add.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/account.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/addproduct.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/alert.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/alert2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/backnow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/boxplus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/cancel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/cancel2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/category.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/confirmation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/delete.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/deleteproduct.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/edit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/export.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/goback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/key.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/menubackground.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/menubackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/next.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/nguyenlieu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/note.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/ok.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/order.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/products.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/salary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/save.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/search2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/thongke.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Icon/user2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Discard/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/Control/SalesApplicationControl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/Model/SalesApplicationModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/View/MenuItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/View/OrderFactory.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/View/OrderFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/View/SalesApplicationView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sales/Sales/View/SalesStyle.css" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/CNPMCoffee" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28uYhLJvbBANeTPT1KIVb1m6q1t" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/User/Downloads/HocTap/IntelliJ/openjfx-18.0.1_windows-x64_bin-sdk/javafx-sdk-18.0.1/lib",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Unnamed">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main.Admin.DataManager.Main" />
+      <module name="CNPM" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\User\Downloads\HocTap\IntelliJ\openjfx-18.0.1_windows-x64_bin-sdk\javafx-sdk-18.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main.Admin.SalaryCalculate.MainSalary" />
+      <module name="CNPM" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\User\Downloads\HocTap\IntelliJ\openjfx-18.0.1_windows-x64_bin-sdk\javafx-sdk-18.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.Main" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cda18079-58cd-47ad-b200-6df2401e5646" name="Changes" comment="" />
+      <created>1652068067039</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652068067039</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

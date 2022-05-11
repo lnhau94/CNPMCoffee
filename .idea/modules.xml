@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CNPMCoffee.iml" filepath="$PROJECT_DIR$/CNPMCoffee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNPM.iml" filepath="$PROJECT_DIR$/CNPM.iml" />
     </modules>
   </component>
 </project>

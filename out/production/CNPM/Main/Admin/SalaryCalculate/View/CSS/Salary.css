@@ -1,0 +1,74 @@
+#header{
+   -fx-background-color: #5F50F1;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: Bold;
+    -fx-font-size: 18px;
+    -fx-color: #5F50F1;
+}
+.TextField {
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 20;
+
+}
+.button-menu:hover{
+    -fx-effect: dropshadow(three-pass-box, #5F50F1,10,0,0,0);
+}
+.background{
+    -fx-background-color: #CCFFFF;
+}
+.title{
+    -fx-background-color: #FFFFFF;
+}
+.table-view{
+     -fx-effect: dropshadow(three-pass-box, #111,10,0,0,0);
+}
+.button-menu {
+    -fx-background-color: transparent;
+    -fx-background-color: #5F50F1;
+    -fx-color: #5F50F1;
+    -fx-font-family: "Segoe UI Semibold";
+}
+.button-checkin , .button-checkout {
+    -fx-background: #CCCCCC	;
+}
+.button-bc{
+    -fx-background-color: transparent;
+}
+.button-bc:hover{
+    -fx-opacity: 0.8;
+}
+.button-admin{
+    -fx-background-color: transparent;
+
+}
+.button-admin:hover{
+    -fx-effect: dropshadow(three-pass-box, #5F50F1,10,0,0,0);
+}
+//Add employee
+.header{
+    -fx-background-color: #5F50F1;
+        -fx-text-fill: #fff;
+        -fx-font-family: "Segoe UI Semibold";
+        -fx-font-weight: Bold;
+        -fx-font-size: 18px;
+}
+.TextFieldInput{
+    -fx-background-radius: 10;
+}
+.TextFieldInput:hover{
+    -fx-border-radius: 10;;
+    -fx-border-color: green;
+}
+
+.dialog .button{
+    -fx-alignment: center;
+    -fx-background-radius: 10px;
+    -fx-background-color: #fca311;
+    -fx-text-fill: #fff;
+    -fx-font-weight: 600;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+}
+.dialog .button:hover{
+    -fx-background-color: tomato;
+}
