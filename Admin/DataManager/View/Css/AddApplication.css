@@ -20,13 +20,16 @@
     -fx-border-radius: 10;;
     -fx-border-color: green;
 }
-
+.dialog{
+    -fx-border-color: #111;
+}
 .dialog .button{
     -fx-alignment: center;
     -fx-background-radius: 10px;
     -fx-background-color: #fca311;
+    -fx-font-size: 16px;
     -fx-text-fill: #fff;
-    -fx-font-weight: 600;
+    -fx-font-weight: 700;
     -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
 }
 .dialog .button:hover{

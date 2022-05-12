@@ -1,5 +1,6 @@
 package Main.Admin.DataManager.Controller;
 
+import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Category;
 import javafx.collections.FXCollections;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +42,26 @@ public class AdminProductAddController implements Initializable {
         }
 
     }
-
+    public boolean checkNameProduct(String Name) throws SQLException {
+        AdminProductController adminProductController = new AdminProductController();
+        adminProductController.GetDataProduct();
+        for(ProductInTable product : adminProductController.productInTableList){
+            if(product.getProductName().equalsIgnoreCase(Name)) return false;
+        }
+    return true;
+    }
+    public void excuteCheck() throws SQLException {
+        if(!checkNameProduct(textName.getText())){
+            ErrorController ErrorController = new ErrorController();
+            try {
+                ErrorController.displayError("name");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            AddProduct();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

@@ -12,6 +12,7 @@ import java.io.IOException;
 public class AdminController  {
     public void changeSceneEmployee(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        stage.centerOnScreen();
 //        FXMLLoader loader = new FXMLLoader();
 //        loader.setLocation(this.getClass().getResource("../CNPMCoffee/Admin/IngredientsManager/View/Admin.Employee.fxml"));
         Parent EmployeeViewParent = FXMLLoader.load(getClass().getResource("../View/Admin.Employee.fxml"));
@@ -20,6 +21,7 @@ public class AdminController  {
     }
     public void changeSceneProduct(ActionEvent e) throws  IOException{
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        stage.centerOnScreen();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Admin.Product.fxml"));
         Parent ProductViewParent = loader.load();
@@ -28,6 +30,7 @@ public class AdminController  {
     }
     public void changeSceneCategory(ActionEvent e) throws  IOException{
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        stage.centerOnScreen();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Admin.Category.fxml"));
         Parent CategoryViewParent = loader.load();
@@ -36,6 +39,7 @@ public class AdminController  {
     }
     public void changeSceneAccount(ActionEvent e) throws  IOException{
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        stage.centerOnScreen();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../View/Admin.Account.fxml"));
         Parent AccountViewParent = loader.load();

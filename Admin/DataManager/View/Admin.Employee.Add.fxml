@@ -39,6 +39,7 @@
    </expandableContent>
    <buttonTypes>
       <ButtonType fx:constant="APPLY" />
+      <ButtonType fx:constant="CLOSE" />
    </buttonTypes>
    <stylesheets>
       <URL value="@Css/AddApplication.css" />

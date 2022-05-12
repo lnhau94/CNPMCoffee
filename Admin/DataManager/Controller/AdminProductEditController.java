@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 
 import java.awt.*;
 import java.awt.event.TextEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,6 +52,26 @@ public class AdminProductEditController implements Initializable {
         PriceSEdit.setText(String.valueOf(product.getPriceByS()));
         PriceMEdit.setText(String.valueOf(product.getPriceByM()));
         PriceLEdit.setText(String.valueOf(product.getPriceByL()));
+    }
+    public boolean checkNameProduct(String Name) throws SQLException {
+        AdminProductController adminProductController = new AdminProductController();
+        adminProductController.GetDataProduct();
+        for(ProductInTable product : adminProductController.productInTableList){
+            if(product.getProductName().equalsIgnoreCase(Name)) return false;
+        }
+        return true;
+    }
+    public void excuteCheck(ProductInTable product) throws SQLException {
+        if(!checkNameProduct(textNameProductEdit.getText())){
+            ErrorController ErrorController = new ErrorController();
+            try {
+                ErrorController.displayError("name");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            EditProduct(product);
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

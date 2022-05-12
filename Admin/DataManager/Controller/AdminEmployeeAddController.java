@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,6 +48,26 @@ public class AdminEmployeeAddController implements Initializable {
         while(rs.next()){
             String WorkTypeName = rs.getString(1);
             Type.add(WorkTypeName);
+        }
+    }
+    public boolean checkName(String Name) throws SQLException {
+        AdminEmployeeController adminController = new AdminEmployeeController();
+       adminController.getDataEmployee();
+        for(Employee e : adminController.EmployeeTempList){
+            if(e.getEmployeeName().equalsIgnoreCase(Name)) return false;
+        }
+        return true;
+    }
+    public void excuteCheck() throws SQLException {
+        if(!checkName(textNameEmployee.getText())){
+            ErrorController ErrorController = new ErrorController();
+            try {
+                ErrorController.displayError("name");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            AddEmployee();
         }
     }
     @Override
