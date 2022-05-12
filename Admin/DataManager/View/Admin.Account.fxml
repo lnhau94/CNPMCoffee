@@ -57,7 +57,7 @@
             </ImageView>
         </graphic>
     </Button>
-      <TextField layoutX="40.0" layoutY="41.0" prefHeight="34.0" prefWidth="188.0" promptText="Search Here" styleClass="TextFieldInput" />
+      <TextField fx:id="txtName" layoutX="40.0" layoutY="41.0" onAction="#SearchName" prefHeight="34.0" prefWidth="188.0" promptText="Search Here" styleClass="TextFieldInput" />
     <Button layoutX="228.0" layoutY="40.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="33.0" styleClass="button-admin">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="283.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
@@ -67,7 +67,7 @@
             </ImageView>
         </graphic>
     </Button>
-
+    
 
 
 

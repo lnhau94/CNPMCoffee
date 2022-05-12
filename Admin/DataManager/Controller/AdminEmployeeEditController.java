@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -100,9 +101,17 @@ public class AdminEmployeeEditController implements Initializable {
                 TypeID=o.getTypeId();
             }
         }
-        dao.execute("UPDATE Employee SET EmployeeName=N'"+employeeName+"',EmployeePhone='"+employeePhone+"', WorkPositionID='"+PositionID+"',WorkTypeID='"+TypeID+"'" );
+        dao.execute("UPDATE Employee SET EmployeeName=N'"+employeeName+"',EmployeePhone='"+employeePhone+"', WorkPositionID='"+PositionID+"',WorkTypeID='"+TypeID+"'WHERE EmployeeID ='"+employeeID+"' " );
         AdminEmployeeController adminEmployeeController = new AdminEmployeeController();
         adminEmployeeController.getDataEmployee();
+    }
+    public boolean checkName(String Name) throws SQLException {
+        AdminEmployeeController adminController = new AdminEmployeeController();
+        adminController.getDataEmployee();
+        for(Employee e : adminController.EmployeeTempList){
+            if(e.getEmployeeName().equalsIgnoreCase(Name)) return false;
+        }
+        return true;
     }
 
 
