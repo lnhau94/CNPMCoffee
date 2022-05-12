@@ -6,7 +6,29 @@
     -fx-font-size: 14;
     -fx-font-weight: 700;
     -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+}
 
+#cashbtn{
+    -fx-alignment: center;
+    -fx-pref-width: 500;
+    -fx-background-color: #5F50F1;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+}
+
+#pricelbl{
+    -fx-alignment: center;
+    -fx-pref-height: 30;
+    -fx-pref-width: 500;
+    -fx-background-color: #fff;
+    -fx-text-fill: #5F50F1;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
 }
 
 #menu-drink-text{
