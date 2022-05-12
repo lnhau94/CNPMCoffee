@@ -44,7 +44,7 @@ public class ConfirmOrderController extends MasterController implements Initiali
         dateCol.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(
                 data.getValue().getOrderDate())));
 
-        this.table.setItems(this.model.getIncomeReports());
+        this.table.setItems(this.model.getWaitingInReport());
     }
 
     public void chooseItem(MouseEvent e) {

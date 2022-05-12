@@ -1,7 +1,8 @@
 package Main.Entity.DataAccess;
 
-import Main.Entity.Element.Product;
-import Main.Entity.Element.ProductPrice;
+import Main.Entity.Element.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,21 +14,16 @@ public class DAO {
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     /*
-    private String DBuser = "sa";
-<<<<<<< HEAD
-//    private String DBpass = "123456";
-    private String DBpass = "reallyStrongPwd123";
-=======
-    private String DBpass = "123456";
             "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
             "databaseName=CNPM;" +
             "encrypt=true;trustServerCertificate=true";
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
-//    private String DBpass = "reallyStrongPwd123";
     */
-    private String DBuser = "admin";
-    private String DBpass = "123456";
+    private String DBuser = "sa";
+    private String DBpass = "reallyStrongPwd123";
+//    private String DBuser = "admin";
+//    private String DBpass = "123456";
 
     private Connection connect;
     private Statement stmt;
@@ -48,6 +44,7 @@ public class DAO {
         stmt= connect.createStatement();
         stmt.execute(sqlQuery);
     }
+
     public boolean insert(String sqlQuery){
         boolean flag = false;
         try {
@@ -58,6 +55,138 @@ public class DAO {
             throw new RuntimeException(e);
         }
         return flag;
+    }
+
+    public String findFinalIncomeReport() {
+        ResultSet rs;
+        try {
+            connect = DriverManager.getConnection(connectURL,DBuser,DBpass);
+            stmt= connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery("Select reportID from IncomeReports");
+            rs.last();
+            return rs.getString("reportID");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<Ingredient> getAllIngredient() throws SQLException {
+        ObservableList<Ingredient> list = FXCollections.observableArrayList();
+        Ingredient i = null;
+        ResultSet rs = this.executeQuery("Select * from Ingredients");
+        while(rs.next()) {
+            i = new Ingredient();
+            i.setIngredientId(rs.getString("ingredientID"));
+            i.setIngredientName(rs.getString("ingredientName"));
+            i.setIngredientType(rs.getString("ingredientType"));
+            i.setStorage(rs.getInt("storage"));
+            i.setProducer(rs.getString("Producer"));
+            i.setIncomePrice(rs.getInt("price"));
+            list.add(i);
+        }
+        return list;
+    }
+
+    public ArrayList<ProductPrice> getAllProductPrice() throws SQLException {
+        ArrayList<ProductPrice> list = new ArrayList<>();
+        ProductPrice pr = new ProductPrice();
+        ResultSet rs = this.executeQuery("Select * from ProductPrice");
+        while(rs.next()) {
+            pr.setProductId(rs.getString("ProductID"));
+            pr.setSize(rs.getString("ProductSize"));
+            pr.setPrice(rs.getInt("ProductPrice"));
+            list.add(pr);
+        }
+        return list;
+    }
+
+    public ArrayList<ProductPrice> findProductPriceById(String id, ArrayList<ProductPrice> list) {
+        ArrayList<ProductPrice> foundList;
+        foundList = new ArrayList<>();
+        list.forEach(data -> {
+            if (data.getProductId().equalsIgnoreCase(id)) {
+                foundList.add(data);
+            }
+        });
+        return foundList;
+    }
+
+    public ObservableList<Product> getAllProduct2() throws SQLException {
+        ArrayList<ProductPrice> listPPrice = this.getAllProductPrice();
+        ObservableList<Product> list = FXCollections.observableArrayList();
+        Product p;
+        ResultSet rs = this.executeQuery("Select * from Product pr join Category ct" +
+                "on pr.ProductID = ct.ProductID");
+        while(rs.next()) {
+            p = new Product();
+            p.setProductId(rs.getString("ProductID"));
+            p.setProductName(rs.getString("ProductName"));
+            p.setCategoryName(rs.getString("CategoryName"));
+            p.setPriceList(this.findProductPriceById(rs.getString("ProductID"), listPPrice));
+            list.add(p);
+        }
+        return list;
+    }
+
+    public ObservableList<IncomeReport> getAllIncomeReport(String sql) throws SQLException {
+        ObservableList<IncomeReport> list = FXCollections.observableArrayList();
+        ResultSet rs = this.executeQuery(sql);
+        IncomeReport ir;
+        while (rs.next()) {
+            ir = new IncomeReport();
+            ir.setReportId(rs.getString("reportID"));
+            ir.setEmployeeIdCreate(rs.getString("created"));
+            ir.setOrderDate(rs.getDate("reportDate"));
+            ir.setStatus(rs.getString("StateReport"));
+            ir.setSupplier(rs.getString("supplier"));
+            list.add(ir);
+        }
+        return list;
+    }
+
+    public ObservableList<ProductRecipe> getAllProductRecipe() throws SQLException {
+        ObservableList<ProductRecipe> list = FXCollections.observableArrayList();
+        ResultSet rs = this.executeQuery("Select * from ProductRecipe");
+        ProductRecipe pr;
+        while(rs.next()) {
+            pr = new ProductRecipe();
+            pr.setProductId(rs.getString("productID"));
+            pr.setIngredientId(rs.getString("ingredientID"));
+            pr.setProductQty(rs.getInt("productQty"));
+            pr.setIngredientQty(rs.getInt("ingredientQty"));
+            list.add(pr);
+        }
+        return list;
+    }
+
+    public Ingredient findIngredientById(String id) throws SQLException {
+        Ingredient i = null;
+        ResultSet rs = this.executeQuery("Select * from Ingredients where ingredientID = '"+id+"'");
+        while(rs.next()) {
+            i = new Ingredient();
+            i.setIngredientId(rs.getString("ingredientID"));
+            i.setIngredientName(rs.getString("ingredientName"));
+            i.setIngredientType(rs.getString("ingredientType"));
+            i.setStorage(rs.getInt("storage"));
+            i.setProducer(rs.getString("Producer"));
+            i.setIncomePrice(rs.getInt("price"));
+        }
+        return i;
+    }
+
+    public ObservableList<IncomeDetail> getIncomeDetailsByIncomeReport(IncomeReport ir) throws SQLException {
+        IncomeDetail ide;
+        ObservableList<IncomeDetail> list = FXCollections.observableArrayList();
+        ResultSet rs = this.executeQuery("Select * from IncomeDetails where reportID = '"+ir.getReportId()+"'");
+        while (rs.next()) {
+            ide = new IncomeDetail();
+            ide.setIngredientChoice(findIngredientById(rs.getString("ingredientID")));
+            ide.setOrderQty(rs.getInt("qty"));
+            ide.setReceiveQty(rs.getInt("receiveQty"));
+            list.add(ide);
+        }
+        return list;
     }
 
     public List<Product> getAllProduct() {

@@ -1,5 +1,6 @@
 package Main.Admin.IngredientsManager.Controller;
 
+import Main.Admin.IngredientsManager.Model.IncomeReportsApplicationModel;
 import Main.Admin.IngredientsManager.Model.IngredientApplicationModel;
 import Main.Entity.Element.IncomeDetail;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,9 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.SimpleFormatter;
 
 public class FormIngredientOrderController extends MasterController implements Initializable {
 
@@ -20,7 +23,7 @@ public class FormIngredientOrderController extends MasterController implements I
     @FXML
     private TextField textFieldID;
     @FXML
-    private DatePicker date;
+    private TextField dateTxt;
     @FXML
     private TextField textFieldSupplier;
 
@@ -41,11 +44,14 @@ public class FormIngredientOrderController extends MasterController implements I
     private TableColumn<IncomeDetail, Integer> qtyCol;
 
 
+    private Date now;
     private IngredientApplicationModel model;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.model = MasterController.model;
+        now = new Date();
+        dateTxt.setText(new SimpleDateFormat("dd-MM-yyyy").format(now));
         idCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()
                 .getIngredientChoice().getIngredientId()));
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()
@@ -66,9 +72,18 @@ public class FormIngredientOrderController extends MasterController implements I
 
     public void sendOrder(ActionEvent e) {
         this.model.getIncomeReport().setStatus("Waiting");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-//        this.model.getIncomeReport().setOrderDate(Date.valueOf(this.date.getValue().format(formatter)));
+//        System.out.println(java.sql.Date.valueOf(
+//                new SimpleDateFormat("yyyy-MM-dd").format(now)
+//        ).getClass().getName());
+        this.model.getIncomeReport().setOrderDate(java.sql.Date.valueOf(
+                new SimpleDateFormat("yyyy-MM-dd").format(now)
+        ));
         this.model.getIncomeReport().setEmployeeIdCreate(this.textFieldID.getText());
+        this.model.getIncomeReport().setSupplier(this.textFieldSupplier.getText());
+
+        this.model.saveIncomeReport();
+        this.model.saveIncomeDetails();
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Message");
         alert.setHeaderText("Send Successfully");
