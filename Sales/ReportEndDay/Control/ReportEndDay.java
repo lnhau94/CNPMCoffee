@@ -64,7 +64,7 @@ public class ReportEndDay extends SceneController implements Initializable {
                     "serverName=localhost;" +
                     "databaseName=CNPM;" +
                     "encrypt=true;trustServerCertificate=true";
-            String user = "admin";
+            String user = "sa";
             String pass = "123456";
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();
