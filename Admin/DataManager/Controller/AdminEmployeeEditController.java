@@ -1,25 +1,109 @@
 package Main.Admin.DataManager.Controller;
 
+import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Employee;
+import Main.Entity.Element.WorkPosition;
+import Main.Entity.Element.WorkType;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class AdminEmployeeEditController {
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class AdminEmployeeEditController implements Initializable {
     @FXML
-    private TextField textName;
+    ComboBox<String> textPosition;
+    @FXML
+    ComboBox<String> textType;
+    @FXML
+    private TextField textNameEmployee;
     @FXML
     private TextField textPhone;
-    @FXML
-    private TextField textPosition;
-    @FXML
-    private TextField textWorkType;
-    public void handleEvent(Employee employee){
-        textName.setText(employee.getEmployeeName());
-        textPhone.setText(employee.getEmployeePhone());
-        textPosition.setText(employee.getPosition());
-        textWorkType.setText(employee.getType());
+
+    public ArrayList<String> PositionArray = new ArrayList<>();
+    public ArrayList<String> TypeArray = new ArrayList<>();
+    ObservableList<String> PositionList;
+    ObservableList<String> TypeList;
+    DAO dao;
+    public void handleEvent(Employee selected){
+        textNameEmployee.setText(selected.getEmployeeName());
+        textPhone.setText(selected.getEmployeePhone());
+        textPosition.setValue(selected.getPosition());
+        textType.setValue(selected.getType());
     }
-    public void EditEmployee(Employee employee){
+    public void getDataPosition() throws SQLException{
+        dao = new DAO();
+        DAO dao = new DAO();
+        ResultSet rs = dao. executeQuery("SELECT WorkPositionName FROM WorkPosition");
+        while(rs.next()){
+            String WorkPositionName = rs.getString(1);
+            PositionArray.add(WorkPositionName);
+        }
+    }
+    public void getDataType() throws SQLException {
+        dao = new DAO();
+        ResultSet rs = dao. executeQuery("SELECT WorkTypeName FROM WorkType");
+        while(rs.next()){
+            String WorkTypeName = rs.getString(1);
+            TypeArray.add(WorkTypeName);
+        }
 
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            getDataPosition();
+            getDataType();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        PositionList= FXCollections.observableArrayList(PositionArray);
+        textPosition.setItems(PositionList);
+        TypeList = FXCollections.observableArrayList(TypeArray);
+        textType.setItems(TypeList);
+    }
+
+    public void EditEmployee(Employee employee) throws SQLException {
+        String employeeID = employee.getEmployeeID();
+        String employeeName = textNameEmployee.getText();
+        String employeePhone = textPhone.getText();
+        String WorkPosition = textPosition.getValue();
+        String workType = textType.getValue();
+        DAO dao = new DAO();
+        ResultSet rs = dao.executeQuery("SELECT * FROM WorkPosition");
+        ArrayList<Main.Entity.Element.WorkPosition> workPositionArrayList = new ArrayList<>();
+        while (rs.next()){
+            workPositionArrayList.add(new WorkPosition(rs.getString(2), rs.getString(3)));
+        }
+        ResultSet rs1 = dao.executeQuery("SELECT * FROM WorkType");
+        ArrayList<Main.Entity.Element.WorkType> workTypeArrayList = new ArrayList<>();
+        while ((rs1.next())){
+            workTypeArrayList.add(new WorkType(rs1.getString(2), rs1.getString(3)));
+        }
+        String PositionID = null;
+        String TypeID = null;
+        for(Main.Entity.Element.WorkPosition o: workPositionArrayList){
+            if(o.getWorkPositionName().equalsIgnoreCase(WorkPosition)){
+                PositionID=o.getWorkPositionId();
+            }
+        }
+        for(Main.Entity.Element.WorkType o: workTypeArrayList){
+            if(o.getTypeName().equalsIgnoreCase(workType)){
+                TypeID=o.getTypeId();
+            }
+        }
+        dao.execute("UPDATE Employee SET EmployeeName=N'"+employeeName+"',EmployeePhone='"+employeePhone+"', WorkPositionID='"+PositionID+"',WorkTypeID='"+TypeID+"'" );
+        AdminEmployeeController adminEmployeeController = new AdminEmployeeController();
+        adminEmployeeController.getDataEmployee();
+    }
+
+
 }
