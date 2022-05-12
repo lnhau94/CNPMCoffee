@@ -87,7 +87,7 @@ public class AdminProductAddController implements Initializable {
         }
         System.out.println(ProductName+CategoryId);
          DAO dao = new DAO();
-        dao.execute("INSERT INTO Product (ProductName, CategoryID) VALUES ('"+ProductName+"','"+CategoryId+"')");
+        dao.execute("INSERT INTO Product (ProductName, CategoryID) VALUES (N'"+ProductName+"','"+CategoryId+"')");
         AdminProductController adminProductController = new AdminProductController();
         adminProductController.GetDataProduct();
         String ProductId = null;
