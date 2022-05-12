@@ -1,6 +1,7 @@
 package Main.Admin.DataManager.Controller;
 
 
+import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Employee;
 import javafx.collections.FXCollections;
@@ -43,15 +44,19 @@ public class AdminEmployeeController implements Initializable {
     private TableColumn<Employee, String> typeColumn;
    public static List<Employee> EmployeeTempList = new ArrayList<>();
     private ObservableList<Employee> EmployeeList;
-    public void getDataEmplyee() throws SQLException {
+    public void getDataEmployee() throws SQLException {
+        EmployeeTempList.clear();
         DAO dao = new DAO();
-        ResultSet rs = dao.executeQuery("SELECT * FROM Employee");
+        ResultSet rs = dao.executeQuery("SELECT Employee.EmployeeID,Employee.EmployeeName, Employee.EmployeePhone, WorkPosition.WorkPositionName, WorkType.WorkTypeName \n" +
+                "FROM Employee, WorkPosition, WorkType\n" +
+                "Where Employee.WorkPositionID=WorkPosition.WorkPositionID \n" +
+                "AND Employee.WorkTypeID = WorkType.WorkTypeID");
         while (rs.next()){
-            String EmployeeId = rs.getString(2);
-            String EmployeeName= rs.getString(3);
-            String EmployeePhone = rs.getString(4);
-            String EmployeePosition = rs.getString(5);
-            String EmployeeWorkType = rs.getString(6);
+            String EmployeeId = rs.getString(1);
+            String EmployeeName= rs.getString(2);
+            String EmployeePhone = rs.getString(3);
+            String EmployeePosition = rs.getString(4);
+            String EmployeeWorkType = rs.getString(5);
             Employee employee = new Employee(EmployeeId,EmployeeName,EmployeePhone,EmployeePosition,EmployeeWorkType);
             EmployeeTempList.add(employee);
         }
@@ -60,7 +65,7 @@ public class AdminEmployeeController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            getDataEmplyee();
+            getDataEmployee();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -86,25 +91,58 @@ public class AdminEmployeeController implements Initializable {
             table.refresh();
         }
     }
-    public void changeSceneEditEvent(ActionEvent e)throws  IOException{
+    public void changeSceneEditEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Employee.Edit.fxml"));
-        Pane EmployeeAddViewParentEdit = loader.load();
-        AdminEmployeeEditController controller= loader.getController();
         Employee selected = table.getSelectionModel().getSelectedItem();
-        controller.handleEvent(selected);
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
-        dialog.show();
-    }
-    public void changeSceneDeleteEvent(ActionEvent e)throws  IOException{
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        if (selected==null){
+            loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
+            Pane EditParentView = loader.load();
+            Dialog<ButtonType> dialog = new Alert(Alert.AlertType.ERROR);
+            dialog.setDialogPane((DialogPane) EditParentView);
+            dialog.showAndWait();
+        }else{
+            loader.setLocation(this.getClass().getResource("../View/Admin.Employee.Edit.fxml"));
+            Pane EmployeeAddViewParentEdit = loader.load();
+            AdminEmployeeEditController controller= loader.getController();
+            controller.handleEvent(selected);
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if(clickedButton.get() == ButtonType.APPLY){
+           controller.EditEmployee(selected);
+                table.setItems(FXCollections.observableArrayList(EmployeeTempList));
+                table.refresh();
+            }else if(clickedButton.get()==ButtonType.CLOSE){
+                dialog.close();
+            }
+        }
+        }
+
+    public void changeSceneDeleteEvent(ActionEvent e) throws IOException, SQLException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
-        Pane CategoryDeleteParentView = loader.load();
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane)  CategoryDeleteParentView);
-        dialog.show();
+        Employee selected = table.getSelectionModel().getSelectedItem();
+        if(selected ==null){
+            loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
+            Pane EmployeeAlertParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) EmployeeAlertParentView);
+            dialog.showAndWait();
+        }else{
+            loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
+            Pane EmployeeDeleteParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) EmployeeDeleteParentView);
+            Optional<ButtonType> ClickedButton = dialog.showAndWait();
+            AdminDeleteController adminDeleteController = loader.getController();
+            if(ClickedButton.get()==ButtonType.YES){
+                adminDeleteController.DeleteEmployee(selected);
+                table.setItems(FXCollections.observableArrayList(EmployeeTempList));
+                table.refresh();
+            }
+
+        }
+
     }
     public void GoBack(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();

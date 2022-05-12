@@ -14,6 +14,10 @@ public class DAO {
                                 "encrypt=true;trustServerCertificate=true";
     /*
     private String DBuser = "sa";
+<<<<<<< HEAD
+//    private String DBpass = "123456";
+    private String DBpass = "reallyStrongPwd123";
+=======
     private String DBpass = "123456";
             "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
             "databaseName=CNPM;" +

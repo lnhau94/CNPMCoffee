@@ -488,6 +488,7 @@ public class ReportCancelDay extends SceneController implements Initializable {
     public void saveData() {
         Connection cnn = null;
         try {
+
             String url = "jdbc:sqlserver://;" +
                     "serverName=localhost;" +
                     "databaseName=CNPM;" +
