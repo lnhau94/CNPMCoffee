@@ -82,9 +82,22 @@ public class SalesApplicationModel {
         }
     }
 
+    public void updatePrice(){
+        calculatePrice();
+    }
+
     public void payCurrentOrder(){
+        calculatePrice();
         System.out.println("Save");
         createNewOrder();
+    }
+
+    private void calculatePrice(){
+        int totalPrice = 0;
+        for(OrderDetail od : currentChoices){
+            totalPrice += od.getPrice();
+        }
+        currentOrders.setTotalPrice(totalPrice);
     }
 
 }

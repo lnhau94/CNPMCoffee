@@ -3,8 +3,13 @@ package Main.Sales.Sales.View;
 import Main.Entity.Element.OrderDetail;
 import Main.Entity.Element.Product;
 import Main.Sales.Sales.Control.SalesApplicationControl;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,12 +21,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -34,12 +41,15 @@ public class SalesApplicationView{
     private BorderPane orderPnl;
     TableView<OrderDetail> orderBody;
     FlowPane orderTittle;
-    FlowPane orderFootter;
+    VBox orderFootter;
 
     TextField search;
     private Scene mainScene;
     private ArrayList<Button> buttons;
     ScrollPane srcViewMenu;
+
+    Label priceLbl;
+    Button cashBtn;
 
     private String[] cates = {"ALL","Trà Xanh","Trà sữa", "Cà phê"};
 
@@ -58,7 +68,7 @@ public class SalesApplicationView{
     private void initGUI(){
         root = new BorderPane();
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        mainScene = new Scene(root,d.getWidth(),d.getHeight()-50);
+        mainScene = new Scene(root,d.getWidth()-100,d.getHeight()-50);
         mainScene.getStylesheets().add(getClass().getResource("SalesStyle.css").toExternalForm());
 
         createControlPnl();
@@ -153,11 +163,17 @@ public class SalesApplicationView{
     }
 
     private void createOrderFooter(){
-        orderFootter =  new FlowPane();
+        orderFootter =  new VBox();
+        orderFootter.setFillWidth(true);
+        orderFootter.setSpacing(5);
         orderFootter.setPrefSize(100,100);
-        Button cashbtn = new Button("Cash!!");
-        cashbtn.setOnAction(actionEvent -> controller.cash());
-        orderFootter.getChildren().add(cashbtn);
+        priceLbl = new Label("0");
+        priceLbl.setId("pricelbl");
+        cashBtn = new Button("Cash!!");
+        cashBtn.setId("cashbtn");
+        cashBtn.setOnAction(actionEvent -> controller.cash());
+        orderFootter.getChildren().add(priceLbl);
+        orderFootter.getChildren().add(cashBtn);
     }
 
     private void createOrderBody(){
@@ -191,14 +207,22 @@ public class SalesApplicationView{
 
 
         orderBody.getColumns().addAll(indexColumn,nameColumn,sizeColumn,qtyColumn,priceColumn);
-        updateOrder();
+        initOrder();
 
+    }
+
+    private void initOrder(){
+        orderBody.setItems(FXCollections.observableList(this.controller.getModel().getCurrentChoices()));
+        orderBody.refresh();
     }
 
     public void updateOrder(){
         orderBody.setItems(FXCollections.observableList(this.controller.getModel().getCurrentChoices()));
         orderBody.refresh();
+        this.controller.getModel().updatePrice();
+        priceLbl.setText(String.valueOf(this.controller.getModel().getCurrentOrders().getTotalPrice()));
     }
+
 
     private void createOrderTittle(){
         orderTittle = new FlowPane();
@@ -207,6 +231,11 @@ public class SalesApplicationView{
         orderTittle.setAlignment(Pos.TOP_RIGHT);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Label timeLbl = new Label(dateFormat.format((System.currentTimeMillis())));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e-> {
+            timeLbl.setText(dateFormat.format(System.currentTimeMillis()));
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
         orderTittle.setStyle(
                         "-fx-background-color: #5F50F1;" +
                         "    -fx-text-fill: #fff;" +
