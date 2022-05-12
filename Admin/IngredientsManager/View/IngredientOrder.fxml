@@ -22,11 +22,11 @@
       <TableView fx:id="table" layoutX="15.0" layoutY="97.0" prefHeight="467.0" prefWidth="1015.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="80.27553462982178" text="ID" />
-          <TableColumn fx:id="nameCol" prefWidth="368.05589294433594" text="Name" />
-            <TableColumn fx:id="priceCol" prefWidth="121.944091796875" text="Import Price" />
-            <TableColumn fx:id="typeCol" prefWidth="183.05474853515625" text="Category" />
-            <TableColumn fx:id="producerCol" prefWidth="124.3302001953125" text="Producer" />
-            <TableColumn fx:id="storageCol" prefWidth="136.66265869140625" text="Storage" />
+          <TableColumn fx:id="nameCol" prefWidth="291.5" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="150.0" text="Import Price" />
+            <TableColumn fx:id="typeCol" prefWidth="164.5" text="Category" />
+            <TableColumn fx:id="producerCol" prefWidth="203.5" text="Producer" />
+            <TableColumn fx:id="storageCol" prefWidth="126.0" text="Storage" />
         </columns>
          <opaqueInsets>
             <Insets />
@@ -41,6 +41,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="orderListBtn" layoutX="612.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" text="Ordered  List">
          <graphic>
@@ -50,6 +53,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="newOrderBtn" layoutX="771.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="47.0" prefWidth="131.0" styleClass="button-admin" text="New Order">
          <graphic>
@@ -59,6 +65,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button layoutX="296.0" layoutY="44.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="36.0" styleClass="button-admin">
          <graphic>
@@ -77,6 +86,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button layoutX="527.0" layoutY="578.0" mnemonicParsing="false" onAction="#openEditStage" styleClass="button-admin">
          <graphic>
@@ -86,6 +98,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button layoutX="646.0" layoutY="577.0" mnemonicParsing="false" onAction="#openRemoveStage" styleClass="button-admin">
          <graphic>
@@ -95,6 +110,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="backAdminBtn" layoutX="10.0" layoutY="587.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
          <graphic>
@@ -104,6 +122,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="recipeBtn" layoutX="904.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="47.0" prefWidth="125.0" styleClass="button-admin" text="Recipes">
          <graphic>
@@ -113,6 +134,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
    <cursor>

@@ -16,13 +16,13 @@
       <Label fx:id="header" layoutY="-4.0" prefHeight="32.0" prefWidth="1041.0" styleClass="header" text="Order Detail" />
       <TableView fx:id="table" layoutX="16.0" layoutY="202.0" prefHeight="388.0" prefWidth="1013.0">
          <columns>
-            <TableColumn fx:id="idCol" prefWidth="52.24338150024414" text="ID" />
-            <TableColumn fx:id="nameCol" prefWidth="354.5" text="Name" />
-            <TableColumn fx:id="priceCol" prefWidth="137.5" text="Import Price" />
-            <TableColumn fx:id="qtyCol" prefWidth="142.5" text="Order Quantity" />
-            <TableColumn fx:id="receiveQtyCol" minWidth="0.0" prefWidth="114.5" text="Receive Quantity" />
-            <TableColumn fx:id="typeCol" prefWidth="110.5" text="Category" />
-            <TableColumn fx:id="producerCol" prefWidth="100.0" text="Producer" />
+            <TableColumn fx:id="idCol" prefWidth="122.5" text="ID" />
+            <TableColumn fx:id="nameCol" prefWidth="258.5" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="123.5" text="Import Price" />
+            <TableColumn fx:id="qtyCol" prefWidth="130.5" text="Order Quantity" />
+            <TableColumn fx:id="receiveQtyCol" minWidth="0.0" prefWidth="127.5" text="Receive Quantity" />
+            <TableColumn fx:id="typeCol" prefWidth="121.5" text="Category" />
+            <TableColumn fx:id="producerCol" prefWidth="128.0" text="Producer" />
          </columns>
       </TableView>
       <Button fx:id="orderListBtn" layoutX="-2.0" layoutY="608.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">

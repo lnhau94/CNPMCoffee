@@ -9,7 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mssql-jdbc-10.2.0.jre8" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="mssql-jdbc-10.2.0.jre8" level="project" />
+    <orderEntry type="library" name="xml-apis-1.4.01" level="project" />
   </component>
 </module>
