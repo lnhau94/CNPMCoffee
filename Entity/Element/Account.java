@@ -2,7 +2,7 @@ package Main.Entity.Element;
 
 public class Account {
     private String username;
-    private String password;
+    protected String password;
     private String ownerId;
 
     public Account() {

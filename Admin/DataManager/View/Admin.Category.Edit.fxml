@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<DialogPane prefHeight="323.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.DataManager.Controller.AdminCategoryEditController">
+<DialogPane prefHeight="323.0" prefWidth="420.0" styleClass="dialog" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.DataManager.Controller.AdminCategoryEditController">
 <content>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="420.0">
         <children>
@@ -19,6 +19,7 @@
 </content>
 <buttonTypes>
     <ButtonType fx:constant="APPLY" />
+      <ButtonType fx:constant="CLOSE" />
 </buttonTypes>
    <stylesheets>
       <URL value="@Css/AddApplication.css" />

@@ -5,13 +5,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="374.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.DataManager.Controller.AdminCategoryController">
+<AnchorPane prefHeight="573.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.DataManager.Controller.AdminCategoryController">
    <children>
-      <TableView fx:id="table" layoutX="157.0" layoutY="55.0" prefHeight="323.0" prefWidth="304.0" styleClass="table-view">
+      <TableView fx:id="table" layoutX="157.0" layoutY="113.0" prefHeight="323.0" prefWidth="304.0" styleClass="table-view">
          <columns>
             <TableColumn fx:id="CategoryIdColumn" prefWidth="73.0" styleClass="column-header-background" text="ID" />
             <TableColumn fx:id="CategoryNameColumn" prefWidth="241.0" styleClass="column-header-background" text="Name" />
@@ -29,7 +31,7 @@
             <URL value="@Css/AddApplication.css" />
          </stylesheets>
       </Label>
-      <Button layoutX="185.0" layoutY="391.0" mnemonicParsing="false" onAction="#changeSceneAddEvent" styleClass="button-admin">
+      <Button layoutX="176.0" layoutY="453.0" mnemonicParsing="false" onAction="#changeSceneAddEvent" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="-39.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                <image>
@@ -43,7 +45,7 @@
             <URL value="@Css/AddApplication.css" />
          </stylesheets>
       </Button>
-      <Button layoutX="278.0" layoutY="391.0" mnemonicParsing="false" onAction="#changeSceneEditEvent" styleClass="button-admin">
+      <Button layoutX="278.0" layoutY="454.0" mnemonicParsing="false" onAction="#changeSceneEditEvent" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="46.0" fitWidth="49.0" layoutX="-27.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                <image>
@@ -57,7 +59,7 @@
             <URL value="@Css/AddApplication.css" />
          </stylesheets>
       </Button>
-      <Button layoutX="375.0" layoutY="393.0" mnemonicParsing="false" onAction="#changeSceneDeleteEvent" styleClass="button-admin">
+      <Button layoutX="384.0" layoutY="456.0" mnemonicParsing="false" onAction="#changeSceneDeleteEvent" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="46.0" fitWidth="42.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                <image>
@@ -71,7 +73,7 @@
             <URL value="@Css/AddApplication.css" />
          </stylesheets>
       </Button>
-      <Button layoutX="27.0" layoutY="439.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="48.0" prefWidth="43.0" styleClass="button-admin">
+      <Button layoutX="23.0" layoutY="502.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="48.0" prefWidth="43.0" styleClass="button-admin">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="76.0" layoutX="96.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -85,5 +87,21 @@
             <URL value="@Css/AddApplication.css" />
          </stylesheets>
       </Button>
+      <TextField fx:id="txtSearchName" layoutX="37.0" layoutY="49.0" prefHeight="34.0" prefWidth="218.0" promptText="Search  here">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button layoutX="272.0" layoutY="48.0" mnemonicParsing="false" onAction="#SearchName" prefHeight="28.0" prefWidth="33.0" styleClass="button-admin" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="261.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icon/search2.png" />
+         </image>
+      </ImageView>
    </children>
+   <stylesheets>
+      <URL value="@Css/AddApplication.css" />
+      <URL value="@Css/AdminApplication.css" />
+      <URL value="@Css/Application.css" />
+   </stylesheets>
 </AnchorPane>

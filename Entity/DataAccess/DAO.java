@@ -15,14 +15,15 @@ public class DAO {
                                 "encrypt=true;trustServerCertificate=true";
     /*
             "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
-            "databaseName=CNPM;" +
-            "encrypt=true;trustServerCertificate=true";
+                    "databaseName=CNPM;" +
+                    "encrypt=true;trustServerCertificate=true";
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
     */
-    private String DBuser = "sa";
-    private String DBpass = "reallyStrongPwd123";
-//    private String DBuser = "admin";
+//    private String DBuser = "sa";
+//    private String DBpass = "reallyStrongPwd123";
+    private String DBuser = "admin";
+    private String DBpass = "123456";
 //    private String DBpass = "123456";
 
     private Connection connect;

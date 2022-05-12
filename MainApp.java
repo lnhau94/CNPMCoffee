@@ -27,8 +27,8 @@ public class MainApp extends Application {
         toolPanel = new Stage(StageStyle.TRANSPARENT);
         toolPanel.setScene(new Scene(new ControlBar(stage)));
         ((ControlBar)toolPanel.getScene().getRoot()).prepareCSS();
-        toolPanel.setX(0);
-        toolPanel.setY(screenSize.getHeight()-100);
+        toolPanel.setX(100);
+        toolPanel.setY(100);
         toolPanel.sizeToScene();
 
     }
@@ -44,7 +44,7 @@ public class MainApp extends Application {
         MasterController.start();
         SalesApplicationControl control = new SalesApplicationControl();
         //stage.setScene(control.getView());
-        stage.setScene(new Scene(FXMLLoader.load(new File("Helpers/SignIn/SignInv2.fxml").toURI().toURL())));
+        stage.setScene(new Scene(FXMLLoader.load(new File("Helpers/SignIn/Signinv2.fxml").toURI().toURL())));
         createControlBar(stage);
         toolPanel.initOwner(stage);
         stage.show();

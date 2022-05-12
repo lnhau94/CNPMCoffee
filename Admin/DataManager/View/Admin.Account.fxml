@@ -12,12 +12,12 @@
 
 <AnchorPane prefHeight="515.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.DataManager.Controller.AdminAccountController">
 <children>
-    <TableView fx:id="table" layoutX="156.0" layoutY="82.0" prefHeight="323.0" prefWidth="619.0" styleClass="table-view">
+    <TableView fx:id="tableView" layoutX="156.0" layoutY="82.0" prefHeight="323.0" prefWidth="619.0" styleClass="table-view">
         <columns>
-            <TableColumn fx:id="idColumn" prefWidth="73.0" styleClass="column-header-background" text="OwnerID" />
-            <TableColumn fx:id="nameColumn" prefWidth="223.0" styleClass="column-header-background" text="Name" />
-            <TableColumn fx:id="phoneColumn" prefWidth="184.0" styleClass="column-header-background" text="UserName" />
-            <TableColumn fx:id="PositionColumn" prefWidth="138.0" styleClass="column-header-background" text="Password" />
+            <TableColumn fx:id="ownerIdColumn" prefWidth="73.0" styleClass="column-header-background" text="OwnerID" />
+            <TableColumn fx:id="ownerNameColumn" prefWidth="223.0" styleClass="column-header-background" text="Name" />
+            <TableColumn fx:id="userNameColumn" prefWidth="184.0" styleClass="column-header-background" text="UserName" />
+            <TableColumn fx:id="passwordColumn" prefWidth="138.0" styleClass="column-header-background" text="Password" />
         </columns>
     </TableView>
     <Label fx:id="header" alignment="CENTER" prefHeight="34.0" prefWidth="915.0" text="Manage" />
@@ -57,7 +57,7 @@
             </ImageView>
         </graphic>
     </Button>
-      <TextField layoutX="40.0" layoutY="41.0" prefHeight="34.0" prefWidth="188.0" promptText="Search Here" styleClass="TextFieldInput" />
+      <TextField fx:id="txtName" layoutX="40.0" layoutY="41.0" onAction="#SearchName" prefHeight="34.0" prefWidth="188.0" promptText="Search Here" styleClass="TextFieldInput" />
     <Button layoutX="228.0" layoutY="40.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="33.0" styleClass="button-admin">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="283.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
@@ -67,7 +67,7 @@
             </ImageView>
         </graphic>
     </Button>
-
+    
 
 
 
