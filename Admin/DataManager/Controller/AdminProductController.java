@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -91,15 +92,18 @@ public class AdminProductController implements Initializable {
         loader.setLocation(this.getClass().getResource("../View/Admin.Product.Add.fxml"));
         Pane ProductAddViewParent = loader.load();
         Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initStyle(StageStyle.TRANSPARENT);
         dialog.setDialogPane((DialogPane) ProductAddViewParent);
         Optional<ButtonType> ClickedButton = dialog.showAndWait();
         AdminProductAddController AddController = loader.getController();
         if(ClickedButton.get()==ButtonType.APPLY){
-            AddController.AddProduct();
+            AddController.excuteCheck();
             productTableView.setItems(FXCollections.observableArrayList(productInTableList));
             productTableView.refresh();
+        }else if(ClickedButton.get()==ButtonType.CLOSE){
+            dialog.close();
         }
-    }
+        }
     public void changeSceneEditEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
         ProductInTable selected = productTableView.getSelectionModel().getSelectedItem();
@@ -116,6 +120,7 @@ public class AdminProductController implements Initializable {
             adminProductEditController.handleEvent(selected);
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane((DialogPane) ProductEditViewParent);
+            dialog.initStyle(StageStyle.TRANSPARENT);
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if(clickedButton.get() == ButtonType.APPLY){
                 adminProductEditController.EditProduct(selected);

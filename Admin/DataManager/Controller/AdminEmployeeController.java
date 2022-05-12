@@ -4,6 +4,8 @@ package Main.Admin.DataManager.Controller;
 import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Employee;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +45,8 @@ public class AdminEmployeeController implements Initializable {
     private TableColumn<Employee, String> PositionColumn;
     @FXML
     private TableColumn<Employee, String> typeColumn;
+    @FXML
+    private TextField txtSearchName;
    public static List<Employee> EmployeeTempList = new ArrayList<>();
     private ObservableList<Employee> EmployeeList;
     public void getDataEmployee() throws SQLException {
@@ -76,6 +81,7 @@ public class AdminEmployeeController implements Initializable {
         PositionColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("position"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("type"));
         table.setItems(EmployeeList);
+        SearchNameAutoFill();
     }
     public void changeSceneAddEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
@@ -83,12 +89,15 @@ public class AdminEmployeeController implements Initializable {
         Pane EmployeeAddViewParent = loader.load();
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane((DialogPane) EmployeeAddViewParent);
+        dialog.initStyle(StageStyle.TRANSPARENT);
         Optional<ButtonType> ClickedButton = dialog.showAndWait();
         AdminEmployeeAddController adminEmployeeAddController = loader.getController();
         if(ClickedButton.get()== ButtonType.APPLY){
             adminEmployeeAddController.AddEmployee();
             table.setItems(FXCollections.observableArrayList(EmployeeTempList));
             table.refresh();
+        }else if(ClickedButton.get()==ButtonType.CLOSE){
+            dialog.close();
         }
     }
     public void changeSceneEditEvent(ActionEvent e) throws IOException, SQLException {
@@ -106,6 +115,7 @@ public class AdminEmployeeController implements Initializable {
             AdminEmployeeEditController controller= loader.getController();
             controller.handleEvent(selected);
             Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.initStyle(StageStyle.TRANSPARENT);
             dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if(clickedButton.get() == ButtonType.APPLY){
@@ -151,5 +161,33 @@ public class AdminEmployeeController implements Initializable {
         Parent AdminViewParent = FXMLLoader.load(getClass().getResource("../View/Admin.fxml"));
         Scene scene = new Scene(AdminViewParent);
         stage.setScene(scene);
+    }
+    public void SearchName(ActionEvent e) throws SQLException {
+        this.getDataEmployee();
+        List<Employee> Array = new ArrayList<>();
+        String pattern = ".*" + txtSearchName.getText() + ".*";
+        for(Employee o : EmployeeTempList){
+            if(o.getEmployeeName().toLowerCase().matches(pattern.toLowerCase())){
+                Array.add(o);
+            }
+        }
+       table.setItems(FXCollections.observableArrayList(Array));
+       table.refresh();
+    }
+    public void SearchNameAutoFill(){
+        this.txtSearchName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                List<Employee>Array = new ArrayList<>();
+                String pattern = ".*" + t1 + ".*";
+                for(Employee o : EmployeeTempList){
+                    if(o.getEmployeeName().toLowerCase().matches(pattern.toLowerCase())){
+                       Array.add(o);
+                    }
+                }
+               table.setItems(FXCollections.observableArrayList(Array));
+                table.refresh();
+            }
+        });
     }
 }

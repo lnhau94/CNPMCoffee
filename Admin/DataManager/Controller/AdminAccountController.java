@@ -1,7 +1,10 @@
 package Main.Admin.DataManager.Controller;
 import Main.Admin.DataManager.Model.AccountInTable;
+import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -35,6 +40,8 @@ public class AdminAccountController implements Initializable {
     private TableColumn<AccountInTable, String> userNameColumn;
     @FXML
     private TableColumn<AccountInTable, String> passwordColumn;
+    @FXML
+    private TextField txtName;
     public static List<AccountInTable> accountInTableArrayList = new ArrayList<>();
     ObservableList<AccountInTable> accountInTables;
     public void getDataAccount() throws SQLException {
@@ -63,6 +70,7 @@ public class AdminAccountController implements Initializable {
         userNameColumn.setCellValueFactory(new PropertyValueFactory<AccountInTable, String>("username"));
         passwordColumn.setCellValueFactory(element -> new SimpleStringProperty(element.getValue().getPassword()));
         tableView.setItems(accountInTables);
+        SearchNameAutoFill();
     }
     public void changeSceneAddEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
@@ -75,26 +83,51 @@ public class AdminAccountController implements Initializable {
         Optional<ButtonType> ClickedButton = dialog.showAndWait();
         if(ClickedButton.get()==ButtonType.APPLY) {
             if(!adminAccountAddController.checkPassword()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Sai mat khau r nhe");
-                alert.showAndWait();
+                ErrorController errorController = new ErrorController();
+                errorController.displayError("password");
             }else{
-             adminAccountAddController.AddAccount();
+             adminAccountAddController.excuteCheck();
              tableView.setItems(FXCollections.observableArrayList(accountInTableArrayList));
              tableView.refresh();
             }
+        }else if(ClickedButton.get()==ButtonType.CLOSE){
+            dialog.close();
         }
     }
-    public void changeSceneEditEvent(ActionEvent e)throws  IOException{
+    public void changeSceneEditEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
         AccountInTable selected = tableView.getSelectionModel().getSelectedItem();
-        loader.setLocation(this.getClass().getResource("../View/Admin.Account.Edit.fxml"));
-        Pane EmployeeAddViewParentEdit = loader.load();
-        AdminAccountEditController adminAccountEditController = loader.getController();
-        adminAccountEditController.HandleEvent(selected);
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
-        dialog.show();
+        if(selected==null){
+            loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
+            Pane CategoryEditParentView = loader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane((DialogPane) CategoryEditParentView);
+            dialog.showAndWait();
+        }else{
+            loader.setLocation(this.getClass().getResource("../View/Admin.Account.Edit.fxml"));
+            Pane EmployeeAddViewParentEdit = loader.load();
+            AdminAccountEditController adminAccountEditController = loader.getController();
+            adminAccountEditController.HandleEvent(selected);
+            Dialog<ButtonType> dialog = new Alert(Alert.AlertType.ERROR);
+            dialog.setDialogPane((DialogPane) EmployeeAddViewParentEdit);
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if(clickedButton.get()==ButtonType.APPLY){
+                if(!adminAccountEditController.checkPassword()){
+                    ErrorController errorController = new ErrorController();
+                    errorController.displayError("password");
+                }else {
+                    adminAccountEditController.EditAccount(selected);
+                    tableView.setItems(FXCollections.observableArrayList(accountInTableArrayList));
+                    tableView.refresh();
+                }
+
+            }else if(clickedButton.get()==ButtonType.CLOSE){
+                dialog.close();
+            }
+
+
+        }
+
     }
     public void changeSceneDeleteEvent(ActionEvent e) throws IOException, SQLException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
@@ -104,12 +137,14 @@ public class AdminAccountController implements Initializable {
             loader.setLocation(this.getClass().getResource("../View/Alert.fxml"));
             Pane CategoryEditParentView = loader.load();
             Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.initStyle(StageStyle.TRANSPARENT);
             dialog.setDialogPane((DialogPane) CategoryEditParentView);
             dialog.showAndWait();
         }else{
             loader.setLocation(this.getClass().getResource("../View/Admin.Delete.fxml"));
             Pane CategoryDeleteParentView = loader.load();
             Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.initStyle(StageStyle.TRANSPARENT);
             dialog.setDialogPane((DialogPane)  CategoryDeleteParentView);
             AdminDeleteController adminDeleteController = loader.getController();
             Optional<ButtonType> ClickedButton = dialog.showAndWait();
@@ -130,6 +165,33 @@ public class AdminAccountController implements Initializable {
         Scene scene = new Scene(AdminViewParent);
         stage.setScene(scene);
     }
-
+    public void SearchName(ActionEvent e) throws SQLException {
+        this.getDataAccount();
+        List<AccountInTable> Array = new ArrayList<>();
+        String pattern = ".*" + txtName.getText() + ".*";
+        for(AccountInTable o : accountInTableArrayList){
+            if(o.getOwnerName().toLowerCase().matches(pattern.toLowerCase())){
+                Array.add(o);
+            }
+        }
+        tableView.setItems(FXCollections.observableArrayList(Array));
+        tableView.refresh();
+    }
+    public void SearchNameAutoFill(){
+        this.txtName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                List<AccountInTable> Array = new ArrayList<>();
+                String pattern = ".*" + t1 + ".*";
+                for(AccountInTable o : accountInTableArrayList){
+                    if(o.getOwnerName().toLowerCase().matches(pattern.toLowerCase())){
+                        Array.add(o);
+                    }
+                }
+                tableView.setItems(FXCollections.observableArrayList(Array));
+                tableView.refresh();
+            }
+        });
+    }
 
 }

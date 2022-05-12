@@ -1,6 +1,7 @@
 package Main.Admin.DataManager.Controller;
 
 import Main.Admin.DataManager.Model.AccountInTable;
+import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Category;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javax.swing.text.TabExpander;
+import java.sql.SQLException;
 
 public class AdminAccountEditController {
     @FXML
@@ -36,7 +38,15 @@ public class AdminAccountEditController {
         }
         return  false;
     }
-    public void EditAccount (AccountInTable account){
+    public void EditAccount (AccountInTable account) throws SQLException {
+        String EmployeeID = account.getOwnerId();
+        String EmployeeName = txtName.getText();
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
+        DAO dao =new DAO();
+        dao.execute("UPDATE Account SET AccountUsername='"+userName+"', AccountPassword='"+password+"' WHERE EmployeeID LIKE '"+EmployeeID+"' ");
+        AdminAccountController accountController = new AdminAccountController();
+        accountController.getDataAccount();
 
     }
 }

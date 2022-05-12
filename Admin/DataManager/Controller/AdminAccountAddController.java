@@ -1,6 +1,8 @@
 package Main.Admin.DataManager.Controller;
 
+import Main.Admin.DataManager.Model.AccountInTable;
 import Main.Entity.DataAccess.DAO;
+import Main.Entity.Element.Employee;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -96,5 +99,25 @@ public class AdminAccountAddController implements Initializable {
          dao.execute("INSERT INTO Account(AccountUsername, AccountPassword, EmployeeID) VALUES('"+UserName+"','"+password+"','"+id+"')");
          AdminAccountController adminAccountController = new AdminAccountController();
          adminAccountController.getDataAccount();
+    }
+    public boolean checkName(String Name) throws SQLException {
+       AdminAccountController adminAccountController = new AdminAccountController();
+       adminAccountController.getDataAccount();
+        for(AccountInTable e : adminAccountController.accountInTableArrayList){
+            if(e.getUsername().equalsIgnoreCase(Name)) return false;
+        }
+        return true;
+    }
+    public void excuteCheck() throws SQLException {
+        if(!checkName(txtUserName.getText())){
+            ErrorController ErrorController = new ErrorController();
+            try {
+                ErrorController.displayError("name");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            AddAccount();
+        }
     }
 }

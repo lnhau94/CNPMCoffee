@@ -69,3 +69,26 @@
     -fx-alignment: center;
     -fx-effect: dropshadow(three-pass-box, #48cae4,3,1,1,0);
 }
+.alert{
+    -fx-font-size: 16px;
+
+}
+.alert .label{
+    -fx-text-fill: #c81d25;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+.alert .image{
+    -fx-effect: dropshadow(three-pass-box, #ba181b,15,0.5,-2,2);
+}
+.alert .button{
+    -fx-background-color: #ffbe0b;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, #8d99ae,10,0,1,0);
+    -fx-text-fill: #ffff;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+}
+.alert .button:hover{
+    -fx-background-color: tomato;
+}

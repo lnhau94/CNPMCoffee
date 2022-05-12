@@ -47,15 +47,6 @@
          </graphic>
       </Button>
       <Label alignment="CENTER" layoutX="423.0" layoutY="54.0" prefHeight="30.0" prefWidth="66.0" styleClass="labelHello" text="Xin chào! " />
-       <Button layoutX="31.0" layoutY="393.0" minWidth="52.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" styleClass="button-bc">
-           <graphic>
-               <ImageView fitHeight="41.0" fitWidth="45.0" layoutX="206.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" styleClass="button-bc">
-                   <image>
-                       <Image url="@../../../Icon/backnow.png" />
-                   </image>
-               </ImageView>
-           </graphic>
-       </Button>
       <Button contentDisplay="TOP" layoutX="209.0" layoutY="251.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="101.0" styleClass="button-icon" text="Salary" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
          <graphic>
             <ImageView fitHeight="82.0" fitWidth="102.0" layoutX="178.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">

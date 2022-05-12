@@ -3,6 +3,8 @@ package Main.Admin.DataManager.Controller;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Category;
 import Main.Entity.Element.Employee;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -36,6 +39,9 @@ public class AdminCategoryController implements Initializable {
     private TableColumn<Category, String> CategoryNameColumn;
     @FXML
     private TextField textNameCategory;
+
+    @FXML
+    private TextField txtSearchName;
     ObservableList<Category> CategoryList;
     public static List<Category> list = new ArrayList<>();
     public void getData() throws SQLException {
@@ -57,6 +63,7 @@ public class AdminCategoryController implements Initializable {
         CategoryIdColumn.setCellValueFactory(new PropertyValueFactory<Category, String>("categoryId"));
         CategoryNameColumn.setCellValueFactory(new PropertyValueFactory<Category, String>("categoryName"));
         table.setItems(CategoryList);
+        SearchNameAutoFill();
     }
 
     public void changeSceneAddEvent(ActionEvent e) throws IOException, SQLException {
@@ -65,11 +72,12 @@ public class AdminCategoryController implements Initializable {
         loader.setLocation(this.getClass().getResource("../View/Admin.Category.Add.fxml"));
         Pane CategoryAddParentView = loader.load();
         Dialog<ButtonType> dialogCategoryAdd = new Dialog<>();;
+        dialogCategoryAdd.initStyle(StageStyle.TRANSPARENT);
         dialogCategoryAdd.setDialogPane((DialogPane) CategoryAddParentView);
         Optional<ButtonType> ClickedButton = dialogCategoryAdd.showAndWait();
         AdminCategoryAddController AddController = loader.getController();
         if(ClickedButton.get()==ButtonType.APPLY){
-            AddController.AddCategory();
+            AddController.excuteCheck();
             table.setItems(FXCollections.observableArrayList(list));
             table.refresh();
         }
@@ -91,6 +99,7 @@ public class AdminCategoryController implements Initializable {
             AdminCategoryEditController controller = loader.getController();
             controller.handleEvent(selected);
             Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.initStyle(StageStyle.TRANSPARENT);
             dialog.setDialogPane((DialogPane) CategoryEditParentView);
             Optional<ButtonType> clickButton = dialog.showAndWait();
             if(clickButton.get() ==  ButtonType.APPLY){
@@ -139,7 +148,34 @@ public class AdminCategoryController implements Initializable {
         Scene scene = new Scene(AdminViewParent);
         stage.setScene(scene);
     }
-
+    public void SearchName(ActionEvent e) throws SQLException {
+        this.getData();
+        List<Category> Array = new ArrayList<>();
+        String pattern = ".*" + txtSearchName.getText() + ".*";
+        for(Category o : list){
+            if(o.getCategoryName().toLowerCase().matches(pattern.toLowerCase())){
+                Array.add(o);
+            }
+        }
+        table.setItems(FXCollections.observableArrayList(Array));
+        table.refresh();
+    }
+    public void SearchNameAutoFill(){
+        this.txtSearchName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                List<Category>Array = new ArrayList<>();
+                String pattern = ".*" + t1 + ".*";
+                for(Category o : list){
+                    if(o.getCategoryName().toLowerCase().matches(pattern.toLowerCase())){
+                        Array.add(o);
+                    }
+                }
+                table.setItems(FXCollections.observableArrayList(Array));
+                table.refresh();
+            }
+        });
+    }
 
 
 
