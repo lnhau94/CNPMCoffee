@@ -41,6 +41,9 @@ public class ControlBar extends FlowPane {
         try {
             dataManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/DataManager/View/Admin.fxml")));
             ingredientManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/IngredientsManager/View/IngredientOrder.fxml")));
+            discardScreen = new Scene(FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL()));
+            discardScreen.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
+
             //salaryManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("Admin/DataManager/View/Admin.fxml")));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -97,7 +100,10 @@ public class ControlBar extends FlowPane {
             owner.setScene(salesScreen);
             changeLocation(-50);
         });
-        //discardBtn
+        discardMenuItem.setOnAction(e->{
+            owner.setScene(discardScreen);
+            changeLocation(0);
+        });
         dataManagerMenuItem.setOnAction(e->{
             owner.setScene(dataManagerScreen);
             changeLocation(0);

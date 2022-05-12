@@ -44,7 +44,6 @@ public class MainApp extends Application {
         MasterController.start();
         SalesApplicationControl control = new SalesApplicationControl();
         //stage.setScene(control.getView());
-        stage.setScene(new Scene(FXMLLoader.load(new File("Helpers/SignIn/Signinv2.fxml").toURI().toURL())));
         createControlBar(stage);
         toolPanel.initOwner(stage);
         stage.show();

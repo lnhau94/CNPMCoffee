@@ -19,7 +19,6 @@ public class ScreenTranfer {
             put("orderListBtn", "Admin/IngredientsManager/View/OrderList.fxml");
             put("newOrderBtn", "Admin/IngredientsManager/View/CreateIngredientOrder.fxml");
             put("backWarehouseBtn", "Admin/IngredientsManager/View/IngredientOrder.fxml");
-            put("orderDetailBtn", "Admin/IngredientsManager/View/OrderDetail.fxml");
             put("frmIngredientOrder", "Admin/IngredientsManager/View/FormIngredientOrder.fxml");
             put("backAdminBtn", "Admin/DataManager/View/Admin.fxml");
             put("recipeBtn", "Admin/IngredientsManager/View/RecipeView.fxml");
@@ -50,7 +49,9 @@ public class ScreenTranfer {
     }
 
     public void switchScene(ActionEvent e){
+        Stage owner = ((Stage) ((Node)e.getSource()).getScene().getWindow());
         ((Stage) ((Node)e.getSource()).getScene().getWindow()).setScene(getScene((Button) e.getSource()));
+        owner.centerOnScreen();
     }
 
 

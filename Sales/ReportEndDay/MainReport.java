@@ -1,4 +1,4 @@
-package Main.Sales.Discard.ReportEndDay;
+package Main.Sales.ReportEndDay;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,14 +8,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class MainReport extends Application {
     
     public void start(Stage primaryStage){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../ReportEndDay/View/ReportEndDay.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
+            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../ReportEndDay/View/ReportEndDay.fxml"));
+            //Parent root = (Parent) fxmlLoader.load();
+            Parent root = FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL());
+
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("../ReportEndDay/View/CSS/ReportEndDay.css").toExternalForm());
+            scene.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
             primaryStage.setTitle("Report");
             primaryStage.setScene(scene);
             primaryStage.show();
