@@ -13,33 +13,45 @@ import java.util.HashMap;
 
 public class ScreenTranfer {
 
-    private static final HashMap<String, String> url = new HashMap<>() {
+    private final HashMap<String, String> url = new HashMap<>() {
         {
             put("incomeCfmBtn", "Admin/IngredientsManager/View/ConfirmOrder.fxml");
             put("orderListBtn", "Admin/IngredientsManager/View/OrderList.fxml");
             put("newOrderBtn", "Admin/IngredientsManager/View/CreateIngredientOrder.fxml");
             put("backWarehouseBtn", "Admin/IngredientsManager/View/IngredientOrder.fxml");
-            put("cfmDetailBtn", "Admin/IngredientsManager/View/ConfirmDetail.fxml");
-            put("orderDetailBtn", "Admin/IngredientsManager/View/OrderDetail.fxml");
             put("frmIngredientOrder", "Admin/IngredientsManager/View/FormIngredientOrder.fxml");
             put("backAdminBtn", "Admin/DataManager/View/Admin.fxml");
-            put("addIngredientBtn", "Admin/IngredientsManager/View/IngredientAdd.fxml");
-            put("editIngredientBtn", "Admin/IngredientsManager/View/IngredientEdit.fxml");
-            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete1.fxml");
+            put("recipeBtn", "Admin/IngredientsManager/View/RecipeView.fxml");
+
         }
     };
 
-    private static Scene getScene(Button btn) {
-        File file = new File(url.get(btn.getId()));
-        try {
-            return new Scene(FXMLLoader.load(file.toURI().toURL()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private HashMap<String, Scene> sceneList;
+
+    public ScreenTranfer() {
+        this.initSceneList();
+    }
+
+    private void initSceneList() {
+        this.sceneList = new HashMap<>();
+        for(String btn : this.url.keySet()) {
+            try {
+                sceneList.put(btn, new Scene(FXMLLoader.load(new File(url.get(btn)).toURI().toURL())));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public static void switchScene(ActionEvent e){
+
+    private Scene getScene(Button btn) {
+        return sceneList.get(btn.getId());
+    }
+
+    public void switchScene(ActionEvent e){
+        Stage owner = ((Stage) ((Node)e.getSource()).getScene().getWindow());
         ((Stage) ((Node)e.getSource()).getScene().getWindow()).setScene(getScene((Button) e.getSource()));
+        owner.centerOnScreen();
     }
 
 

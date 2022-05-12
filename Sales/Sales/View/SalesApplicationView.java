@@ -58,7 +58,7 @@ public class SalesApplicationView{
     private void initGUI(){
         root = new BorderPane();
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        mainScene = new Scene(root,d.getWidth(),d.getHeight()-100);
+        mainScene = new Scene(root,d.getWidth(),d.getHeight()-50);
         mainScene.getStylesheets().add(getClass().getResource("SalesStyle.css").toExternalForm());
 
         createControlPnl();
@@ -251,12 +251,10 @@ public class SalesApplicationView{
                             filerCondition.equals(menuItem.getProduct().getCategoryName())
                                     && menuItem.getProduct().getProductName().toLowerCase(Locale.ROOT).contains(searchString))
                             .collect(Collectors.toList());
-
         }
         for (int i = 0; i < currentList.size(); i++) {
             menu.add(currentList.get(i), (int) i % 5, (int) i / 5);
         }
-
     }
 
 }

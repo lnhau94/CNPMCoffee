@@ -17,18 +17,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class IngredientOrderController extends MasterController implements Initializable {
-
-    private static final HashMap<String, String> url = new HashMap<>() {
-        {
-
-            put("editIngredientBtn", "Admin/IngredientsManager/View/IngredientEdit.fxml");
-            put("removeIngredientBtn", "Admin/IngredientsManager/View/IngredientDelete1.fxml");
-        }
-    };
 
     @FXML
     private TableView<Ingredient> table;
@@ -51,7 +42,7 @@ public class IngredientOrderController extends MasterController implements Initi
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        model = new IngredientApplicationModel();
+        this.model = MasterController.model;
         idCol.setCellValueFactory(new PropertyValueFactory<>("ingredientId"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("ingredientName"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("ingredientType"));
@@ -78,7 +69,7 @@ public class IngredientOrderController extends MasterController implements Initi
         }
         stage.showAndWait();
 
-        this.model.addItem(controller.getI());
+        this.model.addNewItem(controller.getI());
     }
 
     public void openEditStage(ActionEvent e) {
@@ -124,15 +115,14 @@ public class IngredientOrderController extends MasterController implements Initi
         File file;
         FXMLLoader fx = new FXMLLoader();
         if(i != null) {
-            file = new File("Admin/IngredientsManager/View/IngredientDelete.fxml");
-            IngredientDeleteController controller;
+            file = new File("Admin/IngredientsManager/View/DeleteItemView.fxml");
+            DeleteItemController controller;
             try {
                 fx.setLocation(file.toURI().toURL());
                 stage.setScene(new Scene(fx.load()));
                 controller = fx.getController();
                 stage.showAndWait();
                 if(controller.isRemove()) {
-//                    System.out.println("hello");
                     this.model.removeItem(i);
                 }
             } catch (IOException ex) {
@@ -151,7 +141,5 @@ public class IngredientOrderController extends MasterController implements Initi
         }
 
     }
-
-
 
 }

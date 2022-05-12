@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -31,7 +32,7 @@ public class OrderFactory {
     private static Stage stage;
 
     private static void prepareGUI(){
-        stage = new Stage();
+        stage = new Stage(StageStyle.TRANSPARENT);
         stage.initModality(Modality.APPLICATION_MODAL);
         nameLbl = new Label();
         sizeChoice = new ComboBox<>();
@@ -117,6 +118,7 @@ public class OrderFactory {
         cont2.getChildren().add(priceLbl);
         cont2.getChildren().add(sizeChoice);
         cont2.getChildren().add(qtyControl);
+        cont.setId("maincont");
         cont1.setId("cont");
         cont2.setId("cont");
 
