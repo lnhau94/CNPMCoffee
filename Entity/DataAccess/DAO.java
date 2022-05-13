@@ -27,8 +27,16 @@ public class DAO {
                     "encrypt=true;trustServerCertificate=true";
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
-//    private String DBpass = "reallyStrongPwd123";
+
     */
+//    private String DBuser = "sa";
+//    private String DBpass = "reallyStrongPwd123";
+//    private String DBuser = "admin";
+//    private String DBpass = "123456";
+//    private String DBpass = "123456";
+
+//    private String DBpass = "reallyStrongPwd123";
+
     private String DBuser = "admin";
     private String DBpass = "123456";
 
@@ -204,6 +212,14 @@ public class DAO {
             i.setIncomePrice(rs.getInt("price"));
         }
         return i;
+    }
+
+    public String findEmployeeNameById(String id) throws SQLException {
+        ResultSet rs = this.executeQuery("Select * from Employee where EmployeeID = '"+id+"'");
+        if(rs.next()) {
+            return  rs.getString("EmployeeName");
+        }
+        return null;
     }
 
     public ObservableList<IncomeDetail> getIncomeDetailsByIncomeReport(IncomeReport ir) throws SQLException {

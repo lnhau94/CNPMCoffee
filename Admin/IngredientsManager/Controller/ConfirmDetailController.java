@@ -17,6 +17,7 @@ import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
@@ -49,6 +50,7 @@ public class ConfirmDetailController extends MasterController implements Initial
     @FXML
     private TableColumn<IncomeDetail, Integer> receiveQtyCol;
     private IncomeReportsApplicationModel model;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -105,8 +107,12 @@ public class ConfirmDetailController extends MasterController implements Initial
     }
 
     public void displayChosenItem(IncomeReport i) {
-        textFieldID.setText(i.getEmployeeIdConfirm());
-//        textFieldName.setText("Thanh Huyen");
+        textFieldID.setText(i.getEmployeeIdCreate());
+        try {
+            textFieldName.setText(this.model.getDao().findEmployeeNameById(i.getEmployeeIdCreate()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         textFieldSupplier.setText(i.getSupplier());
         Date date = i.getOrderDate();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

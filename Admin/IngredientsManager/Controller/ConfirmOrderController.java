@@ -1,6 +1,7 @@
 package Main.Admin.IngredientsManager.Controller;
 
 import Main.Admin.IngredientsManager.Model.IncomeReportsApplicationModel;
+import Main.Entity.Element.Employee;
 import Main.Entity.Element.IncomeReport;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -19,6 +20,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class ConfirmOrderController extends MasterController implements Initializable {
@@ -40,8 +43,15 @@ public class ConfirmOrderController extends MasterController implements Initiali
         model = MasterController.inRModel;
         numberOrdCol.setCellValueFactory(new PropertyValueFactory<IncomeReport, String>("reportId"));
         idEmployeeCol.setCellValueFactory(new PropertyValueFactory<IncomeReport, String>("employeeIdCreate"));
-//        nameEmployeeCol.setCellFactory(new PropertyValueFactory<Employee, String>("name"));
-        dateCol.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(
+        nameEmployeeCol.setCellValueFactory(data -> {
+            try {
+                return new SimpleStringProperty(model.getDao().
+                        findEmployeeNameById(data.getValue().getEmployeeIdCreate()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        dateCol.setCellValueFactory(data -> new SimpleStringProperty(new SimpleDateFormat("dd-MM-yyyy").format(
                 data.getValue().getOrderDate())));
 
         this.table.setItems(this.model.getWaitingInReport());
