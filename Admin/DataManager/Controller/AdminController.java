@@ -1,16 +1,24 @@
 package Main.Admin.DataManager.Controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 
 public class AdminController  {
+    @FXML
+    private Label txtUserName;
+
+    public void setTxtUserName(String name){
+        txtUserName.setText(name);
+    }
     public void changeSceneEmployee(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         stage.centerOnScreen();
@@ -54,6 +62,16 @@ public class AdminController  {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.getScene().getStylesheets().add(new File("Sales/ReportStatistic/View/CSS/RevenueStatistic.css")
+                .toURI().toURL().toExternalForm());
+        stage.show();
+    }
+
+    public void changeSceneSalary(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(new File("Admin/SalaryCalculate/View/Timekeeping.fxml").toURI().toURL());
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.getScene().getStylesheets().add(new File("Admin/SalaryCalculate/View/CSS/Salary.css")
                 .toURI().toURL().toExternalForm());
         stage.show();
     }

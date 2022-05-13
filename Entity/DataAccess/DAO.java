@@ -25,8 +25,8 @@ public class DAO {
 
     */
 
-    private String DBuser = "sa";
-    private String DBpass = "reallyStrongPwd123";
+    private String DBuser = "admin";
+    private String DBpass = "123456";
 //    private String DBuser = "admin";
 //    private String DBpass = "123456";
 
