@@ -19,18 +19,46 @@ public class ControlBar extends VBox {
 
     ToggleButton saleBtn, EoDsBtn, dataBtn, salaryBtn, ingredientBtn;
     Scene salesScreen;
-    Scene discardScreen;
+    Scene eodScreen;
     Scene dataManagerScreen;
     Scene ingredientManagerScreen;
     Scene salaryManagerScreen;
     Scene loginScreen;
     Stage owner;
-    Button logoutBtn;
+    Button logoutBtn,exitBtn;
 
     public ControlBar(Stage stage){
         this.owner = stage;
         initGUI();
         createHandleEvent();
+    }
+
+    public void showFunction(int lvl){
+        this.getChildren().clear();
+        switch (lvl) {
+            case 0 -> {
+                owner.setScene(loginScreen);
+                this.getChildren().add(exitBtn);
+            }
+            case 1 -> {
+                this.getChildren().add(saleBtn);
+                this.getChildren().add(EoDsBtn);
+                saleBtn.setSelected(true);
+                owner.setScene(salesScreen);
+                this.getChildren().add(logoutBtn);
+            }
+            case 2 -> {
+                this.getChildren().add(saleBtn);
+                this.getChildren().add(EoDsBtn);
+                this.getChildren().add(dataBtn);
+                this.getChildren().add(ingredientBtn);
+                this.getChildren().add(salaryBtn);
+                dataBtn.setSelected(true);
+                owner.setScene(dataManagerScreen);
+                this.getChildren().add(logoutBtn);
+            }
+        }
+        this.getScene().getWindow().sizeToScene();
     }
     private void initGUI(){
         saleBtn = new ToggleButton("Sale");
@@ -42,8 +70,9 @@ public class ControlBar extends VBox {
         try {
             dataManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/DataManager/View/Admin.fxml")));
             ingredientManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/IngredientsManager/View/IngredientOrder.fxml")));
-            discardScreen = new Scene(FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL()));
-            discardScreen.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
+            eodScreen = new Scene(FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL()));
+            eodScreen.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
+            loginScreen = new Scene(FXMLLoader.load(new File("Helpers/SignIn/Signinv2.fxml").toURI().toURL()));
 
             //salaryManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("Admin/DataManager/View/Admin.fxml")));
         } catch (IOException e) {
@@ -58,18 +87,13 @@ public class ControlBar extends VBox {
         dataBtn.setToggleGroup(gr);
         ingredientBtn.setToggleGroup(gr);
         salaryBtn.setToggleGroup(gr);
-        saleBtn.setSelected(true);
 
         logoutBtn = new Button("Logout");
+        exitBtn = new Button("Exit");
 
         setBtnImgandTooltip();
 
-        this.getChildren().add(saleBtn);
-        this.getChildren().add(EoDsBtn);
-        this.getChildren().add(dataBtn);
-        this.getChildren().add(ingredientBtn);
-        this.getChildren().add(salaryBtn);
-        this.getChildren().add(logoutBtn);
+
 
 
 
@@ -143,7 +167,7 @@ public class ControlBar extends VBox {
             //changeLocation();
         });
         EoDsBtn.setOnAction(e->{
-            owner.setScene(discardScreen);
+            owner.setScene(eodScreen);
             //changeLocation();
         });
         dataBtn.setOnAction(e->{
@@ -156,7 +180,8 @@ public class ControlBar extends VBox {
             owner.setScene(ingredientManagerScreen);
             //changeLocation();
         });
-        logoutBtn.setOnAction(e->owner.close());
+        logoutBtn.setOnAction(e->showFunction(0));
+        exitBtn.setOnAction(e->owner.close());
         owner.sceneProperty().addListener((w,o,n)->{
             w.getValue().getWindow().centerOnScreen();
             changeLocation();

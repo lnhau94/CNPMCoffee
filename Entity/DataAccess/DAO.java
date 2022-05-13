@@ -1,5 +1,7 @@
 package Main.Entity.DataAccess;
 
+import Main.Admin.DataManager.Controller.AdminProductController;
+import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.Element.Product;
 import Main.Entity.Element.ProductPrice;
 
@@ -26,7 +28,7 @@ public class DAO {
     private String DBpass = "1248163264128";
 //    private String DBpass = "reallyStrongPwd123";
     */
-    private String DBuser = "sa";
+    private String DBuser = "admin";
     private String DBpass = "123456";
 
     private Connection connect;
@@ -62,168 +64,30 @@ public class DAO {
 
     public List<Product> getAllProduct() {
         ArrayList<Product> list =  new ArrayList<>();
-        ArrayList<ProductPrice> productPriceslist =  new ArrayList<>();
-        productPriceslist.add(new ProductPrice("123","S",10000));
-        productPriceslist.add(new ProductPrice("123","M",20000));
-        productPriceslist.add(new ProductPrice("123","L",30000));
-        Product tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
+        try {
+            new AdminProductController().GetDataProduct();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for(ProductInTable p : AdminProductController.productInTableList){
+            Product tmp = new Product(p.getProductID(), p.getProductName(), p.getCategoryName());
+            if(p.getPriceByS()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "S",p.getPriceByS()));
+            }
+            if(p.getPriceByM()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "M",p.getPriceByM()));
+            }
+            if(p.getPriceByL()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "L",p.getPriceByL()));
+            }
+            list.add(tmp);
+        }
 
         return list;
+    }
+
+    public PreparedStatement getPrepareStatement(String sqlQuery) throws SQLException {
+        connect = DriverManager.getConnection(connectURL,DBuser,DBpass);
+        return connect.prepareStatement(sqlQuery);
     }
 }
