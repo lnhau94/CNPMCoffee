@@ -1,31 +1,32 @@
-package Main.Sales.Discard.ReportStatistic.Control;
+package Main.Sales.ReportStatistic.Control;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import Main.Sales.Discard.ReportStatistic.Model.Revenue;
+import Main.Sales.ReportStatistic.Model.Prod;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class RevenueStatistic extends ScreenManager implements Initializable {
+public class ProductStatistic extends ScreenManager implements Initializable {
 
     @FXML
     private DatePicker startDate;
@@ -34,36 +35,47 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
     private DatePicker endDate;
 
     @FXML
-    private TableColumn<Revenue, String> colDate;
+    private Button btnClear;
 
     @FXML
-    private TableColumn<Revenue, String> colProduct;
+    private Button btnOk;
 
     @FXML
-    private TableColumn<Revenue, String> colOrder;
+    private TableColumn<Prod, String> idProduct;
 
     @FXML
-    private TableColumn<Revenue, String> colPrice;
+    private TableColumn<Prod, String> nameProduct;
 
     @FXML
-    private TableView<Revenue> tableProduct;
+    private TableColumn<Prod, String> catProduct;
+
+    @FXML
+    private TableColumn<Prod, String> priceProduct;
+
+    @FXML
+    private TableColumn<Prod, String> qtyProduct;
+
+    @FXML
+    private TableView<Prod> tableProduct;
 
     public static String startTime = "";
     public static String endTime = "";
     public static LocalDate beginTime = null;
     public static LocalDate lastTime = null;
 
-    ObservableList<Revenue> listRevenue = FXCollections.observableArrayList();
-
+    ObservableList<Prod> listProd = FXCollections.observableArrayList();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public ResultSet loadData(String yourQuery) {
         ResultSet rs = null;
         Connection cnn = null;
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=CNPM";
-            String user = "sa";
-            String pass = "Huy0908617538huy";
+            String url = "jdbc:sqlserver://;" +
+                    "serverName=localhost;" +
+                    "databaseName=CNPM;" +
+                    "encrypt=true;trustServerCertificate=true";
+            String user = "admin";
+            String pass = "123456";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();
@@ -82,7 +94,8 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
         try {
             while (rs.next()) {
                 try {
-                    listRevenue.add(new Revenue(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                    listProd.add(new Prod(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                            rs.getString(5)));
                 } catch (SQLException e) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setHeaderText(null);
@@ -113,14 +126,14 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
                 if (beginDate.compareTo(finishDate) <= 0) {
                     beginTime = startDate.getValue();
                     lastTime = endDate.getValue();
-                    ProductStatistic.beginTime = startDate.getValue();
-                    ProductStatistic.lastTime = endDate.getValue();
+                    RevenueStatistic.beginTime = startDate.getValue();
+                    RevenueStatistic.lastTime = endDate.getValue();
                     CategoryStatistic.beginTime = startDate.getValue();
                     CategoryStatistic.lastTime = endDate.getValue();
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
-                    listRevenue.clear();
-                    getData("select od.OrderDate, count(odt.ProductID), count(od.OrderID), sum(od.TotalPrice) from Orders od join OrderDetails odt ON odt.OrderID = od.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by od.OrderDate", startTime, endTime);
+                    listProd.clear();
+                    getData("select odt.ProductID, pd.ProductName, pd.CategoryID, sum(od.TotalPrice), sum(odt.Quantity)  from Orders od join OrderDetails odt on odt.OrderID = od.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by odt.ProductID,pd.ProductName, pd.CategoryID", startTime, endTime);
                     tableProduct.refresh();
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
@@ -145,21 +158,22 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
         endTime = null ;
         startTime = "";
         endTime = "";
-        ProductStatistic.beginTime = null;
-        ProductStatistic.endTime = null;
+        RevenueStatistic.beginTime = null;
+        RevenueStatistic.endTime = null;
         CategoryStatistic.beginTime = null;
         CategoryStatistic.endTime = null;
-        listRevenue.clear();
+        listProd.clear();
         tableProduct.refresh();
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-        colDate.setCellValueFactory(new PropertyValueFactory<Revenue, String>("colDate"));
-        colProduct.setCellValueFactory(new PropertyValueFactory<Revenue, String>("colProduct"));
-        colOrder.setCellValueFactory(new PropertyValueFactory<Revenue, String>("colOrder"));
-        colPrice.setCellValueFactory(new PropertyValueFactory<Revenue, String>("colPrice"));
+        idProduct.setCellValueFactory(new PropertyValueFactory<Prod, String>("productId"));
+        nameProduct.setCellValueFactory(new PropertyValueFactory<Prod, String>("productName"));
+        catProduct.setCellValueFactory(new PropertyValueFactory<Prod, String>("productCategory"));
+        priceProduct.setCellValueFactory(new PropertyValueFactory<Prod, String>("productPrice"));
+        qtyProduct.setCellValueFactory(new PropertyValueFactory<Prod, String>("productQty"));
         if (beginTime != null && lastTime != null) {
             try {
                 startDate.setValue(beginTime);
@@ -169,8 +183,8 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
                 if (beginDate.compareTo(finishDate) <= 0) {
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
-                    listRevenue.clear();
-                    getData("select od.OrderDate, count(odt.ProductID), count(od.OrderID), sum(od.TotalPrice) from Orders od join OrderDetails odt ON odt.OrderID = od.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by od.OrderDate", startTime, endTime);
+                    listProd.clear();
+                    getData("select odt.ProductID, pd.ProductName, pd.CategoryID, sum(od.TotalPrice), sum(odt.Quantity)  from Orders od join OrderDetails odt on odt.OrderID = od.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by odt.ProductID,pd.ProductName, pd.CategoryID", startTime, endTime);
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setHeaderText(null);
@@ -186,9 +200,9 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
             }
         }
         else if (beginTime == null || lastTime == null) {
-            listRevenue.clear();
+            listProd.clear();
         }
-        tableProduct.setItems(listRevenue);
+        tableProduct.setItems(listProd);
     }
 
 }
