@@ -18,6 +18,7 @@ public class Product {
         this.productId = productId;
         this.productName = productName;
         this.categoryName = categoryName;
+        this.priceList = new ArrayList<>();
     }
 
     public Product(String productId, String productName, String categoryName, ArrayList<ProductPrice> priceList) {

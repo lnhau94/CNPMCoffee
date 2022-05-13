@@ -16,18 +16,18 @@
       <Label fx:id="header" contentDisplay="CENTER" layoutY="-1.0" prefHeight="30.0" prefWidth="1042.0" text="Choose Ingredients" textAlignment="CENTER" />
       <TableView fx:id="tableOrder" layoutX="682.0" layoutY="83.0" prefHeight="500.0" prefWidth="350.0">
         <columns>
-          <TableColumn fx:id="idColOrd" minWidth="0.0" prefWidth="55.3350830078125" text="ID" />
-            <TableColumn fx:id="nameColOrd" prefWidth="222.79425048828125" text="Name" />
-          <TableColumn fx:id="qtyCol" minWidth="0.0" prefWidth="71.70574951171875" text="Quantity" />
+          <TableColumn fx:id="idColOrd" minWidth="0.0" prefWidth="76.5" text="ID" />
+            <TableColumn fx:id="nameColOrd" prefWidth="202.0" text="Name" />
+          <TableColumn fx:id="qtyCol" minWidth="0.0" prefWidth="72.0" text="Quantity" />
         </columns>
       </TableView>
       <TableView fx:id="tableChoose" layoutX="11.0" layoutY="82.0" onMouseClicked="#addItem" prefHeight="502.0" prefWidth="660.0">
         <columns>
-          <TableColumn fx:id="idCol" prefWidth="44.336814880371094" text="ID" />
-          <TableColumn fx:id="nameCol" prefWidth="301.3175468444824" text="Name" />
-            <TableColumn fx:id="priceCol" prefWidth="117.70574951171875" text="Import Price" />
-            <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="95.33517456054688" text="Category" />
-            <TableColumn fx:id="producerCol" prefWidth="102.664794921875" text="Producer" />
+          <TableColumn fx:id="idCol" prefWidth="83.5" text="ID" />
+          <TableColumn fx:id="nameCol" prefWidth="218.5" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="105.0" text="Import Price" />
+            <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="130.5" text="Category" />
+            <TableColumn fx:id="producerCol" prefWidth="125.0" text="Producer" />
         </columns>
       </TableView>
       <Button fx:id="backWarehouseBtn" layoutX="5.0" layoutY="593.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">

@@ -4,6 +4,7 @@ import Main.Admin.IngredientsManager.Controller.IngredientOrderController;
 import Main.Admin.IngredientsManager.Controller.MasterController;
 import Main.Admin.IngredientsManager.Controller.ScreenTranfer;
 import Main.Admin.IngredientsManager.Model.IngredientApplicationModel;
+import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Ingredient;
 import javafx.application.Application;
 import javafx.fxml.FXML;

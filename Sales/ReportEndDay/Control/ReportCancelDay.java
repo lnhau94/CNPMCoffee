@@ -1,5 +1,6 @@
-package Main.Sales.Discard.ReportEndDay.Control;
+package Main.Sales.ReportEndDay.Control;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import Main.Sales.Discard.ReportEndDay.Model.ProductCancel;
+import Main.Sales.ReportEndDay.Model.ProductCancel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -96,10 +97,10 @@ public class ReportCancelDay extends SceneController implements Initializable {
     @Override
     public void screenReportEndDay(ActionEvent event) throws IOException {
         saveData();
-        root = FXMLLoader.load((getClass().getResource("../ReportEndDay/View/ReportEndDay.fxml")));
+        root = FXMLLoader.load((new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL()));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("../ReportEndDay/View/CSS/ReportEndDay.css").toExternalForm());
+        scene.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
         stage.setScene(scene);
         stage.show();
      }
@@ -487,8 +488,12 @@ public class ReportCancelDay extends SceneController implements Initializable {
     public void saveData() {
         Connection cnn = null;
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=CNPM";
-            String user = "sa";
+
+            String url = "jdbc:sqlserver://;" +
+                    "serverName=localhost;" +
+                    "databaseName=CNPM;" +
+                    "encrypt=true;trustServerCertificate=true";
+            String user = "admin";
             String pass = "123456";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);

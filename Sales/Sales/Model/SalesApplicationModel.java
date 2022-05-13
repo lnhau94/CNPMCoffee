@@ -1,10 +1,17 @@
 package Main.Sales.Sales.Model;
 
+import Main.Admin.DataManager.Controller.AdminProductController;
+import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Order;
 import Main.Entity.Element.OrderDetail;
 import Main.Entity.Element.Product;
+import Main.Entity.Element.ProductPrice;
+import Main.MainApp;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +55,30 @@ public class SalesApplicationModel {
 
     public SalesApplicationModel(){
         dao = new DAO();
-        this.productList = dao.getAllProduct();
+        productList = dao.getAllProduct();
         createNewOrder();
+    }
+
+    private void prepareProductList(){
+        productList = new ArrayList<>();
+        try {
+            new AdminProductController().GetDataProduct();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for(ProductInTable p : AdminProductController.productInTableList){
+            Product tmp = new Product(p.getProductID(), p.getProductName(), p.getCategoryName());
+            if(p.getPriceByS()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "S",p.getPriceByS()));
+            }
+            if(p.getPriceByM()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "M",p.getPriceByM()));
+            }
+            if(p.getPriceByL()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "L",p.getPriceByL()));
+            }
+            productList.add(tmp);
+        }
     }
 
     public void createNewOrder(){
@@ -82,9 +111,50 @@ public class SalesApplicationModel {
         }
     }
 
+    public void updatePrice(){
+        calculatePrice();
+    }
+
     public void payCurrentOrder(){
-        System.out.println("Save");
+        calculatePrice();
+        save();
         createNewOrder();
+    }
+
+    private void save(){
+        PreparedStatement pstm;
+        try {
+           pstm = dao.getPrepareStatement(
+                    "insert into Orders (TotalPrice, OrderDate, OrderTime, Cashier) " +
+                    "output inserted.OrderID " +
+                    "values(" +
+                    "?, getDate(), (select convert (time, getdate())), ? " +
+                    ")");
+           pstm.setInt(1,currentOrders.getTotalPrice());
+           pstm.setString(2, MainApp.staff.getEmployeeID());
+           pstm.execute();
+           ResultSet rs = pstm.getResultSet();
+           rs.next();
+           String orderId = rs.getString(1);
+           pstm = dao.getPrepareStatement("insert into OrderDetails values (?,?,?)");
+           for (OrderDetail od : currentChoices){
+               pstm.setString(1,orderId);
+               pstm.setString(2,od.getProductChoice().getProductId());
+               pstm.setInt(3,od.getQuantity());
+               pstm.execute();
+           }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void calculatePrice(){
+        int totalPrice = 0;
+        for(OrderDetail od : currentChoices){
+            totalPrice += od.getPrice();
+        }
+        currentOrders.setTotalPrice(totalPrice);
     }
 
 }

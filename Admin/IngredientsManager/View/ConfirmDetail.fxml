@@ -17,8 +17,8 @@
       <Label fx:id="header" layoutY="-4.0" prefHeight="32.0" prefWidth="1042.0" styleClass="header" text="Form Imcome Confirmation" />
       <TableView fx:id="table" layoutX="16.0" layoutY="209.0" prefHeight="365.0" prefWidth="1011.0">
          <columns>
-            <TableColumn fx:id="idCol" prefWidth="66.5" text="ID" />
-            <TableColumn fx:id="nameCol" prefWidth="285.5" text="Name" />
+            <TableColumn fx:id="idCol" prefWidth="70.5" text="ID" />
+            <TableColumn fx:id="nameCol" prefWidth="281.5" text="Name" />
             <TableColumn fx:id="priceCol" prefWidth="114.5" text="Import Price" />
             <TableColumn fx:id="qtyCol" prefWidth="155.5" text="Order Quantity" />
             <TableColumn fx:id="receiveQtyCol" minWidth="0.0" prefWidth="148.5" text="Receive Quantity" />

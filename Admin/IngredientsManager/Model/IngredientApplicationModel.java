@@ -7,25 +7,36 @@ import Main.Entity.Element.Ingredient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class IngredientApplicationModel {
 
     private IncomeReport incomeReport;
     private DAO dao;
 
-    private ObservableList<Ingredient> ingredientList = FXCollections.observableArrayList(
-            new Ingredient("1", "huyen", "caphe", 12,
-                                   12000, "Dalat Farm"),
-            new Ingredient("2", "hau", "duong", 12,
-                                    12000, "Dalat Farm")
-        );
+    private ObservableList<Ingredient> ingredientList;
 
     private ObservableList<IncomeDetail> currentChoices;
 
     public IngredientApplicationModel() {
         dao = new DAO();
+        try {
+            this.ingredientList = dao.getAllIngredient();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
+    public DAO getDao() {
+        return dao;
+    }
+
+    public void setDao(DAO dao) {
+        this.dao = dao;
+    }
 
     public ObservableList<IncomeDetail> getCurrentChoices() {
         return currentChoices;
@@ -91,7 +102,22 @@ public class IngredientApplicationModel {
     }
 
     public void saveIncomeReport() {
+        String sql = String.format("Insert into IncomeReports(created, reportDate, supplier, StateReport) " +
+                "values ('%s', '"+incomeReport.getOrderDate()+"', '%s', '%s')", incomeReport.getEmployeeIdCreate(),
+                incomeReport.getSupplier(), incomeReport.getStatus());
+        System.out.println(sql);
+        dao.insert(sql);
+        incomeReport.setReportId(dao.findFinalIncomeReport());
+    }
 
+
+    public void saveIncomeDetails() {
+        this.getCurrentChoices().forEach(data -> {
+            String sql = String.format("Insert into IncomeDetails(reportID, ingredientID, qty, receiveQty) " +
+                    "values " +"('%s', '%s', '%d', '%d')", incomeReport.getReportId(),
+                    data.getIngredientChoice().getIngredientId(), data.getOrderQty(), data.getReceiveQty());
+            dao.insert(sql);
+        });
     }
 
 
