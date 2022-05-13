@@ -120,12 +120,7 @@ public class ReportCancelDay extends SceneController implements Initializable {
         }
    }));
 
-    ObservableList<ProductCancel> listProduct = FXCollections.observableArrayList(
-            new ProductCancel("PD001", "Bột cà phê đen", 10),
-            new ProductCancel("PD002", "Sữa ông thọ", 7),
-            new ProductCancel("PD003", "Bột cacao", 9),
-            new ProductCancel("PD004", "Trà", 8),
-            new ProductCancel("PD005", "Ớt", 2));
+    ObservableList<ProductCancel> listProduct = FXCollections.observableArrayList();
 
     public static ObservableList<ProductCancel> listData = FXCollections.observableArrayList();
 

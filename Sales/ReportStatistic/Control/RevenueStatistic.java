@@ -1,32 +1,31 @@
-package Main.Sales.Discard.ReportStatistic.Control;
+package Main.Sales.ReportStatistic.Control;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.sql.Statement;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import Main.Sales.Discard.ReportStatistic.Model.Cate;
+import Main.Sales.ReportStatistic.Model.Revenue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CategoryStatistic extends ScreenManager implements Initializable {
+public class RevenueStatistic extends ScreenManager implements Initializable {
 
     @FXML
     private DatePicker startDate;
@@ -35,38 +34,39 @@ public class CategoryStatistic extends ScreenManager implements Initializable {
     private DatePicker endDate;
 
     @FXML
-    private Button btnClear;
+    private TableColumn<Revenue, String> colDate;
 
     @FXML
-    private Button btnOk;
+    private TableColumn<Revenue, String> colProduct;
 
     @FXML
-    private TableColumn<Cate, String> idCategory;
+    private TableColumn<Revenue, String> colOrder;
 
     @FXML
-    private TableColumn<Cate, String> nameCategory;
+    private TableColumn<Revenue, String> colPrice;
 
     @FXML
-    private TableColumn<Cate, String> qtyCategory;
-
-    @FXML
-    private TableView<Cate> tableProduct;
+    private TableView<Revenue> tableProduct;
 
     public static String startTime = "";
     public static String endTime = "";
     public static LocalDate beginTime = null;
     public static LocalDate lastTime = null;
 
-    ObservableList<Cate> listCate = FXCollections.observableArrayList();
+    ObservableList<Revenue> listRevenue = FXCollections.observableArrayList();
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public ResultSet loadData(String yourQuery) {
         ResultSet rs = null;
         Connection cnn = null;
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=CNPM";
-            String user = "sa";
-            String pass = "Huy0908617538huy";
+            String url = "jdbc:sqlserver://;" +
+                    "serverName=localhost;" +
+                    "databaseName=CNPM;" +
+                    "encrypt=true;trustServerCertificate=true";
+            String user = "admin";
+            String pass = "123456";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();
@@ -85,7 +85,7 @@ public class CategoryStatistic extends ScreenManager implements Initializable {
         try {
             while (rs.next()) {
                 try {
-                    listCate.add(new Cate(rs.getString(1), rs.getString(2), rs.getString(3)));
+                    listRevenue.add(new Revenue(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
                 } catch (SQLException e) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setHeaderText(null);
@@ -116,14 +116,14 @@ public class CategoryStatistic extends ScreenManager implements Initializable {
                 if (beginDate.compareTo(finishDate) <= 0) {
                     beginTime = startDate.getValue();
                     lastTime = endDate.getValue();
-                    RevenueStatistic.beginTime = startDate.getValue();
-                    RevenueStatistic.lastTime = endDate.getValue();
                     ProductStatistic.beginTime = startDate.getValue();
                     ProductStatistic.lastTime = endDate.getValue();
+                    CategoryStatistic.beginTime = startDate.getValue();
+                    CategoryStatistic.lastTime = endDate.getValue();
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
-                    listCate.clear();
-                    getData("select ct.CategoryID, ct.CategoryName, sum(odt.Quantity) from Category ct join Product pd on pd.CategoryID = ct.CategoryID join OrderDetails odt on odt.ProductID = pd.ProductID join Orders od on od.OrderID = odt.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by ct.CategoryID, ct.CategoryName", startTime, endTime);
+                    listRevenue.clear();
+                    getData("select od.OrderDate, count(odt.ProductID), count(od.OrderID), sum(od.TotalPrice) from Orders od join OrderDetails odt ON odt.OrderID = od.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by od.OrderDate", startTime, endTime);
                     tableProduct.refresh();
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
@@ -148,20 +148,21 @@ public class CategoryStatistic extends ScreenManager implements Initializable {
         endTime = null ;
         startTime = "";
         endTime = "";
-        RevenueStatistic.beginTime = null;
-        RevenueStatistic.endTime = null;
         ProductStatistic.beginTime = null;
         ProductStatistic.endTime = null;
-        listCate.clear();
+        CategoryStatistic.beginTime = null;
+        CategoryStatistic.endTime = null;
+        listRevenue.clear();
         tableProduct.refresh();
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-        idCategory.setCellValueFactory(new PropertyValueFactory<Cate, String>("idCategory"));
-        nameCategory.setCellValueFactory(new PropertyValueFactory<Cate, String>("nameCategory"));
-        qtyCategory.setCellValueFactory(new PropertyValueFactory<Cate, String>("qtyCategory"));
+        colDate.setCellValueFactory(new PropertyValueFactory<Revenue, String>("date"));
+        colProduct.setCellValueFactory(new PropertyValueFactory<Revenue, String>("numOrder"));
+        colOrder.setCellValueFactory(new PropertyValueFactory<Revenue, String>("numProduct"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<Revenue, String>("totalPrice"));
         if (beginTime != null && lastTime != null) {
             try {
                 startDate.setValue(beginTime);
@@ -171,8 +172,8 @@ public class CategoryStatistic extends ScreenManager implements Initializable {
                 if (beginDate.compareTo(finishDate) <= 0) {
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
-                    listCate.clear();
-                    getData("select ct.CategoryID, ct.CategoryName, sum(odt.Quantity) from Category ct join Product pd on pd.CategoryID = ct.CategoryID join OrderDetails odt on odt.ProductID = pd.ProductID join Orders od on od.OrderID = odt.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by ct.CategoryID, ct.CategoryName", startTime, endTime);
+                    listRevenue.clear();
+                    getData("select od.OrderDate, count(odt.ProductID), count(od.OrderID), sum(od.TotalPrice) from Orders od join OrderDetails odt ON odt.OrderID = od.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by od.OrderDate", startTime, endTime);
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setHeaderText(null);
@@ -188,9 +189,9 @@ public class CategoryStatistic extends ScreenManager implements Initializable {
             }
         }
         else if (beginTime == null || lastTime == null) {
-            listCate.clear();
+            listRevenue.clear();
         }
-        tableProduct.setItems(listCate);
+        tableProduct.setItems(listRevenue);
     }
-    
+
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Sales.Discard.ReportStatistic.Control.RevenueStatistic">
+<SplitPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Sales.ReportStatistic.Control.CategoryStatistic">
    <items>
       <AnchorPane fx:id="secondPane" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="799.0">
          <children>
@@ -19,10 +19,9 @@
             <Button fx:id="btnRevenue" layoutX="204.0" layoutY="117.0" mnemonicParsing="false" onAction="#screenRevenueStatistic" prefHeight="24.0" prefWidth="177.0" text="DOANH THU" />
             <TableView fx:id="tableProduct" layoutX="52.0" layoutY="168.0" prefHeight="401.0" prefWidth="935.0">
                <columns>
-                  <TableColumn fx:id="colDate" prefWidth="180.0" text="NGÀY" />
-                  <TableColumn fx:id="colOrder" prefWidth="156.0" text="SỐ ĐƠN" />
-                  <TableColumn fx:id="colProduct" minWidth="0.0" prefWidth="342.0" text="SỐ SẢN PHẨM" />
-                  <TableColumn fx:id="colPrice" prefWidth="256.0" text="GIÁ TIỀN" />
+                  <TableColumn fx:id="idCategory" prefWidth="220.0" text="MÃ LOẠI" />
+                  <TableColumn fx:id="nameCategory" prefWidth="533.0" text="TÊN LOẠI" />
+                  <TableColumn fx:id="qtyCategory" minWidth="0.0" prefWidth="181.0" text="SỐ LƯỢNG" />
                </columns>
             </TableView>
             <DatePicker fx:id="startDate" layoutX="161.0" layoutY="34.0" />
