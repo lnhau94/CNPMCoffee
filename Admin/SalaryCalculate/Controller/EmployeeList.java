@@ -55,8 +55,8 @@ public class EmployeeList implements  Initializable{
             String employeeID = rs.getString(1);
             String employeeName = rs.getString(2);
             String employeePhone = rs.getString(3);
-            String employeeType = rs.getString(4);
-            String employeePosition = rs.getString(5);
+            String employeeType = rs.getString(5);
+            String employeePosition = rs.getString(4);
             int employeeSalaryPerHour = rs.getInt(6);
             Employee newEmployee = new Employee(employeeID,employeeName,employeePhone,employeeType,employeePosition,employeeSalaryPerHour);
             employeeTableViewList.add(newEmployee);
@@ -70,7 +70,6 @@ public class EmployeeList implements  Initializable{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(employeeIDtable);
         employeeTable= FXCollections.observableArrayList(employeeTableViewList);
             employeeIDtable.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeID"));
             employeeNametable.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
@@ -110,6 +109,51 @@ public class EmployeeList implements  Initializable{
             employeeTableView.setItems(FXCollections.observableArrayList(employeeTableViewList));
             employeeTableView.refresh();
         }
+        if(ClickedButton.get()==ButtonType.CANCEL){
+            dialog.close();
+        }
     }
-
+    public void changSceneAddPosition(ActionEvent e) throws  IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/AddWorkPosition.fxml"));
+        Pane ProductAddViewParent = loader.load();
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane) ProductAddViewParent);
+        Optional<ButtonType> ClickedButton = dialog.showAndWait();
+        AddWorkPosition AddController = loader.getController();
+        if(ClickedButton.get()==ButtonType.APPLY){
+            AddController.addPosition();
+            employeeTableView.setItems(FXCollections.observableArrayList(employeeTableViewList));
+            employeeTableView.refresh();
+        }
+        if(ClickedButton.get()==ButtonType.CANCEL){
+            dialog.close();
+        }
+    }
+    public void changSceneEditSalary(ActionEvent e) throws  IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/EditSalary.fxml"));
+        Pane ProductAddViewParent = loader.load();
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane((DialogPane) ProductAddViewParent);
+        Optional<ButtonType> ClickedButton = dialog.showAndWait();
+        EditSalary AddController = loader.getController();
+        if(ClickedButton.get()==ButtonType.APPLY){
+            AddController.editSalary();
+            employeeTableView.setItems(FXCollections.observableArrayList(employeeTableViewList));
+            employeeTableView.refresh();
+        }
+        if(ClickedButton.get()==ButtonType.CANCEL){
+            dialog.close();
+        }
+    }
+    public void GoBack(ActionEvent e) throws IOException {
+        System.out.println(123);
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../../../Admin/DataManager/View/Admin.fxml"));
+        Parent EmployeeViewParent = loader.load();
+        Scene scene = new Scene(EmployeeViewParent);
+        stage.setScene(scene);
+    }
 }

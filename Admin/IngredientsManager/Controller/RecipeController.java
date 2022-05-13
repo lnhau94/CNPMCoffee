@@ -1,8 +1,6 @@
 package Main.Admin.IngredientsManager.Controller;
 
 import Main.Admin.IngredientsManager.Model.RecipesModel;
-import Main.Entity.DataAccess.DAO;
-import Main.Entity.Element.Product;
 import Main.Entity.Element.ProductRecipe;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -53,25 +51,26 @@ public class RecipeController extends MasterController implements Initializable 
         this.comboBoxProductName.setItems(this.model.getProductNameList());
 
         productIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("productId"));
-//        productNameCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>(""));
-        productNameCol.setCellValueFactory(data -> new SimpleStringProperty(((new DAO() {
-            String findName(){
-                for(Product p : getAllProduct()) {
-                    if(p.getProductId().equalsIgnoreCase(data.getValue().getProductId())) {
-                        return p.getProductName();
-                    }
-                }
-                return null;
-            }
-        }).findName())));
+        productNameCol.setCellValueFactory(data -> new SimpleStringProperty(
+                this.model.findProductNameById(data.getValue().getProductId())));
+//        productNameCol.setCellValueFactory(data -> new SimpleStringProperty(((new DAO() {
+//            String findName(){
+//                for(Product p : getAllProduct()) {
+//                    if(p.getProductId().equalsIgnoreCase(data.getValue().getProductId())) {
+//                        return p.getProductName();
+//                    }
+//                }
+//                return null;
+//            }
+//        }).findName())));
         ingredientIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("ingredientId"));
-//        ingredientNameCol.setCellValueFactory(new PropertyValueFactory<>());
+        ingredientNameCol.setCellValueFactory(data -> new SimpleStringProperty(
+                this.model.findIngredientNameById(data.getValue().getIngredientId())));
         ingredientQtyCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, Integer>("ingredientQty"));
-//        String str = String.valueOf(new PropertyValueFactory<ProductRecipe, Ingredient>("productQty"));
-        String str = "12";
-        result.setText(str);
 
-        this.table.setItems(this.model.getRecipesListRecipes());
+//        result.setText("");
+
+        this.table.setItems(this.model.getRecipesList());
 
     }
 
@@ -87,7 +86,6 @@ public class RecipeController extends MasterController implements Initializable 
             fx.setLocation(file.toURI().toURL());
             stage.setScene(new Scene(fx.load()));
             controller = fx.getController();
-            controller.setComboBox(this.model.getProductNameList(), this.model.getIngredientNameList());
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

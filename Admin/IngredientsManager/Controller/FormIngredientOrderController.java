@@ -11,10 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.SimpleFormatter;
 
 public class FormIngredientOrderController extends MasterController implements Initializable {
 
@@ -46,10 +44,12 @@ public class FormIngredientOrderController extends MasterController implements I
 
     private Date now;
     private IngredientApplicationModel model;
+    private IncomeReportsApplicationModel modelExtra;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.model = MasterController.model;
+        this.modelExtra = MasterController.inRModel;
         now = new Date();
         dateTxt.setText(new SimpleDateFormat("dd-MM-yyyy").format(now));
         idCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()
@@ -65,7 +65,7 @@ public class FormIngredientOrderController extends MasterController implements I
                 .getIngredientChoice().getProducer()));
 
         textFieldID.setText("WF001");
-        textFieldName.setText("Thanh Huyền");
+        textFieldName.setText("");
 
         table.setItems(this.model.getCurrentChoices());
     }
@@ -83,6 +83,10 @@ public class FormIngredientOrderController extends MasterController implements I
 
         this.model.saveIncomeReport();
         this.model.saveIncomeDetails();
+
+        this.modelExtra.getWaitingInReport().add(this.model.getIncomeReport());
+        this.modelExtra.getIncomeReports().add(this.model.getIncomeReport());
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Message");

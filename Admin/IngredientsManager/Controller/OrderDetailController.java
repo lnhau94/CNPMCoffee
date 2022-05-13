@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
@@ -71,15 +72,16 @@ public class OrderDetailController extends MasterController implements Initializ
     }
 
     public void displayChosenItem(IncomeReport i) {
-        textFieldID.setText("WF001");
-        textFieldName.setText("Thanh Huyen");
-        textFieldSupplier.setText("Dalat Trung Nguyen");
-//        Convert date sql to String
-//        Then convert String to LocalDate
-        Date date = new Date(2030, 9, 5);
+        textFieldID.setText(i.getEmployeeIdCreate());
+        try {
+            textFieldName.setText(this.model.getDao().findEmployeeNameById(i.getEmployeeIdCreate()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        textFieldSupplier.setText(i.getSupplier());
+        Date date = i.getOrderDate();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = dateFormat.format(date);
-//        System.out.println("Converted String " + strDate);
         this.date.setText(strDate);
     }
 

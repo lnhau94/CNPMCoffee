@@ -32,7 +32,7 @@
 
 .title-form {
     -fx-background-color: linear-gradient(to left, #acb6e5, #86fde8);
-    -fx-text-fill: #333;
+    -fx-text-fill: #000;
     -fx-font-weight: 900;
     -fx-padding: 4px 8px;
     -fx-border: solid;
@@ -48,18 +48,26 @@
     -fx-background-radius: 12px;
 }
 
+.txt-field-no-input {
+    -fx-background-radius: 12px;
+    -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #f7971e, #ffd200);
+    -fx-prompt-text-fill: #333;
+    -fx-alignment: center;
+}
+
 .btn-confirm,
 .label-form {
     -fx-font-weight: 900;
     -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #f7971e, #ffd200);
     -fx-padding: 4px 8px;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
     -fx-border: solid;
     -fx-background-radius: 6px;
 }
 
 .btn-confirm:hover {
     -fx-background-color: linear-gradient(from 0px 0px to 50px 100px, #ff6b6b, #556270);
+    -fx-text-fill: #fff;
 }
 
 .combo-box {

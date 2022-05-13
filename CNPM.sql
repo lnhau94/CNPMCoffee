@@ -402,4 +402,12 @@ insert into Ingredients(ingredientName, ingredientType, storage, Producer, price
 (N'Ớt', N'Đồ chế biến', 3, N'Dalat Farm', 5000)
 
 
-select * from IncomeReports
+INSERT INTO dbo.WorkType(WorkTypeName) VALUES ('Parttime'), ('Fulltime');
+SELECT * FROM dbo.WorkType ;
+INSERT INTO WorkPosition(WorkPositionName) VALUES ('Cashier'),('Barista'),('Manager'),('ShiftLeader');
+INSERT INTO PositionType VALUES
+('WP001','WT001','20000'),
+('WP001','WT002','30000'),
+('WP002','WT001','25000'),
+('WP002','WT002','35000'),
+('WP003','WT002','50000')
