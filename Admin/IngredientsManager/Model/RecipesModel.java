@@ -29,11 +29,14 @@ public class RecipesModel {
         this.dao = new DAO();
         try {
             ingredientList = dao.getAllIngredient();
-            productList = this.dao.getAllProduct2();
+            productList = FXCollections.observableArrayList(this.dao.getAllProduct());
             recipesList = this.dao.getAllProductRecipe();
 
             setIngredientNameList();
             setIngredientIdList();
+
+            setProductNameList();
+            setProductIdList();
 
 
         } catch (SQLException e) {

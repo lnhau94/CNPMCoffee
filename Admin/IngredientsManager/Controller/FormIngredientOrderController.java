@@ -65,7 +65,7 @@ public class FormIngredientOrderController extends MasterController implements I
                 .getIngredientChoice().getProducer()));
 
         textFieldID.setText("WF001");
-        textFieldName.setText("Thanh Huyền");
+        textFieldName.setText("");
 
         table.setItems(this.model.getCurrentChoices());
     }
