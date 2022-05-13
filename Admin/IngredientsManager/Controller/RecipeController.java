@@ -1,8 +1,6 @@
 package Main.Admin.IngredientsManager.Controller;
 
 import Main.Admin.IngredientsManager.Model.RecipesModel;
-import Main.Entity.DataAccess.DAO;
-import Main.Entity.Element.Product;
 import Main.Entity.Element.ProductRecipe;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
