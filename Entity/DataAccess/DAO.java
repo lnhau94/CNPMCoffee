@@ -1,8 +1,9 @@
 package Main.Entity.DataAccess;
 
-import Main.Entity.Element.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Main.Admin.DataManager.Controller.AdminProductController;
+import Main.Admin.DataManager.Model.ProductInTable;
+import Main.Entity.Element.Product;
+import Main.Entity.Element.ProductPrice;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,17 +15,21 @@ public class DAO {
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     /*
+    private String DBuser = "sa";
+<<<<<<< HEAD
+//    private String DBpass = "123456";
+    private String DBpass = "reallyStrongPwd123";
+=======
+    private String DBpass = "123456";
             "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
                     "databaseName=CNPM;" +
                     "encrypt=true;trustServerCertificate=true";
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
-    */
-//    private String DBuser = "sa";
 //    private String DBpass = "reallyStrongPwd123";
+    */
     private String DBuser = "admin";
     private String DBpass = "123456";
-//    private String DBpass = "123456";
 
     private Connection connect;
     private Statement stmt;
@@ -45,7 +50,6 @@ public class DAO {
         stmt= connect.createStatement();
         stmt.execute(sqlQuery);
     }
-
     public boolean insert(String sqlQuery){
         boolean flag = false;
         try {
@@ -58,302 +62,32 @@ public class DAO {
         return flag;
     }
 
-    public String findFinalIncomeReport() {
-        ResultSet rs;
+    public List<Product> getAllProduct() {
+        ArrayList<Product> list =  new ArrayList<>();
         try {
-            connect = DriverManager.getConnection(connectURL,DBuser,DBpass);
-            stmt= connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery("Select reportID from IncomeReports");
-            rs.last();
-            return rs.getString("reportID");
-
+            new AdminProductController().GetDataProduct();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public ObservableList<Ingredient> getAllIngredient() throws SQLException {
-        ObservableList<Ingredient> list = FXCollections.observableArrayList();
-        Ingredient i = null;
-        ResultSet rs = this.executeQuery("Select * from Ingredients");
-        while(rs.next()) {
-            i = new Ingredient();
-            i.setIngredientId(rs.getString("ingredientID"));
-            i.setIngredientName(rs.getString("ingredientName"));
-            i.setIngredientType(rs.getString("ingredientType"));
-            i.setStorage(rs.getInt("storage"));
-            i.setProducer(rs.getString("Producer"));
-            i.setIncomePrice(rs.getInt("price"));
-            list.add(i);
-        }
-        return list;
-    }
-
-    public ArrayList<ProductPrice> getAllProductPrice() throws SQLException {
-        ArrayList<ProductPrice> list = new ArrayList<>();
-        ProductPrice pr = new ProductPrice();
-        ResultSet rs = this.executeQuery("Select * from ProductPrice");
-        while(rs.next()) {
-            pr.setProductId(rs.getString("ProductID"));
-            pr.setSize(rs.getString("ProductSize"));
-            pr.setPrice(rs.getInt("ProductPrice"));
-            list.add(pr);
-        }
-        return list;
-    }
-
-    public ArrayList<ProductPrice> findProductPriceById(String id, ArrayList<ProductPrice> list) {
-        ArrayList<ProductPrice> foundList;
-        foundList = new ArrayList<>();
-        list.forEach(data -> {
-            if (data.getProductId().equalsIgnoreCase(id)) {
-                foundList.add(data);
+        for(ProductInTable p : AdminProductController.productInTableList){
+            Product tmp = new Product(p.getProductID(), p.getProductName(), p.getCategoryName());
+            if(p.getPriceByS()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "S",p.getPriceByS()));
             }
-        });
-        return foundList;
-    }
-
-    public ObservableList<Product> getAllProduct2() throws SQLException {
-        ArrayList<ProductPrice> listPPrice = this.getAllProductPrice();
-        ObservableList<Product> list = FXCollections.observableArrayList();
-        Product p;
-        ResultSet rs = this.executeQuery("Select * from Product pr join Category ct" +
-                "on pr.ProductID = ct.ProductID");
-        while(rs.next()) {
-            p = new Product();
-            p.setProductId(rs.getString("ProductID"));
-            p.setProductName(rs.getString("ProductName"));
-            p.setCategoryName(rs.getString("CategoryName"));
-            p.setPriceList(this.findProductPriceById(rs.getString("ProductID"), listPPrice));
-            list.add(p);
+            if(p.getPriceByM()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "M",p.getPriceByM()));
+            }
+            if(p.getPriceByL()!=0){
+                tmp.getPriceList().add(new ProductPrice(tmp.getProductId(), "L",p.getPriceByL()));
+            }
+            list.add(tmp);
         }
+
         return list;
     }
 
-    public ObservableList<IncomeReport> getAllIncomeReport(String sql) throws SQLException {
-        ObservableList<IncomeReport> list = FXCollections.observableArrayList();
-        ResultSet rs = this.executeQuery(sql);
-        IncomeReport ir;
-        while (rs.next()) {
-            ir = new IncomeReport();
-            ir.setReportId(rs.getString("reportID"));
-            ir.setEmployeeIdCreate(rs.getString("created"));
-            ir.setOrderDate(rs.getDate("reportDate"));
-            ir.setStatus(rs.getString("StateReport"));
-            ir.setSupplier(rs.getString("supplier"));
-            list.add(ir);
-        }
-        return list;
-    }
-
-    public ObservableList<ProductRecipe> getAllProductRecipe() throws SQLException {
-        ObservableList<ProductRecipe> list = FXCollections.observableArrayList();
-        ResultSet rs = this.executeQuery("Select * from ProductRecipe");
-        ProductRecipe pr;
-        while(rs.next()) {
-            pr = new ProductRecipe();
-            pr.setProductId(rs.getString("productID"));
-            pr.setIngredientId(rs.getString("ingredientID"));
-            pr.setProductQty(rs.getInt("productQty"));
-            pr.setIngredientQty(rs.getInt("ingredientQty"));
-            list.add(pr);
-        }
-        return list;
-    }
-
-    public Ingredient findIngredientById(String id) throws SQLException {
-        Ingredient i = null;
-        ResultSet rs = this.executeQuery("Select * from Ingredients where ingredientID = '"+id+"'");
-        while(rs.next()) {
-            i = new Ingredient();
-            i.setIngredientId(rs.getString("ingredientID"));
-            i.setIngredientName(rs.getString("ingredientName"));
-            i.setIngredientType(rs.getString("ingredientType"));
-            i.setStorage(rs.getInt("storage"));
-            i.setProducer(rs.getString("Producer"));
-            i.setIncomePrice(rs.getInt("price"));
-        }
-        return i;
-    }
-
-    public ObservableList<IncomeDetail> getIncomeDetailsByIncomeReport(IncomeReport ir) throws SQLException {
-        IncomeDetail ide;
-        ObservableList<IncomeDetail> list = FXCollections.observableArrayList();
-        ResultSet rs = this.executeQuery("Select * from IncomeDetails where reportID = '"+ir.getReportId()+"'");
-        while (rs.next()) {
-            ide = new IncomeDetail();
-            ide.setIngredientChoice(findIngredientById(rs.getString("ingredientID")));
-            ide.setOrderQty(rs.getInt("qty"));
-            ide.setReceiveQty(rs.getInt("receiveQty"));
-            list.add(ide);
-        }
-        return list;
-    }
-
-    public List<Product> getAllProduct() {
-        ArrayList<Product> list =  new ArrayList<>();
-        ArrayList<ProductPrice> productPriceslist =  new ArrayList<>();
-        productPriceslist.add(new ProductPrice("123","S",10000));
-        productPriceslist.add(new ProductPrice("123","M",20000));
-        productPriceslist.add(new ProductPrice("123","L",30000));
-        Product tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà sữa");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-        tmp = new Product();
-        tmp.setProductId("123");
-        tmp.setCategoryName("Trà Xanh");
-        tmp.setProductName("Trà Lài Hoa Cúc");
-        tmp.setPriceList(productPriceslist);
-        list.add(tmp);
-
-        return list;
+    public PreparedStatement getPrepareStatement(String sqlQuery) throws SQLException {
+        connect = DriverManager.getConnection(connectURL,DBuser,DBpass);
+        return connect.prepareStatement(sqlQuery);
     }
 }
