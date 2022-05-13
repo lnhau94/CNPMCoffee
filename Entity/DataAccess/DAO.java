@@ -25,11 +25,16 @@ public class DAO {
     private String DBpass = "1248163264128";
 
     */
-    private String DBuser = "sa";
-    private String DBpass = "reallyStrongPwd123";
 
 //    private String DBuser = "admin";
-//    private String DBpass = "123456";
+
+//    private String DBpass = "reallyStrongPwd123";
+//    private String DBuser = "admin";
+
+//    private String DBpass = "reallyStrongPwd123";
+
+    private String DBuser = "admin";
+    private String DBpass = "123456";
 
     private Connection connect;
     private Statement stmt;
