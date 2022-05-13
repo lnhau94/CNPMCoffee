@@ -31,6 +31,7 @@ public class ErrorController {
 
         }
         Dialog<ButtonType> dialogError = new Dialog<>();
+        dialogError.setTitle("Error");
         dialogError.setDialogPane(error);
         dialogError.showAndWait();
 

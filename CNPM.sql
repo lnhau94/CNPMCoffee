@@ -296,12 +296,20 @@ alter table DailySales add reportId varchar(10),
 	constraint FK_DAILYSALES_SALESREPORT foreign key (reportId)
 		references SaleReports(reportID)
 
+--Thêm cột số lượng nhận vào bảng IncomeDetails
+alter table IncomeDetails add receiveQty int		
 
 --Thêm cột nhà sản xuất vào bảng Ingredients (nguyên vật liệu)
 alter table Ingredients add Producer nvarchar(30)
 
+--Thêm cột giá nhập vào bảng Ingredients (nguyên vật liệu)
+alter table Ingredients add price int
+
 --Thêm cột trạng thái đơn đặt hàng vào bảng IncomeReports (bảng lưu báo cáo nhận hàng)
 alter table IncomeReports add StateReport varchar(20)
+
+--Thêm cột nhà cung cấp vào bảng IncomeReports (bảng lưu báo cáo nhận hàng)
+alter table IncomeReports add supplier nvarchar(30)
 
 
 --Tạo dữ liệu thể loại
@@ -309,41 +317,49 @@ insert into Category(CategoryName) values
 (N'Cà phê'),
 (N'Trà'),
 (N'Bánh mì')
-select * from Category
-select * from Product
+select * from IncomeReports
+select * from IncomeDetails
 
 --Tạo dữ liệu sản phẩm
 insert into Product(ProductName, CategoryID) values
-(N'Cà phê đá', 'CAT002'),
-(N'Cà phê sữa đá', 'CAT002'),
-(N'Bạc xỉu đá', 'CAT002'),
-(N'Espresso', 'CAT002'),
-(N'Trà sen vàng', 'CAT003'),
-(N'Trà thanh đào', 'CAT003'),
-(N'Trà thạch vải', 'CAT003'),
-(N'Trà xanh đậu đỏ', 'CAT003'),
-(N'Bánh mì ốp la', 'CAT004'),
-(N'Bánh mì thịt', 'CAT004'),
-(N'Bánh mì cá ngừ', 'CAT004'),
-(N'Bánh mì gà xé', 'CAT004')
+(N'Cà phê đá', 'CAT001'),
+(N'Cà phê sữa đá', 'CAT001'),
+(N'Bạc xỉu đá', 'CAT001'),
+(N'Espresso', 'CAT001'),
+(N'Trà sen vàng', 'CAT002'),
+(N'Trà thanh đào', 'CAT002'),
+(N'Trà thạch vải', 'CAT002'),
+(N'Trà xanh đậu đỏ', 'CAT002'),
+(N'Bánh mì ốp la', 'CAT003'),
+(N'Bánh mì thịt', 'CAT003'),
+(N'Bánh mì cá ngừ', 'CAT003'),
+(N'Bánh mì gà xé', 'CAT003')
 
 -- Tạo dữ liệu giá sản phẩm theo size
 insert into ProductPrice(ProductID, ProductSize, ProductPrice) values
-('PD003', 'S', 18000),
-('PD003', 'M', 21000),
-('PD003', 'L', 23000),
+('PD001', 'S', 18000),
+('PD001', 'M', 21000),
+('PD001', 'L', 23000),
+
+('PD002', 'S', 20000),
+('PD002', 'M', 24000),
+('PD002', 'L', 26000),
+
+('PD003', 'S', 24000),
+('PD003', 'M', 30000),
+('PD003', 'L', 33000),
 
 ('PD004', 'S', 20000),
 ('PD004', 'M', 24000),
 ('PD004', 'L', 26000),
 
-('PD005', 'S', 24000),
-('PD005', 'M', 30000),
-('PD005', 'L', 33000),
+('PD005', 'S', 30000),
+('PD005', 'M', 38000),
+('PD005', 'L', 42000),
 
-('PD006', 'S', 20000),
-('PD006', 'M', 24000),
-('PD006', 'L', 26000),
+('PD006', 'S', 30000),
+('PD006', 'M', 38000),
+('PD006', 'L', 42000),
 
 ('PD007', 'S', 30000),
 ('PD007', 'M', 38000),
@@ -353,42 +369,37 @@ insert into ProductPrice(ProductID, ProductSize, ProductPrice) values
 ('PD008', 'M', 38000),
 ('PD008', 'L', 42000),
 
-('PD009', 'S', 30000),
-('PD009', 'M', 38000),
-('PD009', 'L', 42000),
-
-('PD010', 'S', 30000),
-('PD010', 'M', 38000),
-('PD010', 'L', 42000),
-
+('PD009', 'M', 30000),
+('PD010', 'M', 30000),
 ('PD011', 'M', 30000),
-('PD012', 'M', 30000),
-('PD013', 'M', 30000),
-('PD014', 'M', 30000)
+('PD012', 'M', 30000)
 
-insert into Ingredients(ingredientName, ingredientType, storage, Producer) values
-(N'Cà phê hạt nguyên chất', N'Cà phê hạt', 100, N'Trung Nguyên Legend'),
-(N'Đường', N'Gia vị', 100, N'Dalat Farm'),
-(N'Sữa đặc nguyên chất', N'Sữa' , 100, N'Dalat Farm'),
-(N'Sữa tươi', N'Sữa' , 100, N'Dalat Farm'),
-(N'Trà lài khô', N'Trà', 100, N'Dalat Farm'),
-(N'Trà đào khô', N'Trà', 100, N'Dalat Farm'),
-(N'Trà hương vải khô', N'Trà', 100, N'Dalat Farm'),
-(N'Trà xanh matcha khô', N'Trà', 100, N'Dalat Farm'),
-(N'Bột mì', N'Bột', 100, N'Dalat Farm'),
-(N'Bột vitamin C', N'Bột', 100, N'Dalat Farm'),
-(N'Giấm', N'Gia vị', 100, N'Dalat Farm'),
-(N'Muối', N'Gia vị', 100, N'Dalat Farm'),
-(N'Dầu ăn', N'Gia vị', 100, N'Dalat Farm'),
-(N'Trứng gà', N'Trứng', 100, N'Dalat Farm'),
-(N'Đồ chua', N'Đồ chế biến', 100, N'Dalat Farm'),
-(N'Rau thơm', N'Rau củ', 100, N'Dalat Farm'),
-(N'Dưa leo', N'Rau củ', 100, N'Dalat Farm'),
-(N'Chà bông', N'Đồ chế biến', 100, N'Dalat Farm'),
-(N'Bơ', N'Đồ chế biến', 100, N'Dalat Farm'),
+insert into Ingredients(ingredientName, ingredientType, storage, Producer, price) values
+(N'Cà phê hạt nguyên chất', N'Cà phê hạt', 100, N'Trung Nguyên Legend', 150000),
+(N'Đường', N'Gia vị', 100, N'Dalat Farm', 12000),
+(N'Sữa đặc nguyên chất', N'Sữa' , 100, N'Dalat Farm', 20000),
+(N'Sữa tươi', N'Sữa' , 100, N'Dalat Farm', 12000),
+(N'Trà lài khô', N'Trà', 100, N'Dalat Farm', 20000),
+(N'Trà đào khô', N'Trà', 100, N'Dalat Farm', 20000),
+(N'Trà hương vải khô', N'Trà', 100, N'Dalat Farm', 20000),
+(N'Trà xanh matcha khô', N'Trà', 100, N'Dalat Farm', 22000),
+(N'Bột mì', N'Bột', 100, N'Dalat Farm', 8000),
+(N'Bột vitamin C', N'Bột', 100, N'Dalat Farm', 15000),
+(N'Giấm', N'Gia vị', 100, N'Dalat Farm', 15000),
+(N'Muối', N'Gia vị', 100, N'Dalat Farm', 17000),
+(N'Dầu ăn', N'Gia vị', 100, N'Dalat Farm', 18000),
+(N'Trứng gà', N'Trứng', 100, N'Dalat Farm', 26000),
+(N'Đồ chua', N'Đồ chế biến', 100, N'Dalat Farm', 20000),
+(N'Rau thơm', N'Rau củ', 100, N'Dalat Farm', 10000),
+(N'Dưa leo', N'Rau củ', 100, N'Dalat Farm', 20000),
+(N'Chà bông', N'Đồ chế biến', 100, N'Dalat Farm', 30000),
+(N'Bơ', N'Đồ chế biến', 100, N'Dalat Farm', 20000),
 
-(N'Thịt xá xíu', N'Thịt', 10, N'Dalat Farm'),
-(N'Salad', N'Rau củ', 100, N'Dalat Farm'),
-(N'Cá ngừ đống hộp', N'Đồ chế biến', 50, N'Dalat Farm'),
-(N'Gà xé chế biến', N'Đồ chế biến', 10, N'Dalat Farm'),
-(N'Ớt', N'Đồ chế biến', 3, N'Dalat Farm')
+(N'Thịt xá xíu', N'Thịt', 10, N'Dalat Farm', 40000),
+(N'Salad', N'Rau củ', 100, N'Dalat Farm', 10000),
+(N'Cá ngừ đống hộp', N'Đồ chế biến', 50, N'Dalat Farm', 35000),
+(N'Gà xé chế biến', N'Đồ chế biến', 10, N'Dalat Farm', 40000),
+(N'Ớt', N'Đồ chế biến', 3, N'Dalat Farm', 5000)
+
+
+select * from IncomeReports
