@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class AdminController  {
@@ -45,6 +46,16 @@ public class AdminController  {
         Parent AccountViewParent = loader.load();
         Scene scene = new Scene(AccountViewParent);
         stage.setScene(scene);
+    }
+
+    public void screenRevenueStatistic(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(new File("Sales/ReportStatistic/View/RevenueStatistic.fxml").toURI().toURL());
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.getScene().getStylesheets().add(new File("Sales/ReportStatistic/View/CSS/RevenueStatistic.css")
+                .toURI().toURL().toExternalForm());
+        stage.show();
     }
 
 
