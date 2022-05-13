@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class OrderListController extends MasterController implements Initializable {
@@ -42,8 +44,15 @@ public class OrderListController extends MasterController implements Initializab
         model = MasterController.inRModel;
         numberOrdCol.setCellValueFactory(new PropertyValueFactory<IncomeReport, String>("reportId"));
         idEmployeeCol.setCellValueFactory(new PropertyValueFactory<IncomeReport, String>("employeeIdCreate"));
-//        nameEmployeeCol.setCellFactory(new PropertyValueFactory<Employee, String>("name"));
-        dateCol.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(
+        nameEmployeeCol.setCellValueFactory(data -> {
+            try {
+                return new SimpleStringProperty(model.getDao().
+                        findEmployeeNameById(data.getValue().getEmployeeIdCreate()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        dateCol.setCellValueFactory(data -> new SimpleStringProperty(new SimpleDateFormat("dd-MM-yyyy").format(
                 data.getValue().getOrderDate())));
         statusCol.setCellValueFactory(new PropertyValueFactory<IncomeReport, String>("status"));
         this.table.setItems(this.model.getIncomeReports());
