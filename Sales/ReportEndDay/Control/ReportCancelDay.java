@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import Main.Entity.DataAccess.DAO;
+import Main.Entity.Element.Product;
 import Main.Sales.ReportEndDay.Model.ProductCancel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -120,7 +122,7 @@ public class ReportCancelDay extends SceneController implements Initializable {
         }
    }));
 
-    ObservableList<ProductCancel> listProduct = FXCollections.observableArrayList();
+    ObservableList<Product> listProduct = FXCollections.observableArrayList(new DAO().getAllProduct());
 
     public static ObservableList<ProductCancel> listData = FXCollections.observableArrayList();
 
@@ -158,16 +160,16 @@ public class ReportCancelDay extends SceneController implements Initializable {
 
     public ObservableList<String> listId() {
         ObservableList<String> list = FXCollections.observableArrayList();
-        for (ProductCancel product : listProduct) {
-            list.add(product.getIdProduct());
+        for (Product product : listProduct) {
+            list.add(product.getProductId());
         }
         return list;
     }
 
     public ObservableList<String> listName() {
         ObservableList<String> list = FXCollections.observableArrayList();
-        for (ProductCancel product : listProduct) {
-            list.add(product.getNameProduct());
+        for (Product product : listProduct) {
+            list.add(product.getProductName());
         }
         return list;
     }
@@ -197,8 +199,8 @@ public class ReportCancelDay extends SceneController implements Initializable {
             if (boxCheck.getValue().compareToIgnoreCase("Mã sản phẩm") == 0) {
                 boolean checkId = false;
                 boolean checkProduct = false;
-                for (ProductCancel product : listProduct) {
-                    if (productId.compareToIgnoreCase(product.getIdProduct()) != 0) {
+                for (Product product : listProduct) {
+                    if (productId.compareToIgnoreCase(product.getProductId()) != 0) {
                         checkId = false;
                     } else {
                         checkId = true;
@@ -217,7 +219,7 @@ public class ReportCancelDay extends SceneController implements Initializable {
                                     }
                                 }
                                 if (checkProduct == false) {
-                                    listData.add(new ProductCancel(product.getIdProduct(), product.getNameProduct(),
+                                    listData.add(new ProductCancel(product.getProductId(), product.getProductName(),
                                             Integer.parseInt(productQty)));
                                 } else {
                                     Alert alert = new Alert(AlertType.ERROR);
@@ -251,8 +253,8 @@ public class ReportCancelDay extends SceneController implements Initializable {
             else if (boxCheck.getValue().compareToIgnoreCase("Tên sản phẩm") == 0) {
                 boolean checkName = false;
                 boolean checkProduct = false;
-                for (ProductCancel product : listProduct) {
-                    if (productId.compareToIgnoreCase(product.getNameProduct()) != 0) {
+                for (Product product : listProduct) {
+                    if (productId.compareToIgnoreCase(product.getProductName()) != 0) {
                         checkName = false;
                     }
                     else {
@@ -272,7 +274,7 @@ public class ReportCancelDay extends SceneController implements Initializable {
                                     }
                                 }
                                 if (checkProduct == false) {
-                                    listData.add(new ProductCancel(product.getIdProduct(), product.getNameProduct(),
+                                    listData.add(new ProductCancel(product.getProductId(), product.getProductName(),
                                             Integer.parseInt(productQty)));
                                     System.out.println(fieldProductID.getText());
                                 } else {
@@ -325,8 +327,8 @@ public class ReportCancelDay extends SceneController implements Initializable {
         ProductCancel prd = tableProduct.getSelectionModel().getSelectedItem();
         boolean checkId = false;
         boolean checkEquals = false;
-        for (ProductCancel product : listProduct) {
-            if (idEditEvent.getNewValue().compareToIgnoreCase(product.getIdProduct()) == 0) {
+        for (Product product : listProduct) {
+            if (idEditEvent.getNewValue().compareToIgnoreCase(product.getProductId()) == 0) {
                 checkId = true;
                 break;
             }
@@ -347,9 +349,9 @@ public class ReportCancelDay extends SceneController implements Initializable {
                 if (idEditEvent.getOldValue().compareToIgnoreCase(listData.get(i).getIdProduct()) == 0
                         && idEditEvent.getNewValue().compareToIgnoreCase(listData.get(i).getIdProduct()) != 0) {
                     listData.get(i).setIdProduct(idEditEvent.getNewValue().toUpperCase());
-                    for (ProductCancel product : listProduct) {
-                        if (idEditEvent.getNewValue().compareToIgnoreCase(product.getIdProduct()) == 0) {
-                            listData.get(i).setNameProduct(product.getNameProduct());
+                    for (Product product : listProduct) {
+                        if (idEditEvent.getNewValue().compareToIgnoreCase(product.getProductId()) == 0) {
+                            listData.get(i).setNameProduct(product.getProductName());
                             tableProduct.refresh();
                         }
                     }
@@ -375,8 +377,8 @@ public class ReportCancelDay extends SceneController implements Initializable {
         ProductCancel prd = tableProduct.getSelectionModel().getSelectedItem();
         boolean checkName = false;
         boolean checkEquals = false;
-        for (ProductCancel product : listProduct) {
-            if (nameEditEvent.getNewValue().compareToIgnoreCase(product.getNameProduct()) == 0) {
+        for (Product product : listProduct) {
+            if (nameEditEvent.getNewValue().compareToIgnoreCase(product.getProductName()) == 0) {
                 checkName = true;
                 break;
             }
@@ -397,9 +399,9 @@ public class ReportCancelDay extends SceneController implements Initializable {
             for (int i = 0; i < listData.size(); i++) {
                 if (nameEditEvent.getOldValue().compareToIgnoreCase(listData.get(i).getNameProduct()) == 0 && nameEditEvent.getNewValue().compareToIgnoreCase(listData.get(i).getNameProduct()) != 0) {
                     listData.get(i).setNameProduct(nameEditEvent.getNewValue());
-                    for (ProductCancel product : listProduct) {
-                        if (nameEditEvent.getNewValue().compareToIgnoreCase(product.getNameProduct()) == 0) {
-                            listData.get(i).setIdProduct(product.getIdProduct());
+                    for (Product product : listProduct) {
+                        if (nameEditEvent.getNewValue().compareToIgnoreCase(product.getProductName()) == 0) {
+                            listData.get(i).setIdProduct(product.getProductId());
                             tableProduct.refresh();
                         }
                     }
