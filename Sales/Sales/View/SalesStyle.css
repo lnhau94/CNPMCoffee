@@ -71,3 +71,21 @@
     -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
 }
 
+.toggle-button{
+    -fx-pref-width: 100;
+    -fx-max-width: 200;
+    -fx-alignment: center;
+    -fx-background-radius: 10px;
+    -fx-background-color: #fff;
+    -fx-text-fill: #5F50F1;
+    -fx-border-radius: 10px;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
+    -fx-padding: 5,0,0,0;
+}
+.toggle-button:selected{
+    -fx-background-color: #5F50F1;
+
+    -fx-text-fill: #fff;
+}
+

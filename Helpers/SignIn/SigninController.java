@@ -78,6 +78,8 @@ public class SigninController {
                     a.show();
                     break;
                 default:
+                    MainApp.controlBar.initGUI();
+                    MainApp.controlBar.getDataControl().setTxtUserName(MainApp.staff.getEmployeeName());
                     MainApp.controlBar.showFunction(flag);
             }
 

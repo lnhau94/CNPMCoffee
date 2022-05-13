@@ -1,5 +1,6 @@
 package Main.Helpers.MainControl;
 
+import Main.Admin.DataManager.Controller.AdminController;
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,10 +28,15 @@ public class ControlBar extends VBox {
     Stage owner;
     Button logoutBtn,exitBtn;
 
+    AdminController dataControl;
+
     public ControlBar(Stage stage){
         this.owner = stage;
-        initGUI();
-        createHandleEvent();
+        start();
+    }
+
+    public AdminController getDataControl() {
+        return dataControl;
     }
 
     public void showFunction(int lvl){
@@ -60,7 +66,7 @@ public class ControlBar extends VBox {
         }
         this.getScene().getWindow().sizeToScene();
     }
-    private void initGUI(){
+    public void initGUI(){
         saleBtn = new ToggleButton("Sale");
         EoDsBtn = new ToggleButton("CloseStore");
         dataBtn = new ToggleButton("Data");
@@ -68,13 +74,18 @@ public class ControlBar extends VBox {
         ingredientBtn = new ToggleButton("Ingredients");
         salesScreen = new SalesApplicationControl().getView();
         try {
-            dataManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/DataManager/View/Admin.fxml")));
+            FXMLLoader fx = new FXMLLoader();
+            fx.setLocation(getClass().getResource("../../Admin/DataManager/View/Admin.fxml"));
+            dataManagerScreen = new Scene(fx.load());
+            dataControl = fx.getController();
             ingredientManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/IngredientsManager/View/IngredientOrder.fxml")));
             eodScreen = new Scene(FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL()));
             eodScreen.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
             loginScreen = new Scene(FXMLLoader.load(new File("Helpers/SignIn/Signinv2.fxml").toURI().toURL()));
 
-            //salaryManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("Admin/DataManager/View/Admin.fxml")));
+            salaryManagerScreen = new Scene(FXMLLoader.load(getClass().getResource("../../Admin/SalaryCalculate/View/Timekeeping.fxml")));
+            salaryManagerScreen.getStylesheets().add(new File("Admin/SalaryCalculate/View/CSS/Salary.css").toURI().toURL().toExternalForm());
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -89,17 +100,32 @@ public class ControlBar extends VBox {
         salaryBtn.setToggleGroup(gr);
 
         logoutBtn = new Button("Logout");
-        exitBtn = new Button("Exit");
 
         setBtnImgandTooltip();
 
 
+        createHandleEvent();
 
 
 
 
         //this.setRotate(90);
 
+    }
+
+    public void start(){
+        try {
+            loginScreen = new Scene(FXMLLoader.load(new File("Helpers/SignIn/Signinv2.fxml").toURI().toURL()));
+            } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        exitBtn = new Button("Exit");
+        exitBtn.setOnAction(e->owner.close());
+        owner.sceneProperty().addListener((w,o,n)->{
+            w.getValue().getWindow().centerOnScreen();
+            changeLocation();
+        });
     }
 
     private void setBtnImgandTooltip(){
@@ -175,17 +201,15 @@ public class ControlBar extends VBox {
             //changeLocation();
 
         });
-        //salaryManagerBtn
+        salaryBtn.setOnAction(e->{
+            owner.setScene(salaryManagerScreen);
+        });
         ingredientBtn.setOnAction(e->{
             owner.setScene(ingredientManagerScreen);
             //changeLocation();
         });
         logoutBtn.setOnAction(e->showFunction(0));
-        exitBtn.setOnAction(e->owner.close());
-        owner.sceneProperty().addListener((w,o,n)->{
-            w.getValue().getWindow().centerOnScreen();
-            changeLocation();
-        });
+
     }
 
 }
