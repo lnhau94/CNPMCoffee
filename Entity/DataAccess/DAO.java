@@ -16,8 +16,7 @@ public class DAO {
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     /*
-    private String DBuser = "sa";
-//    private String DBpass = "123456";
+    private String DBpass = "123456";
             "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
                     "databaseName=CNPM;" +
                     "encrypt=true;trustServerCertificate=true";
@@ -26,15 +25,10 @@ public class DAO {
 
     */
 
+    private String DBuser = "sa";
+    private String DBpass = "reallyStrongPwd123";
 //    private String DBuser = "admin";
-
-//    private String DBpass = "reallyStrongPwd123";
-//    private String DBuser = "admin";
-
-//    private String DBpass = "reallyStrongPwd123";
-
-    private String DBuser = "admin";
-    private String DBpass = "123456";
+//    private String DBpass = "123456";
 
     private Connection connect;
     private Statement stmt;
@@ -122,47 +116,6 @@ public class DAO {
         }
         return list;
     }
-
-//    public ArrayList<ProductPrice> getAllProductPrice() throws SQLException {
-//        ArrayList<ProductPrice> list = new ArrayList<>();
-//        ProductPrice pr = new ProductPrice();
-//        ResultSet rs = this.executeQuery("Select * from ProductPrice");
-//        while(rs.next()) {
-//            pr.setProductId(rs.getString("ProductID"));
-//            pr.setSize(rs.getString("ProductSize"));
-//            pr.setPrice(rs.getInt("ProductPrice"));
-//            list.add(pr);
-//        }
-//        return list;
-//    }
-
-//    public ArrayList<ProductPrice> findProductPriceById(String id, ArrayList<ProductPrice> list) {
-//        ArrayList<ProductPrice> foundList;
-//        foundList = new ArrayList<>();
-//        list.forEach(data -> {
-//            if (data.getProductId().equalsIgnoreCase(id)) {
-//                foundList.add(data);
-//            }
-//        });
-//        return foundList;
-//    }
-
-//    public ObservableList<Product> getAllProduct2() throws SQLException {
-//        ArrayList<ProductPrice> listPPrice = this.getAllProductPrice();
-//        ObservableList<Product> list = FXCollections.observableArrayList();
-//        Product p;
-//        ResultSet rs = this.executeQuery("Select * from Product pr join Category ct" +
-//                "on pr.ProductID = ct.ProductID");
-//        while(rs.next()) {
-//            p = new Product();
-//            p.setProductId(rs.getString("ProductID"));
-//            p.setProductName(rs.getString("ProductName"));
-//            p.setCategoryName(rs.getString("CategoryName"));
-//            p.setPriceList(this.findProductPriceById(rs.getString("ProductID"), listPPrice));
-//            list.add(p);
-//        }
-//        return list;
-//    }
 
     public ObservableList<IncomeReport> getAllIncomeReport(String sql) throws SQLException {
         ObservableList<IncomeReport> list = FXCollections.observableArrayList();

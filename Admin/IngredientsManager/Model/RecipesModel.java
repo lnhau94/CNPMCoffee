@@ -38,7 +38,6 @@ public class RecipesModel {
             setProductNameList();
             setProductIdList();
 
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -116,7 +115,7 @@ public class RecipesModel {
     public void setProductIdList() {
         ProductIdList = FXCollections.observableArrayList();
         this.getProductList().forEach(data -> {
-            ProductIdList.add(data.getProductName());
+            ProductIdList.add(data.getProductId());
         });
     }
 

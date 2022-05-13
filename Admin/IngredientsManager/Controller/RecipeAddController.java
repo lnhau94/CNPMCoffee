@@ -28,7 +28,6 @@ public class RecipeAddController extends MasterController implements Initializab
     private TextField ingredientQtyTxtField;
     @FXML
     private TextField productQtyTxtField;
-
     private ProductRecipe pr;
     private RecipesModel model;
 
@@ -50,8 +49,8 @@ public class RecipeAddController extends MasterController implements Initializab
     }
 
     public void addNewIngredient(ActionEvent e) {
-        if(productIdTxtField.getText() == null || ingredientIdTxtField.getText() == null ||
-                ingredientQtyTxtField.getText() == null || productQtyTxtField.getText() == null) {
+        if(productIdTxtField.getText() == "" || ingredientIdTxtField.getText() == "" ||
+                ingredientQtyTxtField.getText() == "" || productQtyTxtField.getText() == "") {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Input");

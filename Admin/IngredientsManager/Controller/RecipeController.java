@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RecipeController extends MasterController implements Initializable {
+public class RecipeController extends MasterController implements Initializable{
 
     @FXML
     private ComboBox<String> comboBoxProductName;
@@ -43,13 +43,13 @@ public class RecipeController extends MasterController implements Initializable 
     private RecipesModel model;
 
 
-    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         model = MasterController.recipesModel;
-
 //        Arrange Combo-box list of product name
         this.comboBoxProductName.setItems(this.model.getProductNameList());
+    }
 
+    public void displayChosenItem() {
         productIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("productId"));
         productNameCol.setCellValueFactory(data -> new SimpleStringProperty(
                 this.model.findProductNameById(data.getValue().getProductId())));
@@ -68,10 +68,7 @@ public class RecipeController extends MasterController implements Initializable 
                 this.model.findIngredientNameById(data.getValue().getIngredientId())));
         ingredientQtyCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, Integer>("ingredientQty"));
 
-//        result.setText("");
-
         this.table.setItems(this.model.getRecipesList());
-
     }
 
     public void openAddStage(ActionEvent e) {
