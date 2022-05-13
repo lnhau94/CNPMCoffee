@@ -69,8 +69,8 @@ public class Salarytable implements Initializable{
             while (emp.next()){
                 String employeeID = emp.getString(1);
                 String employeeName = emp.getString(2);
-                String employeePosition = emp.getString(3);
-                String employeeType = emp.getString(4);
+                String employeePosition = emp.getString(4);
+                String employeeType = emp.getString(3);
                 int    employeeSalaryPerHour = emp.getInt(5);
                 int    date = CountDate(employeeID,month);
                 int    hour = CountHour(employeeID,month);
@@ -197,6 +197,15 @@ public class Salarytable implements Initializable{
         loader.setLocation(getClass().getResource("../View/EmployeeList.fxml"));
         Parent ProductViewParent = loader.load();
         Scene scene = new Scene(ProductViewParent);
+        stage.setScene(scene);
+    }
+    public void GoBack(ActionEvent e) throws IOException {
+        System.out.println(123);
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../../../Admin/DataManager/View/Admin.fxml"));
+        Parent EmployeeViewParent = loader.load();
+        Scene scene = new Scene(EmployeeViewParent);
         stage.setScene(scene);
     }
 }
