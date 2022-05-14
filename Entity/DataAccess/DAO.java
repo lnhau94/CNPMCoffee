@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DAO {
     private String connectURL = "jdbc:sqlserver://;" +
-                                "serverName=localhost;" +
+                                "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     /*
@@ -30,7 +30,7 @@ public class DAO {
 //    private String DBpass = "reallyStrongPwd123";
     */
     private String DBuser = "admin";
-    private String DBpass = "123456";
+    private String DBpass = "1248163264128";
 
     private Connection connect;
     private Statement stmt;

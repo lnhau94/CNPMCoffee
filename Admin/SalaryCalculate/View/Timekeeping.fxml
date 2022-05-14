@@ -8,15 +8,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="432.0" prefWidth="783.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.SalaryCalculate.Controller.Timekeeping">
+<AnchorPane prefHeight="387.0" prefWidth="783.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.SalaryCalculate.Controller.Timekeeping">
     <children>
-        <Button layoutX="14.0" layoutY="64.0" mnemonicParsing="false" onAction="#changeSceneEmployee" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="Employee" />
-        <Button layoutX="14.0" layoutY="127.0" mnemonicParsing="false" onAction="#changeSceneSalarytable" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="Salary" />
-        <Button layoutX="14.0" layoutY="190.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="TimeKeeping" />
-        <Button layoutX="31.0" layoutY="400.0" minWidth="52.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" styleClass="button-bc" />
-        <AnchorPane layoutX="146.0" layoutY="22.0" prefHeight="378.0" prefWidth="601.0" styleClass="title">
+        <Button layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#changeSceneEmployee" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="Employee" />
+        <Button layoutX="14.0" layoutY="204.0" mnemonicParsing="false" onAction="#changeSceneSalarytable" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="Salary" />
+        <Button layoutX="14.0" layoutY="67.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="TimeKeeping" />
+        <AnchorPane layoutX="146.0" layoutY="22.0" prefHeight="314.0" prefWidth="601.0" styleClass="title">
          <children>
-             <Label fx:id="header" alignment="CENTER" prefHeight="42.0" prefWidth="601.0" text="TimeKeeping" />
+             <Label fx:id="header" alignment="CENTER" prefHeight="42.0" prefWidth="601.0" text="TIMEKEEPING" />
             <Label layoutX="117.0" layoutY="84.0" prefHeight="25" prefWidth="90" styleClass="label-textField" text="ID:" />
             <Label layoutX="117.0" layoutY="127.0" prefHeight="25" prefWidth="90" styleClass="label-textField" text="Name:" />
             <TextField fx:id="name" layoutX="222.0" layoutY="126.0" prefHeight="26.0" prefWidth="232.0" promptText="Enter Your Name " />
@@ -26,7 +25,7 @@
                 
          </children>
       </AnchorPane>
-        <Button layoutX="31.0" layoutY="346.0" mnemonicParsing="false" onAction="#GoBack" styleClass="button-admin">
+        <Button layoutX="41.0" layoutY="282.0" mnemonicParsing="false" onAction="#GoBack" styleClass="button-admin">
             <graphic>
                 <ImageView fitHeight="46.0" fitWidth="49.0" layoutX="-27.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                     <image>
@@ -35,6 +34,11 @@
                 </ImageView>
             </graphic>
         </Button>
+            <ImageView fitHeight="46.0" fitWidth="49.0" layoutX="123.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
+                <image>
+                    <Image url="@../../../Icon/timekeeping.png" />
+                </image>
+            </ImageView>
     </children>
     <stylesheets>
         <URL value="@CSS/Salary.css" />
