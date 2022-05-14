@@ -1,12 +1,16 @@
 package Main.Admin.IngredientsManager.Model;
 
+import Main.Admin.DataManager.Controller.AdminProductController;
+import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Ingredient;
 import Main.Entity.Element.Product;
 import Main.Entity.Element.ProductRecipe;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RecipesModel {
@@ -27,20 +31,40 @@ public class RecipesModel {
 
     public void init() {
         this.dao = new DAO();
-        try {
-            ingredientList = dao.getAllIngredient();
-            productList = FXCollections.observableArrayList(this.dao.getAllProduct());
-            recipesList = this.dao.getAllProductRecipe();
+        ingredientList = IngredientApplicationModel.ingredientList;
+        productList = FXCollections.observableArrayList(this.dao.getAllProduct());
 
-            setIngredientNameList();
-            setIngredientIdList();
+        setIngredientNameList();
+        setIngredientIdList();
 
-            setProductNameList();
-            setProductIdList();
+        setProductNameList();
+        setProductIdList();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        this.productList.addListener(new ListChangeListener<Product>() {
+            @Override
+            public void onChanged(Change<? extends Product> change) {
+                ProductNameList.clear();
+                ProductIdList.clear();
+                for (Product product : productList) {
+                    ProductNameList.add(product.getProductName());
+                    ProductIdList.add(product.getProductId());
+                }
+            }
+        });
+
+        this.ingredientList.addListener(new ListChangeListener<Ingredient>() {
+            @Override
+            public void onChanged(Change<? extends Ingredient> change) {
+                IngredientNameList.clear();
+                IngredientIdList.clear();
+                for (Ingredient ingredient : ingredientList) {
+                    IngredientNameList.add(ingredient.getIngredientName());
+                    IngredientIdList.add(ingredient.getIngredientId());
+                }
+            }
+        });
+
+
     }
 
     public ObservableList<Product> getProductList() {
@@ -84,6 +108,7 @@ public class RecipesModel {
         this.getIngredientList().forEach(data -> {
             IngredientNameList.add(data.getIngredientName());
         });
+
     }
 
     public ObservableList<String> getIngredientIdList() {
@@ -106,6 +131,7 @@ public class RecipesModel {
         this.getProductList().forEach(data -> {
             ProductNameList.add(data.getProductName());
         });
+
     }
 
     public ObservableList<String> getProductIdList() {
@@ -138,15 +164,44 @@ public class RecipesModel {
     }
 
     public void addNewItem(ProductRecipe pr) {
-        this.getRecipesList().add(pr);
+//        this.getRecipesList().add(pr);
+        String sql = String.format("Insert into ProductRecipes(productID, ingredientID, " +
+                        "productQty, ingredientQty) values ('%s', '%s', '%s', '%s')", pr.getProductId(),
+                pr.getIngredientId(), pr.getProductQty(), pr.getIngredientId());
+        dao.insert(sql);
+        try {
+            this.getRecipeOfChosenItem(pr.getProductId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void updateItem(int index, ProductRecipe pr) {
         this.getRecipesList().set(index, pr);
+        String sql = String.format("Update ProductRecipes set productQty = '%s', ingredientQty = '%s' " +
+                "where productID = '%s' and ingredientID = '%s'", pr.getProductQty(), pr.getIngredientId(),
+                pr.getProductId(), pr.getIngredientId());
+        dao.insert(sql);
     }
 
     public void removeItem(ProductRecipe rp) {
+        String sql = String.format("Delete from ProductRecipes where productID = '%s' and ingredientID = '%s'",
+                rp.getProductId(), rp.getIngredientId());
         this.getRecipesList().remove(rp);
+    }
+
+    public void getRecipeOfChosenItem(String productId) throws SQLException {
+        this.recipesList = FXCollections.observableArrayList();
+        ResultSet rs = dao.executeQuery("Select * from ProductRecipes where productID = '"+productId+"'");
+        ProductRecipe pr;
+        while(rs.next()) {
+            pr = new ProductRecipe();
+            pr.setProductId(rs.getString("productID"));
+            pr.setIngredientId(rs.getString("ingredientID"));
+            pr.setProductQty(rs.getInt("productQty"));
+            pr.setIngredientQty(rs.getInt("ingredientQty"));
+            this.recipesList.add(pr);
+        }
     }
 }
 

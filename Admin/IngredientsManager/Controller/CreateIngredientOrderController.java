@@ -61,7 +61,7 @@ public class CreateIngredientOrderController extends MasterController implements
         typeCol.setCellValueFactory(new PropertyValueFactory<>("ingredientType"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("incomePrice"));
         producerCol.setCellValueFactory(new PropertyValueFactory<>("producer"));
-        tableChoose.setItems(this.model.getIngredientList());
+        tableChoose.setItems(IngredientApplicationModel.ingredientList);
 
         idColOrd.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()
                 .getIngredientChoice().getIngredientId()));

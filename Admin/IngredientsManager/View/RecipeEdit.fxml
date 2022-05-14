@@ -14,11 +14,11 @@
       <Label layoutX="17.0" layoutY="110.0" prefHeight="31.0" prefWidth="175.0" styleClass="title-form" text="Ingredient Name" />
       <Label layoutX="17.0" layoutY="169.0" prefHeight="29.0" prefWidth="175.0" styleClass="title-form" text="Quantity of ingredient" />
       <Label layoutX="17.0" layoutY="222.0" prefHeight="31.0" prefWidth="175.0" styleClass="title-form" text="Quantity of finished products" />
-      <TextField fx:id="productIdTxtField" editable="false" layoutX="404.0" layoutY="51.0" prefHeight="27.0" prefWidth="189.0" promptText="Product ID" styleClass="txt-field-input" />
-      <TextField fx:id="ingredientIdTxtField" editable="false" layoutX="402.0" layoutY="111.0" prefHeight="29.0" prefWidth="188.0" promptText="Ingredient ID" styleClass="txt-field-input" />
+      <TextField fx:id="productIdTxtField" editable="false" layoutX="404.0" layoutY="51.0" prefHeight="27.0" prefWidth="189.0" promptText="Product ID" styleClass="txt-field-no-input" />
+      <TextField fx:id="ingredientIdTxtField" editable="false" layoutX="402.0" layoutY="111.0" prefHeight="29.0" prefWidth="188.0" promptText="Ingredient ID" styleClass="txt-field-no-input" />
       <Button layoutX="505.0" layoutY="274.0" mnemonicParsing="false" onAction="#editItem" prefHeight="29.0" prefWidth="73.0" styleClass="btn-confirm" text="Apply" />
-      <ComboBox fx:id="comboBoxProductName" layoutX="209.0" layoutY="50.0" prefHeight="28.0" prefWidth="176.0" promptText="Choose Product" />
-      <ComboBox fx:id="comboBoxIngredientName" layoutX="211.0" layoutY="110.0" prefHeight="28.0" prefWidth="176.0" promptText="Choose Ingredient" />
+      <ComboBox fx:id="comboBoxProductName" layoutX="209.0" layoutY="50.0" prefHeight="28.0" prefWidth="176.0" />
+      <ComboBox fx:id="comboBoxIngredientName" layoutX="211.0" layoutY="110.0" prefHeight="28.0" prefWidth="176.0" />
       <TextField fx:id="ingredientQtyTxtField" layoutX="208.0" layoutY="169.0" prefHeight="29.0" prefWidth="188.0" promptText="Enter quantity" styleClass="txt-field-input" />
       <TextField fx:id="productQtyTxtField" layoutX="207.0" layoutY="223.0" prefHeight="29.0" prefWidth="188.0" promptText="Enter quantityEnter quantity" styleClass="txt-field-input" />
    </children>

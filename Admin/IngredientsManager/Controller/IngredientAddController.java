@@ -35,5 +35,7 @@ public class IngredientAddController extends MasterController {
     public Ingredient getI() {
         return i;
     }
-    
+    public void setI(Ingredient i) {
+        this.i = i;
+    }
 }

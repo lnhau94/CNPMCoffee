@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class RecipeController extends MasterController implements Initializable{
@@ -49,10 +50,26 @@ public class RecipeController extends MasterController implements Initializable{
         this.comboBoxProductName.setItems(this.model.getProductNameList());
     }
 
-    public void displayChosenItem() {
-        productIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("productId"));
-        productNameCol.setCellValueFactory(data -> new SimpleStringProperty(
-                this.model.findProductNameById(data.getValue().getProductId())));
+    public void displayChosenItem(ActionEvent e) {
+        int index = comboBoxProductName.getSelectionModel().getSelectedIndex();
+        try {
+            this.model.getRecipeOfChosenItem(this.model.getProductIdList().get(index));
+            productIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("productId"));
+            productNameCol.setCellValueFactory(data -> new SimpleStringProperty(
+                    this.model.findProductNameById(data.getValue().getProductId())));
+            ingredientIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("ingredientId"));
+            ingredientNameCol.setCellValueFactory(data -> new SimpleStringProperty(
+                    this.model.findIngredientNameById(data.getValue().getIngredientId())));
+            ingredientQtyCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, Integer>("ingredientQty"));
+            if(this.model.getRecipesList().size() > 0) {
+                result.setText(String.valueOf(this.model.getRecipesList().get(0).getProductQty()));
+            }
+
+            this.table.setItems(this.model.getRecipesList());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
 //        productNameCol.setCellValueFactory(data -> new SimpleStringProperty(((new DAO() {
 //            String findName(){
 //                for(Product p : getAllProduct()) {
@@ -63,12 +80,7 @@ public class RecipeController extends MasterController implements Initializable{
 //                return null;
 //            }
 //        }).findName())));
-        ingredientIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("ingredientId"));
-        ingredientNameCol.setCellValueFactory(data -> new SimpleStringProperty(
-                this.model.findIngredientNameById(data.getValue().getIngredientId())));
-        ingredientQtyCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, Integer>("ingredientQty"));
 
-        this.table.setItems(this.model.getRecipesList());
     }
 
     public void openAddStage(ActionEvent e) {
@@ -87,8 +99,10 @@ public class RecipeController extends MasterController implements Initializable{
             throw new RuntimeException(ex);
         }
         stage.showAndWait();
-
-        this.model.addNewItem(controller.getPr());
+        if(controller.getPr() != null) {
+            this.model.addNewItem(controller.getPr());
+            controller.setPr(null);
+        }
     }
 
     public void openEditStage(ActionEvent e) {

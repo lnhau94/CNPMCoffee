@@ -70,6 +70,7 @@ public class RecipeAddController extends MasterController implements Initializab
         return pr;
     }
 
-
-
+    public void setPr(ProductRecipe pr) {
+        this.pr = pr;
+    }
 }

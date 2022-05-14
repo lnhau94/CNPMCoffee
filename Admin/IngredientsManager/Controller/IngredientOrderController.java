@@ -49,7 +49,7 @@ public class IngredientOrderController extends MasterController implements Initi
         storageCol.setCellValueFactory(new PropertyValueFactory<>("storage"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("incomePrice"));
         producerCol.setCellValueFactory(new PropertyValueFactory<>("producer"));
-        table.setItems(this.model.getIngredientList());
+        table.setItems(IngredientApplicationModel.ingredientList);
     }
 
     public void openAddStage(ActionEvent e) {
@@ -68,8 +68,11 @@ public class IngredientOrderController extends MasterController implements Initi
             throw new RuntimeException(ex);
         }
         stage.showAndWait();
-
-        this.model.addNewItem(controller.getI());
+        if(controller.getI() != null) {
+            this.model.addNewItem(controller.getI());
+            table.setItems(IngredientApplicationModel.ingredientList);
+        }
+        controller.setI(null);
     }
 
     public void openEditStage(ActionEvent e) {
