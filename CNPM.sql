@@ -427,3 +427,5 @@ INSERT INTO Employee (EmployeeName, EmployeePhone, WorkPositionID, WorkTypeID) V
 SELECT * FROM WorkPosition, WorkType
 SELECT * FROM Employee
 
+alter table Orders drop CONSTRAINT FK_Orders_DailySales
+select * from Orders
