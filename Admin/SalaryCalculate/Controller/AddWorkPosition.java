@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,7 +40,7 @@ public class AddWorkPosition implements Initializable {
             typeIdArr.add(rs.getString(2));
         }
     }
-    public void addPosition() throws SQLException {
+    public void addPosition() throws SQLException, IOException {
         DAO sqlposition = new DAO();
         DAO sqlpositiontype = new DAO();
         positionArr.clear();
@@ -47,21 +48,37 @@ public class AddWorkPosition implements Initializable {
         String pID = null;
         String tName = TypeList.getValue();
         String tID = null;
+<<<<<<< HEAD
+        int level = 0;
+=======
         int level = Integer.parseInt(LevelList.getValue());
+>>>>>>> master
         for (int i =0; i<typeNameArr.size();i++){
             if (typeNameArr.get(i).equals(tName)){
                 tID = typeIdArr.get(i);
             }
         }
-        int salary = Integer.parseInt(salaryPerHour.getText());
-        sqlposition.execute("INSERT INTO WorkPosition(WorkPositionName,WorkPositionLVL) VALUES('"+pName+"','"+level+"') ");
-        DAO sql = new DAO();
-        ResultSet rs = sql.executeQuery("SELECT WorkPositionID FROM WorkPosition WHERE WorkPositionName='"+pName+"'");
-        while (rs.next()){
-            positionArr.add(rs.getString(1));
+        int salary = 0;
+        try {
+            salary = Integer.parseInt(salaryPerHour.getText());
+            level = Integer.parseInt(LevelList.getValue());
+            sqlposition.execute("INSERT INTO WorkPosition(WorkPositionName,WorkPositionLVL) VALUES('"+pName+"','"+level+"') ");
+            DAO sql = new DAO();
+            ResultSet rs = sql.executeQuery("SELECT WorkPositionID FROM WorkPosition WHERE WorkPositionName='"+pName+"'");
+            while (rs.next()){
+                positionArr.add(rs.getString(1));
+            }
+            pID = positionArr.get(0);
+            sqlpositiontype.execute("INSERT INTO PositionType(WorkPositionID,WorkTypeID,SalaryPerHour) VALUES('"+pID+"','"+tID+"','"+salary+"')");
+            AlertControllerSalary alert = new AlertControllerSalary();
+            alert.AlertSuccess();
+        }catch (Exception e){
+            AlertControllerSalary alert = new AlertControllerSalary();
+            alert.AlertFailed();
         }
-        pID = positionArr.get(0);
-        sqlpositiontype.execute("INSERT INTO PositionType(WorkPositionID,WorkTypeID,SalaryPerHour) VALUES('"+pID+"','"+tID+"','"+salary+"')");
+        if (salary==0 || pID==null || pName==null || level==0){
+
+        }
     }
 
     @Override
