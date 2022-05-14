@@ -16,12 +16,12 @@ public class DAO {
 //                                "databaseName=CNPM;" +
 //                                "encrypt=true;trustServerCertificate=true";
     private String connectURL = "jdbc:sqlserver://;" +
-                                "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
+                                "serverName=" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     /*
     private String DBpass = "123456";
-            "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
+            "serverName=" +
                     "databaseName=CNPM;" +
                     "encrypt=true;trustServerCertificate=true";
     */
