@@ -76,7 +76,7 @@
          </cursor>
       </Button>
       <Button fx:id="backAdminBtn" layoutX="3.0" layoutY="488.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin" />
-      <ComboBox fx:id="comboBoxProductName" layoutX="27.0" layoutY="45.0" prefHeight="41.0" prefWidth="322.0" promptText="Choose Product" />
+      <ComboBox fx:id="comboBoxProductName" layoutX="27.0" layoutY="45.0" onAction="#displayChosenItem" prefHeight="41.0" prefWidth="322.0" promptText="Choose Product" />
       <Label layoutX="783.0" layoutY="55.0" prefHeight="21.0" prefWidth="83.0" text="Thành phẩm:">
          <font>
             <Font size="15.0" />

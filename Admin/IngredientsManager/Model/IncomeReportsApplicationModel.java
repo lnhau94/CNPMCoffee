@@ -24,15 +24,6 @@ public class IncomeReportsApplicationModel {
         }
     }
 
-    public void refresh() {
-        try {
-            incomeReports = dao.getAllIncomeReport("Select * from IncomeReports");
-            waitingInReport = dao.getAllIncomeReport("Select * from IncomeReports where StateReport = 'Waiting'");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public ObservableList<IncomeDetail> getIncomeDetails() {
         return incomeDetails;
     }
@@ -80,7 +71,6 @@ public class IncomeReportsApplicationModel {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public boolean updateRecQtyOfOrder() {
@@ -102,13 +92,9 @@ public class IncomeReportsApplicationModel {
         dao.insert(String.format("Update IncomeReports set StateReport='%s' where reportID='%s'",
                 currentIncomeRe.getStatus(), currentIncomeRe.getReportId()));
 
-//        Refresh Observablelist
-//        try {
-//            waitingInReport = dao.getAllIncomeReport("Select * from IncomeReports where StateReport = 'Waiting'");
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-
+        this.getWaitingInReport().remove(this.getCurrentIncomeRe());
+        this.getIncomeReports().remove(this.getCurrentIncomeRe());
+        this.getIncomeReports().add(this.getCurrentIncomeRe());
         return true;
 //        Sql update receive quantity for each ingredient of order
     }

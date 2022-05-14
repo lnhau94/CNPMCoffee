@@ -1,15 +1,28 @@
 package Main.Admin.IngredientsManager.Model;
 
+import Main.Admin.DataManager.Controller.AdminProductController;
+import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
+import Main.Entity.Element.Ingredient;
 import Main.Entity.Element.Product;
 import Main.Entity.Element.ProductRecipe;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class RecipesModel {
-    private ObservableList<String> productNameList;
-    private ObservableList<String> ingredientNameList;
-    private ObservableList<ProductRecipe> recipesListRecipes;
+    private ObservableList<Product> productList;
+    private ObservableList<Ingredient> ingredientList;
+    private ObservableList<String> IngredientNameList;
+    private ObservableList<String> IngredientIdList;
+    private ObservableList<String> ProductNameList;
+    private ObservableList<String> ProductIdList;
+
+    private ObservableList<ProductRecipe> recipesList;
+
     private DAO dao;
 
     public RecipesModel() {
@@ -17,52 +30,178 @@ public class RecipesModel {
     }
 
     public void init() {
-        ingredientNameList = FXCollections.observableArrayList(
-                "Đường",
-                "Cà phê",
-                "Trà xanh"
-        );
-        productNameList = FXCollections.observableArrayList(
-                "Trà đào cam sả",
-                "Trà hạt sen",
-                "Bánh mì"
-        );
-        recipesListRecipes = FXCollections.observableArrayList(
-                new ProductRecipe("123", "D1", 12, 12),
-                new ProductRecipe("009", "CF01", 12, 12)
-        );
+        this.dao = new DAO();
+        ingredientList = IngredientApplicationModel.ingredientList;
+        productList = FXCollections.observableArrayList(this.dao.getAllProduct());
+
+        setIngredientNameList();
+        setIngredientIdList();
+
+        setProductNameList();
+        setProductIdList();
+
+        this.productList.addListener(new ListChangeListener<Product>() {
+            @Override
+            public void onChanged(Change<? extends Product> change) {
+                ProductNameList.clear();
+                ProductIdList.clear();
+                for (Product product : productList) {
+                    ProductNameList.add(product.getProductName());
+                    ProductIdList.add(product.getProductId());
+                }
+            }
+        });
+
+        this.ingredientList.addListener(new ListChangeListener<Ingredient>() {
+            @Override
+            public void onChanged(Change<? extends Ingredient> change) {
+                IngredientNameList.clear();
+                IngredientIdList.clear();
+                for (Ingredient ingredient : ingredientList) {
+                    IngredientNameList.add(ingredient.getIngredientName());
+                    IngredientIdList.add(ingredient.getIngredientId());
+                }
+            }
+        });
+
+
     }
 
-    public ObservableList<String> getProductNameList() {
-        return productNameList;
+    public ObservableList<Product> getProductList() {
+        return productList;
     }
 
-    public void setProductNameList(ObservableList<String> productNameList) {
-        this.productNameList = productNameList;
+    public void setProductList(ObservableList<Product> productList) {
+        this.productList = productList;
     }
 
-    public ObservableList<ProductRecipe> getRecipesListRecipes() {
-        return recipesListRecipes;
+    public void setIngredientList(ObservableList<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
     }
 
-    public void setRecipesListRecipes(ObservableList<ProductRecipe> recipesListRecipes) {
-        this.recipesListRecipes = recipesListRecipes;
+    public ObservableList<ProductRecipe> getRecipesList() {
+        return recipesList;
+    }
+
+    public void setRecipesList(ObservableList<ProductRecipe> recipesList) {
+        this.recipesList = recipesList;
+    }
+
+    public DAO getDao() {
+        return dao;
+    }
+
+    public void setDao(DAO dao) {
+        this.dao = dao;
+    }
+
+    public ObservableList<Ingredient> getIngredientList() {
+        return ingredientList;
     }
 
     public ObservableList<String> getIngredientNameList() {
-        return ingredientNameList;
+        return IngredientNameList;
+    }
+
+    public void setIngredientNameList() {
+        IngredientNameList = FXCollections.observableArrayList();
+        this.getIngredientList().forEach(data -> {
+            IngredientNameList.add(data.getIngredientName());
+        });
+
+    }
+
+    public ObservableList<String> getIngredientIdList() {
+        return IngredientIdList;
+    }
+
+    public void setIngredientIdList() {
+        IngredientIdList = FXCollections.observableArrayList();
+        this.getIngredientList().forEach(data -> {
+            IngredientIdList.add(data.getIngredientId());
+        });
+    }
+
+    public ObservableList<String> getProductNameList() {
+        return ProductNameList;
+    }
+
+    public void setProductNameList() {
+        ProductNameList = FXCollections.observableArrayList();
+        this.getProductList().forEach(data -> {
+            ProductNameList.add(data.getProductName());
+        });
+
+    }
+
+    public ObservableList<String> getProductIdList() {
+        return ProductIdList;
+    }
+
+    public void setProductIdList() {
+        ProductIdList = FXCollections.observableArrayList();
+        this.getProductList().forEach(data -> {
+            ProductIdList.add(data.getProductId());
+        });
+    }
+
+    public String findIngredientNameById(String id) {
+        for (Ingredient ingredient : this.getIngredientList()) {
+            if(id.equalsIgnoreCase(ingredient.getIngredientId())) {
+                return ingredient.getIngredientName();
+            }
+        }
+        return null;
+    }
+
+    public String findProductNameById(String id) {
+        for (Product p : this.getProductList()) {
+            if(id.equalsIgnoreCase(p.getProductId())) {
+                return p.getProductName();
+            }
+        }
+        return null;
     }
 
     public void addNewItem(ProductRecipe pr) {
-        this.getRecipesListRecipes().add(pr);
+//        this.getRecipesList().add(pr);
+        String sql = String.format("Insert into ProductRecipes(productID, ingredientID, " +
+                        "productQty, ingredientQty) values ('%s', '%s', '%s', '%s')", pr.getProductId(),
+                pr.getIngredientId(), pr.getProductQty(), pr.getIngredientId());
+        dao.insert(sql);
+        try {
+            this.getRecipeOfChosenItem(pr.getProductId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void updateItem(int index, ProductRecipe pr) {
-        this.getRecipesListRecipes().set(index, pr);
+        this.getRecipesList().set(index, pr);
+        String sql = String.format("Update ProductRecipes set productQty = '%s', ingredientQty = '%s' " +
+                "where productID = '%s' and ingredientID = '%s'", pr.getProductQty(), pr.getIngredientId(),
+                pr.getProductId(), pr.getIngredientId());
+        dao.insert(sql);
     }
 
     public void removeItem(ProductRecipe rp) {
-        this.getRecipesListRecipes().remove(rp);
+        String sql = String.format("Delete from ProductRecipes where productID = '%s' and ingredientID = '%s'",
+                rp.getProductId(), rp.getIngredientId());
+        this.getRecipesList().remove(rp);
+    }
+
+    public void getRecipeOfChosenItem(String productId) throws SQLException {
+        this.recipesList = FXCollections.observableArrayList();
+        ResultSet rs = dao.executeQuery("Select * from ProductRecipes where productID = '"+productId+"'");
+        ProductRecipe pr;
+        while(rs.next()) {
+            pr = new ProductRecipe();
+            pr.setProductId(rs.getString("productID"));
+            pr.setIngredientId(rs.getString("ingredientID"));
+            pr.setProductQty(rs.getInt("productQty"));
+            pr.setIngredientQty(rs.getInt("ingredientQty"));
+            this.recipesList.add(pr);
+        }
     }
 }
 

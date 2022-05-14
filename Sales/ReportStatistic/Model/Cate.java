@@ -1,4 +1,4 @@
-package Main.Sales.Discard.ReportStatistic.Model;
+package Main.Sales.ReportStatistic.Model;
 
 public class Cate {
     private String categoryId;
