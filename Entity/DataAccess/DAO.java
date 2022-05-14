@@ -27,13 +27,6 @@ public class DAO {
     */
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
-<<<<<<< HEAD
-=======
-
-
-//    private String DBuser = "admin";
-//    private String DBpass = "123456";
->>>>>>> master
 
     private Connection connect;
     private Statement stmt;
