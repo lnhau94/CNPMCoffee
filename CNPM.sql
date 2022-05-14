@@ -80,9 +80,10 @@ create table Product
 	ID int identity(1, 1) not null,
 	[ProductID] as ('PD' + right(replicate('0', 3) + cast(ID as varchar(3)), 3)) persisted not null,
 	ProductName nvarchar(30) not null,
-	CategoryID varchar(6) not null 
+	CategoryID varchar(6) not null
 );
 
+select * from IncomeReports
 
 --Cơ sở dữ liệu chung cho hóa đơn
 --Hóa đơn
@@ -123,6 +124,8 @@ create table Ingredients
 	constraint PK_Ingredients primary key (ingredientID)
 )
 
+insert into Ingredients(ingredientName, ingredientType, storage) values('Tra', 'Tra', 12)
+select * from Ingredients
 --Bảng công thức sản phẩm
 create table ProductRecipes
 (
@@ -311,29 +314,31 @@ alter table IncomeReports add StateReport varchar(20)
 --Thêm cột nhà cung cấp vào bảng IncomeReports (bảng lưu báo cáo nhận hàng)
 alter table IncomeReports add supplier nvarchar(30)
 
+--Thêm cột WorkPositionLVL vào bảng WorkPosition (Gia Đại)
+alter table WorkPosition add WorkPositionLVL varchar(10)
 
 --Tạo dữ liệu thể loại
 insert into Category(CategoryName) values
 (N'Cà phê'),
 (N'Trà'),
 (N'Bánh mì')
-select * from IncomeReports
-select * from IncomeDetails
+select * from Category
+select * from Product
 
 --Tạo dữ liệu sản phẩm
 insert into Product(ProductName, CategoryID) values
-(N'Cà phê đá', 'CAT001'),
-(N'Cà phê sữa đá', 'CAT001'),
-(N'Bạc xỉu đá', 'CAT001'),
-(N'Espresso', 'CAT001'),
-(N'Trà sen vàng', 'CAT002'),
-(N'Trà thanh đào', 'CAT002'),
-(N'Trà thạch vải', 'CAT002'),
-(N'Trà xanh đậu đỏ', 'CAT002'),
-(N'Bánh mì ốp la', 'CAT003'),
-(N'Bánh mì thịt', 'CAT003'),
-(N'Bánh mì cá ngừ', 'CAT003'),
-(N'Bánh mì gà xé', 'CAT003')
+(N'Cà phê đen', 'CAT002'),
+(N'Cà phê sữa đá', 'CAT002'),
+(N'Bạc xỉu đá', 'CAT002'),
+(N'Espresso', 'CAT002'),
+(N'Trà sen vàng', 'CAT003'),
+(N'Trà thanh đào', 'CAT003'),
+(N'Trà thạch vải', 'CAT003'),
+(N'Trà xanh đậu đỏ', 'CAT003'),
+(N'Bánh mì ốp la', 'CAT004'),
+(N'Bánh mì thịt', 'CAT004'),
+(N'Bánh mì cá ngừ', 'CAT004'),
+(N'Bánh mì gà xé', 'CAT004')
 
 -- Tạo dữ liệu giá sản phẩm theo size
 insert into ProductPrice(ProductID, ProductSize, ProductPrice) values
@@ -374,6 +379,7 @@ insert into ProductPrice(ProductID, ProductSize, ProductPrice) values
 ('PD011', 'M', 30000),
 ('PD012', 'M', 30000)
 
+--Thêm dữ liệu nguyên liệu cho bảng Ingredients
 insert into Ingredients(ingredientName, ingredientType, storage, Producer, price) values
 (N'Cà phê hạt nguyên chất', N'Cà phê hạt', 100, N'Trung Nguyên Legend', 150000),
 (N'Đường', N'Gia vị', 100, N'Dalat Farm', 12000),
@@ -411,3 +417,13 @@ INSERT INTO PositionType VALUES
 ('WP002','WT001','25000'),
 ('WP002','WT002','35000'),
 ('WP003','WT002','50000')
+
+
+
+
+INSERT INTO Product (ProductName, CategoryID) VALUES (N'ProductName','CAT001')
+INSERT INTO Employee (EmployeeName, EmployeePhone, WorkPositionID, WorkTypeID) VALUES('Đại','11','WP001','WT001')
+
+SELECT * FROM WorkPosition, WorkType
+SELECT * FROM Employee
+

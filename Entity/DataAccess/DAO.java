@@ -11,8 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAO {
+//    private String connectURL = "jdbc:sqlserver://;" +
+//                                "serverName=localhost;" +
+//                                "databaseName=CNPM;" +
+//                                "encrypt=true;trustServerCertificate=true";
     private String connectURL = "jdbc:sqlserver://;" +
-                                "serverName=localhost;" +
+                                "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
     /*
@@ -20,13 +24,10 @@ public class DAO {
             "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
                     "databaseName=CNPM;" +
                     "encrypt=true;trustServerCertificate=true";
+    */
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
 
-    */
-
-    private String DBuser = "sa";
-    private String DBpass = "reallyStrongPwd123";
 //    private String DBuser = "admin";
 //    private String DBpass = "123456";
 
@@ -133,20 +134,20 @@ public class DAO {
         return list;
     }
 
-    public ObservableList<ProductRecipe> getAllProductRecipe() throws SQLException {
-        ObservableList<ProductRecipe> list = FXCollections.observableArrayList();
-        ResultSet rs = this.executeQuery("Select * from ProductRecipes");
-        ProductRecipe pr;
-        while(rs.next()) {
-            pr = new ProductRecipe();
-            pr.setProductId(rs.getString("productID"));
-            pr.setIngredientId(rs.getString("ingredientID"));
-            pr.setProductQty(rs.getInt("productQty"));
-            pr.setIngredientQty(rs.getInt("ingredientQty"));
-            list.add(pr);
-        }
-        return list;
-    }
+//    public ObservableList<ProductRecipe> getAllProductRecipe() throws SQLException {
+//        ObservableList<ProductRecipe> list = FXCollections.observableArrayList();
+//        ResultSet rs = this.executeQuery("Select * from ProductRecipes");
+//        ProductRecipe pr;
+//        while(rs.next()) {
+//            pr = new ProductRecipe();
+//            pr.setProductId(rs.getString("productID"));
+//            pr.setIngredientId(rs.getString("ingredientID"));
+//            pr.setProductQty(rs.getInt("productQty"));
+//            pr.setIngredientQty(rs.getInt("ingredientQty"));
+//            list.add(pr);
+//        }
+//        return list;
+//    }
 
     public Ingredient findIngredientById(String id) throws SQLException {
         Ingredient i = null;

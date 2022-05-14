@@ -16,14 +16,14 @@ public class IngredientApplicationModel {
     private IncomeReport incomeReport;
     private DAO dao;
 
-    private ObservableList<Ingredient> ingredientList;
+    public static ObservableList<Ingredient> ingredientList;
 
     private ObservableList<IncomeDetail> currentChoices;
 
     public IngredientApplicationModel() {
         dao = new DAO();
         try {
-            this.ingredientList = dao.getAllIngredient();
+            ingredientList = dao.getAllIngredient();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -46,13 +46,13 @@ public class IngredientApplicationModel {
         this.currentChoices = currentChoices;
     }
 
-    public ObservableList<Ingredient> getIngredientList() {
-        return ingredientList;
-    }
-
-    public void setIngredientList(ObservableList<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
-    }
+//    public ObservableList<Ingredient> getIngredientList() {
+//        return ingredientList;
+//    }
+//
+//    public void setIngredientList(ObservableList<Ingredient> ingredientList) {
+//        this.ingredientList = ingredientList;
+//    }
 
     public IncomeReport getIncomeReport() {
         return incomeReport;
@@ -62,15 +62,31 @@ public class IngredientApplicationModel {
         this.incomeReport = incomeReport;
     }
     public void addNewItem(Ingredient i) {
-        this.ingredientList.add(i);
+//        this.ingredientList.add(i);
+        String sql = String.format("Insert into Ingredients(ingredientName, ingredientType, storage, Producer, price) " +
+                "values (N'%s', N'%s', '%d', N'%s', '%d')", i.getIngredientName(), i.getIngredientType(), i.getStorage(),
+                i.getProducer(), i.getIncomePrice());
+        dao.insert(sql);
+        try {
+            ingredientList.clear();
+            ingredientList.addAll(dao.getAllIngredient());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void updateItem(int index, Ingredient i) {
-        this.getIngredientList().set(index, i);
+        ingredientList.set(index, i);
+        String sql = String.format("Update Ingredients set ingredientName = N'%s', ingredientType = N'%s', " +
+                "storage = '%d', Producer = N'%s', price = '%d' where ingredientID = '%s'", i.getIngredientName(),
+                i.getIngredientType(), i.getStorage(), i.getProducer(), i.getIncomePrice(), i.getIngredientId());
+        dao.insert(sql);
     }
 
     public void removeItem(Ingredient i) {
-        this.getIngredientList().remove(i);
+        ingredientList.remove(i);
+        String sql = String.format("Delete from Ingredients where ingredientID = '%s'", i.getIngredientId());
+        dao.insert(sql);
     }
 
     public void createNewOrder(){
@@ -105,7 +121,6 @@ public class IngredientApplicationModel {
         String sql = String.format("Insert into IncomeReports(created, reportDate, supplier, StateReport) " +
                 "values ('%s', '"+incomeReport.getOrderDate()+"', '%s', '%s')", incomeReport.getEmployeeIdCreate(),
                 incomeReport.getSupplier(), incomeReport.getStatus());
-        System.out.println(sql);
         dao.insert(sql);
         incomeReport.setReportId(dao.findFinalIncomeReport());
     }

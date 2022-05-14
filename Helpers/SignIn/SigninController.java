@@ -44,7 +44,7 @@ public class SigninController {
         else{
             DAO dao = new DAO();
             ResultSet rs = dao.executeQuery(
-                    "select a.AccountUsername, a.AccountPassword, e.EmployeeName,e.EmployeeID, w.LVL " +
+                    "select a.AccountUsername, a.AccountPassword, e.EmployeeName,e.EmployeeID, w.WorkPositionLVL " +
                             "from Employee e join Account a on e.EmployeeID = a.EmployeeID " +
                             "join WorkPosition w on w.WorkPositionID = e.WorkPositionID");
             int flag = -1;

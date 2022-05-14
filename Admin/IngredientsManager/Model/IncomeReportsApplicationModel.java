@@ -24,15 +24,6 @@ public class IncomeReportsApplicationModel {
         }
     }
 
-    public void refresh() {
-        try {
-            incomeReports = dao.getAllIncomeReport("Select * from IncomeReports");
-            waitingInReport = dao.getAllIncomeReport("Select * from IncomeReports where StateReport = 'Waiting'");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public ObservableList<IncomeDetail> getIncomeDetails() {
         return incomeDetails;
     }
