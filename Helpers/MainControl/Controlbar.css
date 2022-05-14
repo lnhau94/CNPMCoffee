@@ -37,6 +37,11 @@
      -fx-effect: dropshadow(three-pass-box, #111,5,0,4,2);
      -fx-padding: 5,0,0,0;
  }
+.toggle-button:selected{
+    -fx-background-color: #5F50F1;
+
+    -fx-text-fill: #fff;
+}
 
 .menu-item{
     -fx-background-color: #035980;
@@ -61,8 +66,4 @@
     -fx-padding: 5,0,0,0;
 }
 
-.toggle-button:selected{
-    -fx-background-color: #5F50F1;
 
-    -fx-text-fill: #fff;
-}

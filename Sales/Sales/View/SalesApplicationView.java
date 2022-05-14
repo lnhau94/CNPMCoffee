@@ -1,5 +1,6 @@
 package Main.Sales.Sales.View;
 
+import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.OrderDetail;
 import Main.Entity.Element.Product;
 import Main.Sales.Sales.Control.SalesApplicationControl;
@@ -26,6 +27,8 @@ import javafx.util.Duration;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -252,15 +255,32 @@ public class SalesApplicationView{
     }
 
     private void createFilterButtons(){
-        buttons = new ArrayList<>();
-        for(int i=0;i< cates.length;i++) {
-            buttons.add( new Button(cates[i]));
-            buttons.get(i).setOnAction(actionEvent -> {
-                filerCondition = ((Button)actionEvent.getSource()).getText();
-                menuFilter();
-            });
-            controlPnl.getChildren().add(buttons.get(i));
+        ResultSet rs = new DAO().executeQuery("select CategoryName from Category");
+        ToggleGroup gr = new ToggleGroup();
+        try {
+            while (rs.next()){
+                ToggleButton btn = new ToggleButton(rs.getString(1));
+                btn.setToggleGroup(gr);
+
+                controlPnl.getChildren().add(btn);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
         }
+        ToggleButton btn = new ToggleButton("ALL");
+        controlPnl.getChildren().add(btn);
+        btn.setToggleGroup(gr);
+
+        controlPnl.getChildren().forEach(node ->{
+            if(node instanceof ToggleButton){
+                ((ToggleButton)node).setOnAction(actionEvent -> {
+                    filerCondition = ((ToggleButton)actionEvent.getSource()).getText();
+                    menuFilter();
+                });
+            }
+        });
+
+
     }
     public Scene getScreen(){
         return this.mainScene;

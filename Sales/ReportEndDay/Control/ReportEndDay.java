@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import Main.Entity.DataAccess.DAO;
+import Main.MainApp;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -66,8 +67,8 @@ public class ReportEndDay extends SceneController implements Initializable {
                     "encrypt=true;trustServerCertificate=true";
 //            String user = "admin";
 //            String pass = "123456";
-            String user = "sa";
-            String pass = "reallyStrongPwd123";
+            String user = "admin";
+            String pass = "123456";
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();
             rs = state.executeQuery(yourQuery);
@@ -168,6 +169,6 @@ public class ReportEndDay extends SceneController implements Initializable {
             }
         }
         totalProduct.setText(valueTotalProduct);
-        nameEmp.setText("Phạm Nguyễn Đức Huy");
+        nameEmp.setText(MainApp.staff.getEmployeeName());
     }
 }

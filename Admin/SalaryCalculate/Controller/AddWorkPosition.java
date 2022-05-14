@@ -47,7 +47,7 @@ public class AddWorkPosition implements Initializable {
         String pID = null;
         String tName = TypeList.getValue();
         String tID = null;
-        String level = LevelList.getValue();
+        int level = Integer.parseInt(LevelList.getValue());
         for (int i =0; i<typeNameArr.size();i++){
             if (typeNameArr.get(i).equals(tName)){
                 tID = typeIdArr.get(i);
