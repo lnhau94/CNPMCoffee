@@ -68,7 +68,7 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
 //            String user = "admin";
 //            String pass = "123456";
             String url = "jdbc:sqlserver://;" +
-                    "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
+                    "serverName=" +
                     "databaseName=CNPM;" +
                     "encrypt=true;trustServerCertificate=true";
             String user = "admin";
