@@ -1,5 +1,6 @@
 #header{
-   -fx-background-color: #00BFFF;
+   -fx-background-color: transparent;
+   -fx-background-color: #5F50F1;
     -fx-text-fill: #fff;
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-weight: Bold;
@@ -16,7 +17,7 @@
     -fx-effect: dropshadow(three-pass-box, #5F50F1,10,0,0,0);
 }
 .background{
-    -fx-background-color: #B0E0E6     ;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #CCFFFF, #00FFFF);
 }
 .table-view{
     -fx-effect: dropshadow(three-pass-box, #111,10,0,0,0);
@@ -24,6 +25,7 @@
 }
 .table-view .column-header{
     -fx-size: 30;
+    -fx-font-size: 14px;
     -fx-background-color:  #00BFFF;
     -fx-alignment: center;
 }
@@ -32,15 +34,19 @@
 }
 .button-menu {
     -fx-background-color: transparent;
-    -fx-background-color: #00BFFF;
+    -fx-background-color: #5F50F1;
+    -fx-text-fill: #fff;
+    -fx-effect: dropshadow(three-pass-box, #48cae4,3,1,1,0);
     -fx-border-color: #FFFF00    ;
     -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-color: #5F50F1;
     -fx-font-family: "Segoe UI Semibold";
 }
 .button-checkin , .button-checkout {
     -fx-background: #CCCCCC	;
 }
+
 .button-bc{
     -fx-background-color: transparent;
 }
@@ -62,24 +68,25 @@
      -fx-font-family: "Segoe UI Semibold";
     -fx-font-weight: Bold;
 }
-.AlertSQL, .AlertSuccess{
+.AlertSQL, .AlertSuccess, .AlertFailed{
         -fx-text-fill: #fff;
         -fx-font-family: "Segoe UI Semibold";
         -fx-font-weight: Bold;
         -fx-font-size: 18px;
         -fx-color: #5F50F1;
 }
-.AlertSQL{
+.AlertSQL, .AlertFailed{
         -fx-background-color: #FF0000  ;
 }
 .AlertSuccess{
     -fx-background-color: #00CC99;
 }
-.textEror{
-    -fx-text-color: #FF0000  ;
-            -fx-text-fill: #fff;
-            -fx-font-family: "Segoe UI Semibold";
-            -fx-font-weight: Bold;
+
+.textAlert{
+    -fx-text-fill:#FF0000;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: Bold;
+    -fx-alignment: center;
 }
 //Add employee
 .header{

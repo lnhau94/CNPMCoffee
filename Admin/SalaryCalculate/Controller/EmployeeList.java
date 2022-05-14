@@ -123,8 +123,8 @@ public class EmployeeList implements  Initializable{
         AddWorkPosition AddController = loader.getController();
         if(ClickedButton.get()==ButtonType.APPLY){
             AddController.addPosition();
-            employeeTableView.setItems(FXCollections.observableArrayList(employeeTableViewList));
-            employeeTableView.refresh();
+//            employeeTableView.setItems(FXCollections.observableArrayList(employeeTableViewList));
+//            employeeTableView.refresh();
         }
         if(ClickedButton.get()==ButtonType.CANCEL){
             dialog.close();

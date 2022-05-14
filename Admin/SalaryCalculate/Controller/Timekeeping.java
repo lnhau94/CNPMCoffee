@@ -1,5 +1,6 @@
 package Main.Admin.SalaryCalculate.Controller;
 import Main.Entity.DataAccess.DAO;
+import Main.Helpers.SignIn.AlertController;
 import com.sun.marlin.Dasher;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import java.awt.*;
@@ -22,8 +24,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
+import javafx.scene.control.Label;
 public class Timekeeping implements Initializable {
+    @FXML
+    private Label textError;
+    @FXML
+    private Label textSuccess;
+    @FXML
+    private Label textFailed;
     @FXML
     private TextField name;
     @FXML
@@ -62,15 +70,8 @@ public class Timekeeping implements Initializable {
             }
 
         } catch (Exception e ) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("../View/AlertSQL.fxml"));
-            Pane ProductAddViewParent = loader.load();
-            javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setDialogPane((DialogPane) ProductAddViewParent);
-            Optional<ButtonType> ClickedButton = dialog.showAndWait();
-            if(ClickedButton.get()==ButtonType.OK) {
-                dialog.close();
-            }
+            AlertControllerSalary alert = new AlertControllerSalary();
+            alert.AlertSQL("../View/AlertSQL.fxml");
         }
         System.out.println(ID);
     }
@@ -89,30 +90,16 @@ public class Timekeeping implements Initializable {
         String ID = employeeID.getText();
         System.out.println(ID+"id");
         if (ID=="" || checkExist(ID) == false){
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("../View/AlertSQL.fxml"));
-            Pane ProductAddViewParent = loader.load();
-            javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setDialogPane((DialogPane) ProductAddViewParent);
-            Optional<ButtonType> ClickedButton = dialog.showAndWait();
-            if(ClickedButton.get()==ButtonType.OK) {
-                dialog.close();
-            }
+            AlertControllerSalary alert = new AlertControllerSalary();
+            alert.AlertFailed();
         }else {
             try {
                 sql.execute("UPDATE DailyWork SET \n" +
                         "Checkout=CURRENT_TIMESTAMP,\n" +
                         "WorkingHour=DATEDIFF(MI,Checkin,Checkout)/60\n" +
                         "WHERE EmployeeID = '"+ID+"' AND DATEPART(DAYOFYEAR,DailyDate) = DATEPART(DAYOFYEAR,CURRENT_TIMESTAMP);");
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(this.getClass().getResource("../View/AlertSuccess.fxml"));
-                Pane ProductAddViewParent = loader.load();
-                javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
-                dialog.setDialogPane((DialogPane) ProductAddViewParent);
-                Optional<ButtonType> ClickedButton = dialog.showAndWait();
-                if(ClickedButton.get()==ButtonType.OK) {
-                    dialog.close();
-                }
+                AlertControllerSalary alert = new AlertControllerSalary();
+                alert.AlertSuccess();
             } catch (SQLException e) {
                 System.out.println(ID);
             }

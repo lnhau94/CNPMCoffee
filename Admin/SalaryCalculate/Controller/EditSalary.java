@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,7 +65,7 @@ public class EditSalary implements Initializable {
         positionList = FXCollections.observableArrayList(PositionNameArr);
         PositionList.setItems(positionList);
     }
-    public void editSalary () throws SQLException {
+    public void editSalary () throws SQLException, IOException {
         String positionId = null;
         String typeId = null;
         int salary = 0;
@@ -83,11 +84,19 @@ public class EditSalary implements Initializable {
                 typeId = TypeIdArr.get(i);
             }
         }
-        System.out.println(positionId);
-        System.out.println(typeId);
-        System.out.println(salary);
         DAO sql = new DAO();
-        sql.execute("UPDATE PositionType SET SalaryPerHour="+salary+" WHERE WorkPositionID='"+positionId+"' AND WorkTypeID='"+typeId+"' ");
+        try{
+            if (positionId==null || typeId==null || salary==0){
+                AlertControllerSalary alert = new AlertControllerSalary();
+                alert.AlertFailed();
+            }else {
+            sql.execute("UPDATE PositionType SET SalaryPerHour="+salary+" WHERE WorkPositionID='"+positionId+"' AND WorkTypeID='"+typeId+"' ");
+            AlertControllerSalary alert = new AlertControllerSalary();
+            alert.AlertSuccess();}
+        }catch (Exception e){
+            AlertControllerSalary alert = new AlertControllerSalary();
+            alert.AlertSQL("../View/AlertSQL.fxml");
+        }
         EmployeeList employeeList = new EmployeeList();
         employeeList.getDataEmployee();
     }

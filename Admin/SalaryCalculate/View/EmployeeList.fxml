@@ -17,20 +17,20 @@
         <Button layoutX="36.0" layoutY="463.0" minWidth="52.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" styleClass="button-bc" />
         <AnchorPane layoutX="148.0" prefHeight="520.0" prefWidth="833.0">
             <children>
-                <Label fx:id="header" alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="801.0" text="Employee" />
+                <Label fx:id="header" alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="801.0" text="EMPLOYEE" />
                 <TableView fx:id="employeeTableView" layoutY="67.0" prefHeight="439.0" prefWidth="801.0" styleClass="table-view">
                     <columns>
-                        <TableColumn fx:id="employeeIDtable" prefWidth="72.66668701171875" text="ID" styleClass="column"/>
-                        <TableColumn fx:id="employeeNametable" prefWidth="216.0" text="Name" styleClass="column"/>
-                        <TableColumn fx:id="employeePhonetable" prefWidth="126.66668701171875" text="Phone" styleClass="column"/>
-                        <TableColumn fx:id="employeeTypetable" prefWidth="117.0" text="Type" styleClass="column"/>
-                        <TableColumn fx:id="employeePositiontable" prefWidth="105.0" text="Positon" styleClass="column"/>
-                        <TableColumn fx:id="employeeSalaryPerHourtable" prefWidth="162.0" text="SalaryPerHour" styleClass="column"/>
+                        <TableColumn fx:id="employeeIDtable" prefWidth="87.66665649414062" styleClass="column" text="ID" />
+                        <TableColumn fx:id="employeeNametable" prefWidth="214.0" styleClass="column" text="Name" />
+                        <TableColumn fx:id="employeePhonetable" prefWidth="153.0" styleClass="column" text="Phone" />
+                        <TableColumn fx:id="employeeTypetable" prefWidth="104.6666259765625" styleClass="column" text="Type" />
+                        <TableColumn fx:id="employeePositiontable" prefWidth="101.6666259765625" styleClass="column" text="Positon" />
+                        <TableColumn fx:id="employeeSalaryPerHourtable" prefWidth="142.66668701171875" styleClass="column" text="SalaryPerHour" />
                     </columns>
                 </TableView>
             </children>
         </AnchorPane>
-        <Button layoutX="28.0" layoutY="412.0" mnemonicParsing="false" styleClass="button-admin" onAction="#GoBack">
+        <Button layoutX="28.0" layoutY="412.0" mnemonicParsing="false" onAction="#GoBack" styleClass="button-admin">
         <graphic>
             <ImageView fitHeight="46.0" fitWidth="49.0" layoutX="-27.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
                 <image>
@@ -39,8 +39,13 @@
             </ImageView>
         </graphic>
         </Button>
-      <Button layoutX="970.0" layoutY="69.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" onAction="#changSceneAddPosition" text="Add Position" />
-      <Button layoutX="970.0" layoutY="141.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" onAction="#changSceneEditSalary" text="Edit Salary" />
+        <ImageView fitHeight="65.0" fitWidth="62.0" layoutX="132.0" pickOnBounds="true" preserveRatio="true" styleClass="button-admin">
+            <image>
+                <Image url="@../../../Icon/employee.png" />
+            </image>
+        </ImageView>
+      <Button layoutX="970.0" layoutY="69.0" mnemonicParsing="false" onAction="#changSceneAddPosition" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="Add Position" />
+      <Button layoutX="970.0" layoutY="141.0" mnemonicParsing="false" onAction="#changSceneEditSalary" prefHeight="42.0" prefWidth="116.0" styleClass="button-menu" text="Edit Salary" />
     </children>
     <stylesheets>
         <URL value="@CSS/Salary.css" />
