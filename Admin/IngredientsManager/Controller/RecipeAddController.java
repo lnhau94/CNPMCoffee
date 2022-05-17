@@ -40,12 +40,16 @@ public class RecipeAddController extends MasterController implements Initializab
 
     public void modifyProductId(ActionEvent e) {
         int index = comboBoxProductName.getSelectionModel().getSelectedIndex();
-        productIdTxtField.setText(this.model.getProductIdList().get(index));
+        if(index >= 0) {
+            productIdTxtField.setText(this.model.getProductIdList().get(index));
+        }
     }
 
     public void modifyIngredientId(ActionEvent e) {
         int index = comboBoxIngredientName.getSelectionModel().getSelectedIndex();
-        ingredientIdTxtField.setText(this.model.getIngredientIdList().get(index));
+        if(index >= 0) {
+            ingredientIdTxtField.setText(this.model.getIngredientIdList().get(index));
+        }
     }
 
     public void addNewIngredient(ActionEvent e) {
@@ -54,15 +58,26 @@ public class RecipeAddController extends MasterController implements Initializab
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Input");
+            alert.setContentText("Not be empty input please");
             alert.showAndWait();
         } else {
-            pr = new ProductRecipe(
-                    productIdTxtField.getText(),
-                    ingredientIdTxtField.getText(),
-                    Integer.parseInt(ingredientQtyTxtField.getText()),
-                    Integer.parseInt(productQtyTxtField.getText())
-            );
-            ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
+            try {
+                pr = new ProductRecipe(
+                        productIdTxtField.getText(),
+                        ingredientIdTxtField.getText(),
+                        Integer.parseInt(productQtyTxtField.getText()),
+                        Integer.parseInt(ingredientQtyTxtField.getText())
+                );
+                ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
+
+            } catch (Exception exception) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("Enter number for quantity please");
+                alert.showAndWait();
+            }
+
         }
     }
 

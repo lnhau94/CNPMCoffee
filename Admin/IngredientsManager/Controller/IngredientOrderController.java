@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -142,6 +144,26 @@ public class IngredientOrderController extends MasterController implements Initi
                 throw new RuntimeException(ex);
             }
         }
+    }
+
+    public void changeSceneRecipe(ActionEvent e) {
+        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        stage.centerOnScreen();
+        FXMLLoader loader = new FXMLLoader();
+        File file = new File("Admin/IngredientsManager/View/RecipeView.fxml");
+        try {
+            loader.setLocation(file.toURI().toURL());
+        } catch (MalformedURLException ex) {
+            throw new RuntimeException(ex);
+        }
+        Parent IngredientViewParent = null;
+        try {
+            IngredientViewParent = loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        Scene scene = new Scene(IngredientViewParent);
+        stage.setScene(scene);
 
     }
 

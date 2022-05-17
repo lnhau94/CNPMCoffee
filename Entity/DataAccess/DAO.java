@@ -16,17 +16,15 @@ public class DAO {
 //                                "databaseName=CNPM;" +
 //                                "encrypt=true;trustServerCertificate=true";
     private String connectURL = "jdbc:sqlserver://;" +
-                                "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
+                                "serverName=" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
-    /*
-    private String DBpass = "123456";
-            "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
-                    "databaseName=CNPM;" +
-                    "encrypt=true;trustServerCertificate=true";
-    */
+
+//    private String DBuser = "sa";
+//    private String DBpass = "123456";
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
+
 
     private Connection connect;
     private Statement stmt;
@@ -187,4 +185,5 @@ public class DAO {
         connect = DriverManager.getConnection(connectURL,DBuser,DBpass);
         return connect.prepareStatement(sqlQuery);
     }
+
 }

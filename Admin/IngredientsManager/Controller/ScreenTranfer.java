@@ -20,8 +20,8 @@ public class ScreenTranfer {
             put("newOrderBtn", "Admin/IngredientsManager/View/CreateIngredientOrder.fxml");
             put("backWarehouseBtn", "Admin/IngredientsManager/View/IngredientOrder.fxml");
             put("frmIngredientOrder", "Admin/IngredientsManager/View/FormIngredientOrder.fxml");
-            put("backAdminBtn", "Admin/DataManager/View/Admin.fxml");
-            put("recipeBtn", "Admin/IngredientsManager/View/RecipeView.fxml");
+//            put("backAdminBtn", "Admin/DataManager/View/Admin.fxml");
+//            put("recipeBtn", "Admin/IngredientsManager/View/RecipeView.fxml");
 
         }
     };

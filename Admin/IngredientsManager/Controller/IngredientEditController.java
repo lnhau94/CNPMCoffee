@@ -4,6 +4,7 @@ import Main.Entity.Element.Ingredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -30,11 +31,19 @@ public class IngredientEditController extends MasterController {
     }
 
     public void editItem(ActionEvent e) {
-        i.setIngredientName(nameTxtField.getText());
-        i.setIngredientType(typeTxtField.getText());
-        i.setIncomePrice(Integer.parseInt(priceTxtField.getText()));
-        i.setProducer(producerTxtField.getText());
-        ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
+        try {
+            i.setIngredientName(nameTxtField.getText());
+            i.setIngredientType(typeTxtField.getText());
+            i.setIncomePrice(Integer.parseInt(priceTxtField.getText()));
+            i.setProducer(producerTxtField.getText());
+            ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
+        } catch (Exception exception) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Invalid Input");
+            alert.setContentText("Enter number for price please");
+            alert.showAndWait();
+        }
     }
 
     public Ingredient getI() {

@@ -15,8 +15,8 @@ public class MasterController {
     public static RecipesModel recipesModel;
 
     public void changeScene(ActionEvent e){
-        recipesModel.getProductList().clear();
-        recipesModel.getProductList().addAll(recipesModel.getDao().getAllProduct());
+//        recipesModel.getProductList().clear();
+//        recipesModel.getProductList().addAll(recipesModel.getDao().getAllProduct());
 
         screenTranfer.switchScene(e);
     }

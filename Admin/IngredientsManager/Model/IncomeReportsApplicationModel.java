@@ -84,6 +84,7 @@ public class IncomeReportsApplicationModel {
         }
         this.currentIncomeRe.setStatus("Confirmed");
         //update receive quantity to DB
+        //Sql update receive quantity for each ingredient of order
         incomeDetails.forEach(data -> {
             dao.insert(String.format("Update IncomeDetails set receiveQty = %d where reportID='%s' and " +
                     "ingredientID='%s'", data.getReceiveQty(), currentIncomeRe.getReportId(),
@@ -92,11 +93,27 @@ public class IncomeReportsApplicationModel {
         dao.insert(String.format("Update IncomeReports set StateReport='%s' where reportID='%s'",
                 currentIncomeRe.getStatus(), currentIncomeRe.getReportId()));
 
+
         this.getWaitingInReport().remove(this.getCurrentIncomeRe());
-        this.getIncomeReports().remove(this.getCurrentIncomeRe());
-        this.getIncomeReports().add(this.getCurrentIncomeRe());
+        this.incomeReports.clear();
+        try {
+            this.incomeReports.addAll(this.dao.getAllIncomeReport("Select * from IncomeReports"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+//        Sql update warehouse
+        incomeDetails.forEach(data -> {
+            dao.insert(String.format("Update Ingredients set storage = (storage + '%d') where ingredientID = '%s'",
+                   data.getReceiveQty(), data.getIngredientChoice().getIngredientId()));
+            try {
+                IngredientApplicationModel.ingredientList.clear();
+                IngredientApplicationModel.ingredientList.addAll(dao.getAllIngredient());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         return true;
-//        Sql update receive quantity for each ingredient of order
     }
 
 }

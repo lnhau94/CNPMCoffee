@@ -3,8 +3,10 @@ package Main.Admin.IngredientsManager.Controller;
 import Main.Admin.IngredientsManager.Model.IncomeReportsApplicationModel;
 import Main.Entity.Element.IncomeDetail;
 import Main.Entity.Element.IncomeReport;
+import Main.Services.ExportExcel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -87,5 +89,10 @@ public class OrderDetailController extends MasterController implements Initializ
 
     public void getDetails(ObservableList<IncomeDetail> incomeDetails) {
         this.table.setItems(incomeDetails);
+    }
+
+    public void exportExcel(ActionEvent event) {
+        ExportExcel e = new ExportExcel();
+        e.exportXLSX(model.getCurrentIncomeRe(), model.getIncomeDetails());
     }
 }

@@ -7,7 +7,6 @@ import Main.Entity.Element.Ingredient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -46,13 +45,6 @@ public class IngredientApplicationModel {
         this.currentChoices = currentChoices;
     }
 
-//    public ObservableList<Ingredient> getIngredientList() {
-//        return ingredientList;
-//    }
-//
-//    public void setIngredientList(ObservableList<Ingredient> ingredientList) {
-//        this.ingredientList = ingredientList;
-//    }
 
     public IncomeReport getIncomeReport() {
         return incomeReport;
@@ -62,7 +54,6 @@ public class IngredientApplicationModel {
         this.incomeReport = incomeReport;
     }
     public void addNewItem(Ingredient i) {
-//        this.ingredientList.add(i);
         String sql = String.format("Insert into Ingredients(ingredientName, ingredientType, storage, Producer, price) " +
                 "values (N'%s', N'%s', '%d', N'%s', '%d')", i.getIngredientName(), i.getIngredientType(), i.getStorage(),
                 i.getProducer(), i.getIncomePrice());

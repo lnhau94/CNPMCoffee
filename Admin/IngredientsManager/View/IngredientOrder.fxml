@@ -114,19 +114,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="backAdminBtn" layoutX="10.0" layoutY="587.0" mnemonicParsing="false" onAction="#changeScene" styleClass="button-admin">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../Icon/backnow.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="recipeBtn" layoutX="904.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="47.0" prefWidth="125.0" styleClass="button-admin" text="Recipes">
+      <Button fx:id="recipeBtn" layoutX="904.0" layoutY="40.0" mnemonicParsing="false" onAction="#changeSceneRecipe" prefHeight="47.0" prefWidth="125.0" styleClass="button-admin" text="Recipes">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
