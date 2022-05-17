@@ -1,19 +1,18 @@
 package Main.Helpers.SignIn;
 
 import Main.Admin.DataManager.Controller.AdminEmployeeController;
+import Main.Admin.IngredientsManager.Controller.MasterController;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Employee;
 import Main.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.StageStyle;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,6 +77,7 @@ public class SigninController {
                     a.show();
                     break;
                 default:
+                    MasterController.start();
                     MainApp.controlBar.initGUI();
                     MainApp.controlBar.getDataControl().setTxtUserName(MainApp.staff.getEmployeeName());
                     MainApp.controlBar.showFunction(flag);
@@ -85,5 +85,4 @@ public class SigninController {
 
         }
     }
-
 }

@@ -1,7 +1,6 @@
 package Main.Admin.IngredientsManager.Controller;
 
 import Main.Admin.IngredientsManager.Model.IncomeReportsApplicationModel;
-import Main.Entity.Element.Employee;
 import Main.Entity.Element.IncomeReport;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;

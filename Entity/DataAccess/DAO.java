@@ -19,6 +19,9 @@ public class DAO {
                                 "serverName=" +
                                 "databaseName=CNPM;" +
                                 "encrypt=true;trustServerCertificate=true";
+
+//    private String DBuser = "sa";
+//    private String DBpass = "123456";
     /*
     private String DBpass = "123456";
             "serverName=" +
@@ -27,6 +30,7 @@ public class DAO {
     */
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
+
 
     private Connection connect;
     private Statement stmt;
@@ -187,4 +191,5 @@ public class DAO {
         connect = DriverManager.getConnection(connectURL,DBuser,DBpass);
         return connect.prepareStatement(sqlQuery);
     }
+
 }

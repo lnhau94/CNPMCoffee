@@ -45,7 +45,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.initStyle(StageStyle.TRANSPARENT);
-        MasterController.start();
         stage.show();
         createControlBar(stage);
         toolPanel.show();

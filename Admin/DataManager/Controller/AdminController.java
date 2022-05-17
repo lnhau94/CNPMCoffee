@@ -76,5 +76,13 @@ public class AdminController  {
         stage.show();
     }
 
+    public void changeSceneWareHouse(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(new File("Admin/IngredientsManager/View/IngredientOrder.fxml").toURI().toURL());
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.show();
+    }
+
 
 }

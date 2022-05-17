@@ -3,6 +3,7 @@ package Main.Admin.IngredientsManager.Controller;
 import Main.Admin.IngredientsManager.Model.IncomeReportsApplicationModel;
 import Main.Admin.IngredientsManager.Model.IngredientApplicationModel;
 import Main.Entity.Element.IncomeDetail;
+import Main.MainApp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,8 +65,8 @@ public class FormIngredientOrderController extends MasterController implements I
         producerCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()
                 .getIngredientChoice().getProducer()));
 
-        textFieldID.setText("WF001");
-        textFieldName.setText("");
+        textFieldID.setText(MainApp.staff.getEmployeeID());
+        textFieldName.setText(MainApp.staff.getEmployeeName());
 
         table.setItems(this.model.getCurrentChoices());
     }

@@ -20,7 +20,7 @@
       <ComboBox fx:id="comboBoxProductName" layoutX="209.0" layoutY="50.0" onAction="#modifyProductId" prefHeight="28.0" prefWidth="176.0" promptText="Choose Product" />
       <ComboBox fx:id="comboBoxIngredientName" layoutX="211.0" layoutY="110.0" onAction="#modifyIngredientId" prefHeight="28.0" prefWidth="176.0" promptText="Choose Ingredient" styleClass="combobox" />
       <TextField fx:id="ingredientQtyTxtField" layoutX="208.0" layoutY="169.0" prefHeight="29.0" prefWidth="188.0" promptText="Enter quantity" styleClass="txt-field-input" />
-      <TextField fx:id="productQtyTxtField" layoutX="207.0" layoutY="223.0" prefHeight="29.0" prefWidth="188.0" promptText="Enter quantityEnter quantity" styleClass="txt-field-input" />
+      <TextField fx:id="productQtyTxtField" editable="false" layoutX="207.0" layoutY="223.0" prefHeight="29.0" prefWidth="188.0" promptText="Result" styleClass="txt-field-input" />
    </children>
    <stylesheets>
       <URL value="@Css/WarehouseApplication.css" />

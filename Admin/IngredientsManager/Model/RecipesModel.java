@@ -33,6 +33,7 @@ public class RecipesModel {
         this.dao = new DAO();
         ingredientList = IngredientApplicationModel.ingredientList;
         productList = FXCollections.observableArrayList(this.dao.getAllProduct());
+        recipesList = FXCollections.observableArrayList();
 
         setIngredientNameList();
         setIngredientIdList();
@@ -40,27 +41,21 @@ public class RecipesModel {
         setProductNameList();
         setProductIdList();
 
-        this.productList.addListener(new ListChangeListener<Product>() {
-            @Override
-            public void onChanged(Change<? extends Product> change) {
-                ProductNameList.clear();
-                ProductIdList.clear();
-                for (Product product : productList) {
-                    ProductNameList.add(product.getProductName());
-                    ProductIdList.add(product.getProductId());
-                }
+        this.productList.addListener((ListChangeListener<Product>) change -> {
+            ProductNameList.clear();
+            ProductIdList.clear();
+            for (Product product : productList) {
+                ProductNameList.add(product.getProductName());
+                ProductIdList.add(product.getProductId());
             }
         });
 
-        this.ingredientList.addListener(new ListChangeListener<Ingredient>() {
-            @Override
-            public void onChanged(Change<? extends Ingredient> change) {
-                IngredientNameList.clear();
-                IngredientIdList.clear();
-                for (Ingredient ingredient : ingredientList) {
-                    IngredientNameList.add(ingredient.getIngredientName());
-                    IngredientIdList.add(ingredient.getIngredientId());
-                }
+        this.ingredientList.addListener((ListChangeListener<Ingredient>) change -> {
+            IngredientNameList.clear();
+            IngredientIdList.clear();
+            for (Ingredient ingredient : ingredientList) {
+                IngredientNameList.add(ingredient.getIngredientName());
+                IngredientIdList.add(ingredient.getIngredientId());
             }
         });
 
@@ -166,8 +161,8 @@ public class RecipesModel {
     public void addNewItem(ProductRecipe pr) {
 //        this.getRecipesList().add(pr);
         String sql = String.format("Insert into ProductRecipes(productID, ingredientID, " +
-                        "productQty, ingredientQty) values ('%s', '%s', '%s', '%s')", pr.getProductId(),
-                pr.getIngredientId(), pr.getProductQty(), pr.getIngredientId());
+                        "productQty, ingredientQty) values ('%s', '%s', '%d', '%d')", pr.getProductId(),
+                pr.getIngredientId(), pr.getProductQty(), pr.getIngredientQty());
         dao.insert(sql);
         try {
             this.getRecipeOfChosenItem(pr.getProductId());
@@ -178,8 +173,8 @@ public class RecipesModel {
 
     public void updateItem(int index, ProductRecipe pr) {
         this.getRecipesList().set(index, pr);
-        String sql = String.format("Update ProductRecipes set productQty = '%s', ingredientQty = '%s' " +
-                "where productID = '%s' and ingredientID = '%s'", pr.getProductQty(), pr.getIngredientId(),
+        String sql = String.format("Update ProductRecipes set productQty = '%d', ingredientQty = '%d' " +
+                "where productID = '%s' and ingredientID = '%s'", pr.getProductQty(), pr.getIngredientQty(),
                 pr.getProductId(), pr.getIngredientId());
         dao.insert(sql);
     }
@@ -187,11 +182,12 @@ public class RecipesModel {
     public void removeItem(ProductRecipe rp) {
         String sql = String.format("Delete from ProductRecipes where productID = '%s' and ingredientID = '%s'",
                 rp.getProductId(), rp.getIngredientId());
+        dao.insert(sql);
         this.getRecipesList().remove(rp);
     }
 
     public void getRecipeOfChosenItem(String productId) throws SQLException {
-        this.recipesList = FXCollections.observableArrayList();
+        this.recipesList.clear();
         ResultSet rs = dao.executeQuery("Select * from ProductRecipes where productID = '"+productId+"'");
         ProductRecipe pr;
         while(rs.next()) {
@@ -202,6 +198,12 @@ public class RecipesModel {
             pr.setIngredientQty(rs.getInt("ingredientQty"));
             this.recipesList.add(pr);
         }
+    }
+
+    public void saveResult(int qty) {
+        String sql = String.format("Update ProductRecipes set productQty = '%d' " +
+                "where productID = '%s'", qty, recipesList.get(0).getProductId());
+        dao.insert(sql);
     }
 }
 

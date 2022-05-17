@@ -22,4 +22,9 @@ public class DeleteItemController extends MasterController {
         this.isRemove = true;
         ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
     }
+
+    public void doNotRemove(ActionEvent e) {
+        this.isRemove = false;
+        ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
+    }
 }

@@ -3,16 +3,14 @@ package Main.Admin.IngredientsManager.Controller;
 import Main.Admin.IngredientsManager.Model.RecipesModel;
 import Main.Entity.Element.ProductRecipe;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,7 +26,7 @@ public class RecipeController extends MasterController implements Initializable{
     @FXML
     private ComboBox<String> comboBoxProductName;
     @FXML
-    private Label result;
+    private TextField result;
     @FXML
     private TableView<ProductRecipe> table;
     @FXML
@@ -48,27 +46,39 @@ public class RecipeController extends MasterController implements Initializable{
         model = MasterController.recipesModel;
 //        Arrange Combo-box list of product name
         this.comboBoxProductName.setItems(this.model.getProductNameList());
+
     }
 
     public void displayChosenItem(ActionEvent e) {
         int index = comboBoxProductName.getSelectionModel().getSelectedIndex();
-        try {
-            this.model.getRecipeOfChosenItem(this.model.getProductIdList().get(index));
-            productIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("productId"));
-            productNameCol.setCellValueFactory(data -> new SimpleStringProperty(
-                    this.model.findProductNameById(data.getValue().getProductId())));
-            ingredientIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("ingredientId"));
-            ingredientNameCol.setCellValueFactory(data -> new SimpleStringProperty(
-                    this.model.findIngredientNameById(data.getValue().getIngredientId())));
-            ingredientQtyCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, Integer>("ingredientQty"));
-            if(this.model.getRecipesList().size() > 0) {
-                result.setText(String.valueOf(this.model.getRecipesList().get(0).getProductQty()));
-            }
+        if(index >= 0) {
+            try {
+                this.model.getRecipeOfChosenItem(this.model.getProductIdList().get(index));
+                productIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("productId"));
+                productNameCol.setCellValueFactory(data -> new SimpleStringProperty(
+                        this.model.findProductNameById(data.getValue().getProductId())));
+                ingredientIdCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, String>("ingredientId"));
+                ingredientNameCol.setCellValueFactory(data -> new SimpleStringProperty(
+                        this.model.findIngredientNameById(data.getValue().getIngredientId())));
+                ingredientQtyCol.setCellValueFactory(new PropertyValueFactory<ProductRecipe, Integer>("ingredientQty"));
+                if(this.model.getRecipesList().size() > 0) {
+                    result.setText(String.valueOf(this.model.getRecipesList().get(0).getProductQty()));
+                }
 
-            this.table.setItems(this.model.getRecipesList());
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+                this.table.setItems(this.model.getRecipesList());
+                this.table.getItems().addListener(new ListChangeListener<ProductRecipe>() {
+                    @Override
+                    public void onChanged(Change<? extends ProductRecipe> change) {
+                        if(model.getRecipesList().size() > 0) {
+                            result.setText(String.valueOf(model.getRecipesList().get(0).getProductQty()));
+                        }
+                    }
+                });
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
+
 
 //        productNameCol.setCellValueFactory(data -> new SimpleStringProperty(((new DAO() {
 //            String findName(){
@@ -101,6 +111,13 @@ public class RecipeController extends MasterController implements Initializable{
         stage.showAndWait();
         if(controller.getPr() != null) {
             this.model.addNewItem(controller.getPr());
+//            this.table.setItems(this.model.getRecipesList());
+//            this.table.getItems().addListener((ListChangeListener<ProductRecipe>) change -> {
+//                if(model.getRecipesList().size() > 0) {
+//                    result.setText(String.valueOf(model.getRecipesList().get(0).getProductQty()));
+//                }
+//            });
+
             controller.setPr(null);
         }
     }
@@ -173,5 +190,25 @@ public class RecipeController extends MasterController implements Initializable{
             }
         }
 
+    }
+
+    public void saveResult(ActionEvent e) {
+        try {
+            int qty = Integer.parseInt(result.getText());
+            this.model.saveResult(qty);
+            int index = comboBoxProductName.getSelectionModel().getSelectedIndex();
+            try {
+                this.model.getRecipeOfChosenItem(this.model.getProductIdList().get(index));
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        } catch (Exception exception) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Invalid Input");
+            alert.setContentText("Enter number for result please");
+            alert.showAndWait();
+        }
     }
 }

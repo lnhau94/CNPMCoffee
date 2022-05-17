@@ -317,6 +317,9 @@ alter table IncomeReports add supplier nvarchar(30)
 --Thêm cột WorkPositionLVL vào bảng WorkPosition (Gia Đại)
 alter table WorkPosition add WorkPositionLVL varchar(10)
 
+--Them
+alter table OrderDetails add productSize varchar(2)
+
 --Tạo dữ liệu thể loại
 insert into Category(CategoryName) values
 (N'Cà phê'),
@@ -428,4 +431,41 @@ SELECT * FROM WorkPosition, WorkType
 SELECT * FROM Employee
 
 alter table Orders drop CONSTRAINT FK_Orders_DailySales
-select * from Orders
+
+select * from OrderDetails
+GO
+
+select * from Ingredients
+S: 360
+M: 500
+L: 700
+go
+create trigger auto_update_ingredient
+on OrderDetails
+after INSERT
+AS
+BEGIN
+	
+	UPDATE Ingredients set storage = storage - (
+		select ((
+		case
+			when i.productSize LIKE 'S' then 360
+			when i.productSize LIKE 'M' then 500
+			when i.productSize LIKE 'L' then 700
+		end
+	)*pr.ingredientQty/pr.productQty)
+		from inserted i, ProductRecipes pr
+		where i.productId = pr.productID and ingredientID = pr.ingredientID
+		)
+		where ingredientID IN (select pr.ingredientID 
+							from inserted i join ProductRecipes pr on i.ProductID = pr.productID)
+END
+drop trigger auto_update_ingredient
+	select * from OrderDetails i join ProductRecipes pr on i.ProductID = pr.productID
+PRINT (cast(300*1000/500 as varchar(100)))
+select * from Ingredients
+update Ingredients set storage = 100
+insert into OrderDetails VALUES ('ODR0000003', 'PD010', 1, 'S')
+
+
+select pr.ingredientID from OrderDetails i join ProductRecipes pr on i.ProductID = pr.productID

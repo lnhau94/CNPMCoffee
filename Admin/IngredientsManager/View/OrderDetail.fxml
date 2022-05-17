@@ -14,7 +14,7 @@
 <AnchorPane prefHeight="640.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Admin.IngredientsManager.Controller.OrderDetailController">
    <children>
       <Label fx:id="header" layoutY="-4.0" prefHeight="32.0" prefWidth="1041.0" styleClass="header" text="Order Detail" />
-      <TableView fx:id="table" layoutX="16.0" layoutY="202.0" prefHeight="388.0" prefWidth="1013.0">
+      <TableView fx:id="table" layoutX="15.0" layoutY="201.0" prefHeight="388.0" prefWidth="1013.0">
          <columns>
             <TableColumn fx:id="idCol" prefWidth="122.5" text="ID" />
             <TableColumn fx:id="nameCol" prefWidth="258.5" text="Name" />
@@ -25,7 +25,7 @@
             <TableColumn fx:id="producerCol" prefWidth="128.0" text="Producer" />
          </columns>
       </TableView>
-      <Button layoutX="481.0" layoutY="596.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="94.0" styleClass="btn-confirm" text="Excel">
+      <Button layoutX="481.0" layoutY="596.0" mnemonicParsing="false" onAction="#exportExcel" prefHeight="39.0" prefWidth="94.0" styleClass="btn-confirm" text="Excel">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
