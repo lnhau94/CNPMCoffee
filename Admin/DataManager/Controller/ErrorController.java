@@ -28,6 +28,8 @@ public class ErrorController {
             case "name":
                 errorController.setMassage("The name already exists");
                 break;
+            case "position":
+                errorController.setMassage("Must be a full-time employee");
 
         }
         Dialog<ButtonType> dialogError = new Dialog<>();

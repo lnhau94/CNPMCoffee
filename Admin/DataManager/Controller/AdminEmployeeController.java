@@ -4,6 +4,7 @@ package Main.Admin.DataManager.Controller;
 import Main.Admin.DataManager.Model.ProductInTable;
 import Main.Entity.DataAccess.DAO;
 import Main.Entity.Element.Employee;
+import Main.MainApp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -82,6 +83,7 @@ public class AdminEmployeeController implements Initializable {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("type"));
         table.setItems(EmployeeList);
         SearchNameAutoFill();
+
     }
     public void changeSceneAddEvent(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
@@ -156,9 +158,9 @@ public class AdminEmployeeController implements Initializable {
     }
     public void GoBack(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(this.getClass().getResource("../CNPMCoffee/Admin/IngredientsManager/View/Admin.Employee.fxml"));
-        Parent AdminViewParent = FXMLLoader.load(getClass().getResource("../View/Admin.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(this.getClass().getResource("../View/Admin.fxml"));
+        Parent AdminViewParent = loader.load();
         Scene scene = new Scene(AdminViewParent);
         stage.setScene(scene);
     }

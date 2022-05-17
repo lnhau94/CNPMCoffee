@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -89,21 +90,33 @@ public class AdminEmployeeEditController implements Initializable {
         while ((rs1.next())){
             workTypeArrayList.add(new WorkType(rs1.getString(2), rs1.getString(3)));
         }
-        String PositionID = null;
-        String TypeID = null;
-        for(Main.Entity.Element.WorkPosition o: workPositionArrayList){
-            if(o.getWorkPositionName().equalsIgnoreCase(WorkPosition)){
-                PositionID=o.getWorkPositionId();
+        if((WorkPosition.equalsIgnoreCase("Manager") && workType.equalsIgnoreCase("Parttime"))||
+                ((WorkPosition.equalsIgnoreCase("ShiftLeader") && workType.equalsIgnoreCase("Parttime")))){
+            ErrorController ErrorController = new ErrorController();
+            try {
+                ErrorController.displayError("position");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        }
-        for(Main.Entity.Element.WorkType o: workTypeArrayList){
-            if(o.getTypeName().equalsIgnoreCase(workType)){
-                TypeID=o.getTypeId();
+
+        } else {
+            String PositionID = null;
+            String TypeID = null;
+            for(Main.Entity.Element.WorkPosition o: workPositionArrayList){
+                if(o.getWorkPositionName().equalsIgnoreCase(WorkPosition)){
+                    PositionID=o.getWorkPositionId();
+                }
             }
+            for(Main.Entity.Element.WorkType o: workTypeArrayList){
+                if(o.getTypeName().equalsIgnoreCase(workType)){
+                    TypeID=o.getTypeId();
+                }
+            }
+            dao.execute("UPDATE Employee SET EmployeeName=N'"+employeeName+"',EmployeePhone='"+employeePhone+"', WorkPositionID='"+PositionID+"',WorkTypeID='"+TypeID+"'WHERE EmployeeID ='"+employeeID+"' " );
+            AdminEmployeeController adminEmployeeController = new AdminEmployeeController();
+            adminEmployeeController.getDataEmployee();
         }
-        dao.execute("UPDATE Employee SET EmployeeName=N'"+employeeName+"',EmployeePhone='"+employeePhone+"', WorkPositionID='"+PositionID+"',WorkTypeID='"+TypeID+"'WHERE EmployeeID ='"+employeeID+"' " );
-        AdminEmployeeController adminEmployeeController = new AdminEmployeeController();
-        adminEmployeeController.getDataEmployee();
+
     }
     public boolean checkName(String Name) throws SQLException {
         AdminEmployeeController adminController = new AdminEmployeeController();

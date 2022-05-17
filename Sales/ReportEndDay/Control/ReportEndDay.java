@@ -144,33 +144,46 @@ public class ReportEndDay extends SceneController implements Initializable {
             valueTotalOrder = "0";
         }
         totalOrder.setText(valueTotalOrder);
-        valueTotalTea = getData("select count(pd.ProductID) from OrderDetails odt join Orders od ON od.OrderID = odt.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID where ct.CategoryID like N'Trà' and od.OrderDate = '%s' group by od.OrderDate", time);
+        valueTotalTea = getData(
+                "select sum(odt.Quantity) from OrderDetails odt join Orders od " +
+                "ON od.OrderID = odt.OrderID join Product pd on pd.ProductID = odt.ProductID " +
+                "join Category ct on ct.CategoryID = pd.CategoryID where ct.CategoryName like N'Trà' " +
+                "and od.OrderDate = '%s' group by od.OrderDate", time);
         if (valueTotalTea.compareToIgnoreCase("") == 0) {
             valueTotalTea = "0";
         }
         totalTea.setText(valueTotalTea);
-        valueTotalCoffee = getData("select count(pd.ProductID) from OrderDetails odt join Orders od ON od.OrderID = odt.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID where ct.CategoryID like N'Cà phê' and od.OrderDate = '%s' group by od.OrderDate", time);
+        valueTotalCoffee = getData("select sum(odt.Quantity) from OrderDetails odt join Orders od " +
+                "ON od.OrderID = odt.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct " +
+                "on ct.CategoryID = pd.CategoryID where ct.CategoryName like N'Cà phê' " +
+                "and od.OrderDate = '%s' group by od.OrderDate", time);
         if (valueTotalCoffee.compareToIgnoreCase("") == 0) {
             valueTotalCoffee = "0";
         }
         totalCoffee.setText(valueTotalCoffee);
-        valueTotalBread = getData("select count(pd.ProductID) from OrderDetails odt join Orders od ON od.OrderID = odt.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID where ct.CategoryID like N'Bánh mì' and od.OrderDate = '%s' group by od.OrderDate", time);
+        valueTotalBread = getData("select sum(odt.Quantity) from OrderDetails odt join Orders od " +
+                "ON od.OrderID = odt.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct " +
+                "on ct.CategoryID = pd.CategoryID where ct.CategoryName like N'Bánh mì' " +
+                "and od.OrderDate = '%s' group by od.OrderDate", time);
         if (valueTotalBread.compareToIgnoreCase("") == 0) {
             valueTotalBread = "0";
         }
         totalBread.setText(valueTotalBread);
-        if (valueTotalProduct.compareToIgnoreCase("") == 0) {
-            valueTotalProduct = "0";
+        boolean check = false;
+
+        try {
+            valueTotalProduct = String.valueOf(Integer.parseInt(valueTotalTea) +
+                    Integer.parseInt(valueTotalCoffee) + Integer.parseInt(valueTotalBread));
+            check = true;
+
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Không thể liên kết để lấy dữ liệu !");
+            alert.showAndWait();
         }
-        else {
-            try {
-                valueTotalProduct = String.valueOf(Integer.parseInt(valueTotalTea) + Integer.parseInt(valueTotalCoffee) + Integer.parseInt(valueTotalBread));
-            } catch (NumberFormatException e) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Không thể liên kết để lấy dữ liệu !");
-                alert.showAndWait();
-            }
+        if(check == false) {
+            valueTotalProduct = "0";
         }
         totalProduct.setText(valueTotalProduct);
         nameEmp.setText(MainApp.staff.getEmployeeName());
