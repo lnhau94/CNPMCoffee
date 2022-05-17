@@ -139,7 +139,13 @@ public class ProductStatistic extends ScreenManager implements Initializable {
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
                     listProd.clear();
-                    getData("select odt.ProductID, pd.ProductName, pd.CategoryID, sum(od.TotalPrice), sum(odt.Quantity)  from Orders od join OrderDetails odt on odt.OrderID = od.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by odt.ProductID,pd.ProductName, pd.CategoryID", startTime, endTime);
+                    getData(
+                            "select pd.ProductID, pd.ProductName, pd.CategoryID, sum(pr.ProductPrice*odt.Quantity), sum(odt.Quantity), od.OrderDate " +
+                                    "from Orders od join OrderDetails odt on odt.OrderID = od.OrderID " +
+                                    "join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID " +
+                                    "join ProductPrice pr on pr.ProductID = odt.ProductID " +
+                                    "where od.OrderDate >=('%s') and od.OrderDate <= ('%s') and pr.ProductSize = odt.productSize " +
+                                    "group by od.OrderDate, pd.ProductID, pd.ProductName, pd.CategoryID", startTime, endTime);
                     tableProduct.refresh();
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
@@ -190,7 +196,13 @@ public class ProductStatistic extends ScreenManager implements Initializable {
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
                     listProd.clear();
-                    getData("select odt.ProductID, pd.ProductName, pd.CategoryID, sum(od.TotalPrice), sum(odt.Quantity)  from Orders od join OrderDetails odt on odt.OrderID = od.OrderID join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by odt.ProductID,pd.ProductName, pd.CategoryID", startTime, endTime);
+                    getData(
+                            "select pd.ProductID, pd.ProductName, pd.CategoryID, sum(pr.ProductPrice*odt.Quantity), sum(odt.Quantity), od.OrderDate " +
+                            "from Orders od join OrderDetails odt on odt.OrderID = od.OrderID " +
+                            "join Product pd on pd.ProductID = odt.ProductID join Category ct on ct.CategoryID = pd.CategoryID " +
+                            "join ProductPrice pr on pr.ProductID = odt.ProductID " +
+                            "where od.OrderDate >=('%s') and od.OrderDate <= ('%s') and pr.ProductSize = odt.productSize " +
+                            "group by od.OrderDate, pd.ProductID, pd.ProductName, pd.CategoryID", startTime, endTime);
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setHeaderText(null);

@@ -1,6 +1,7 @@
 package Main.Helpers.MainControl;
 
 import Main.Admin.DataManager.Controller.AdminController;
+import Main.Sales.ReportEndDay.Control.ReportCancelDay;
 import Main.Sales.Sales.Control.SalesApplicationControl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -66,6 +67,7 @@ public class ControlBar extends VBox {
         }
         this.getScene().getWindow().sizeToScene();
     }
+
     public void initGUI(){
         saleBtn = new ToggleButton("Sale");
         EoDsBtn = new ToggleButton("CloseStore");

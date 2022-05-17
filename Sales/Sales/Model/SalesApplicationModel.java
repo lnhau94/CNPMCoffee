@@ -128,7 +128,7 @@ public class SalesApplicationModel {
                     "insert into Orders (TotalPrice, OrderDate, OrderTime, Cashier) " +
                     "output inserted.OrderID " +
                     "values(" +
-                    "?, getDate(), (select convert (time, getdate())), ? " +
+                    "?, getDate(), getDate(), ? " +
                     ")");
            pstm.setInt(1,currentOrders.getTotalPrice());
            pstm.setString(2, MainApp.staff.getEmployeeID());
@@ -136,11 +136,13 @@ public class SalesApplicationModel {
            ResultSet rs = pstm.getResultSet();
            rs.next();
            String orderId = rs.getString(1);
-           pstm = dao.getPrepareStatement("insert into OrderDetails values (?,?,?)");
+
            for (OrderDetail od : currentChoices){
+               pstm = dao.getPrepareStatement("insert into OrderDetails values (?,?,?,?)");
                pstm.setString(1,orderId);
                pstm.setString(2,od.getProductChoice().getProductId());
                pstm.setInt(3,od.getQuantity());
+               pstm.setString(4, od.getSize());
                pstm.execute();
            }
         } catch (SQLException e) {

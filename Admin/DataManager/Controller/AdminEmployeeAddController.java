@@ -91,9 +91,12 @@ public class AdminEmployeeAddController implements Initializable {
         String type = textType.getValue();
         if((Position.equalsIgnoreCase("Manager") && type.equalsIgnoreCase("Parttime"))||
                 ((Position.equalsIgnoreCase("ShiftLeader") && type.equalsIgnoreCase("Parttime")))){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Khong them duoc truong");
-            alert.showAndWait();
+            ErrorController ErrorController = new ErrorController();
+            try {
+                ErrorController.displayError("position");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }else{
             DAO dao = new DAO();
             ResultSet rs = dao.executeQuery("SELECT * FROM WorkPosition");

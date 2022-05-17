@@ -83,7 +83,6 @@ create table Product
 	CategoryID varchar(6) not null
 );
 
-select * from IncomeReports
 
 --Cơ sở dữ liệu chung cho hóa đơn
 --Hóa đơn
@@ -124,8 +123,6 @@ create table Ingredients
 	constraint PK_Ingredients primary key (ingredientID)
 )
 
-insert into Ingredients(ingredientName, ingredientType, storage) values('Tra', 'Tra', 12)
-select * from Ingredients
 --Bảng công thức sản phẩm
 create table ProductRecipes
 (
@@ -325,8 +322,6 @@ insert into Category(CategoryName) values
 (N'Cà phê'),
 (N'Trà'),
 (N'Bánh mì')
-select * from Category
-select * from Product
 
 --Tạo dữ liệu sản phẩm
 insert into Product(ProductName, CategoryID) values
@@ -380,7 +375,17 @@ insert into ProductPrice(ProductID, ProductSize, ProductPrice) values
 ('PD009', 'M', 30000),
 ('PD010', 'M', 30000),
 ('PD011', 'M', 30000),
-('PD012', 'M', 30000)
+('PD012', 'M', 30000),
+
+('PD009', 'S', 30000),
+('PD010', 'S', 30000),
+('PD011', 'S', 30000),
+('PD012', 'S', 30000),
+
+('PD009', 'L', 42000),
+('PD010', 'L', 42000),
+('PD011', 'L', 42000),
+('PD012', 'L', 42000)
 
 --Thêm dữ liệu nguyên liệu cho bảng Ingredients
 insert into Ingredients(ingredientName, ingredientType, storage, Producer, price) values
@@ -412,7 +417,6 @@ insert into Ingredients(ingredientName, ingredientType, storage, Producer, price
 
 
 INSERT INTO dbo.WorkType(WorkTypeName) VALUES ('Parttime'), ('Fulltime');
-SELECT * FROM dbo.WorkType ;
 INSERT INTO WorkPosition(WorkPositionName) VALUES ('Cashier'),('Barista'),('Manager'),('ShiftLeader');
 INSERT INTO PositionType VALUES
 ('WP001','WT001','20000'),
@@ -420,52 +424,3 @@ INSERT INTO PositionType VALUES
 ('WP002','WT001','25000'),
 ('WP002','WT002','35000'),
 ('WP003','WT002','50000')
-
-
-
-
-INSERT INTO Product (ProductName, CategoryID) VALUES (N'ProductName','CAT001')
-INSERT INTO Employee (EmployeeName, EmployeePhone, WorkPositionID, WorkTypeID) VALUES('Đại','11','WP001','WT001')
-
-SELECT * FROM WorkPosition, WorkType
-SELECT * FROM Employee
-
-alter table Orders drop CONSTRAINT FK_Orders_DailySales
-
-select * from OrderDetails
-GO
-
-select * from Ingredients
-S: 360
-M: 500
-L: 700
-go
-create trigger auto_update_ingredient
-on OrderDetails
-after INSERT
-AS
-BEGIN
-	
-	UPDATE Ingredients set storage = storage - (
-		select ((
-		case
-			when i.productSize LIKE 'S' then 360
-			when i.productSize LIKE 'M' then 500
-			when i.productSize LIKE 'L' then 700
-		end
-	)*pr.ingredientQty/pr.productQty)
-		from inserted i, ProductRecipes pr
-		where i.productId = pr.productID and ingredientID = pr.ingredientID
-		)
-		where ingredientID IN (select pr.ingredientID 
-							from inserted i join ProductRecipes pr on i.ProductID = pr.productID)
-END
-drop trigger auto_update_ingredient
-	select * from OrderDetails i join ProductRecipes pr on i.ProductID = pr.productID
-PRINT (cast(300*1000/500 as varchar(100)))
-select * from Ingredients
-update Ingredients set storage = 100
-insert into OrderDetails VALUES ('ODR0000003', 'PD010', 1, 'S')
-
-
-select pr.ingredientID from OrderDetails i join ProductRecipes pr on i.ProductID = pr.productID

@@ -129,7 +129,12 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
                     listRevenue.clear();
-                    getData("select od.OrderDate, count(odt.ProductID), count(od.OrderID), sum(od.TotalPrice) from Orders od join OrderDetails odt ON odt.OrderID = od.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by od.OrderDate", startTime, endTime);
+                    getData(
+                            "select od.OrderDate, count(distinct od.OrderID), sum(odt.Quantity), " +
+                                    "sum(distinct od.TotalPrice) " +
+                                    "from Orders od join OrderDetails odt on odt.OrderID = od.OrderID " +
+                                    "where od.OrderDate >=('%s') and od.OrderDate <= ('%s') " +
+                                    "group by  od.OrderDate", startTime, endTime);
                     tableProduct.refresh();
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
@@ -166,8 +171,8 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
         colDate.setCellValueFactory(new PropertyValueFactory<Revenue, String>("date"));
-        colProduct.setCellValueFactory(new PropertyValueFactory<Revenue, String>("numOrder"));
-        colOrder.setCellValueFactory(new PropertyValueFactory<Revenue, String>("numProduct"));
+        colProduct.setCellValueFactory(new PropertyValueFactory<Revenue, String>("numProduct"));
+        colOrder.setCellValueFactory(new PropertyValueFactory<Revenue, String>("numOrder"));
         colPrice.setCellValueFactory(new PropertyValueFactory<Revenue, String>("totalPrice"));
         if (beginTime != null && lastTime != null) {
             try {
@@ -179,7 +184,12 @@ public class RevenueStatistic extends ScreenManager implements Initializable {
                     startTime = dateFormat.format(beginDate);
                     endTime = dateFormat.format(finishDate);
                     listRevenue.clear();
-                    getData("select od.OrderDate, count(odt.ProductID), count(od.OrderID), sum(od.TotalPrice) from Orders od join OrderDetails odt ON odt.OrderID = od.OrderID where od.OrderDate >=('%s') and od.OrderDate <= ('%s') group by od.OrderDate", startTime, endTime);
+                    getData(
+                            "select od.OrderDate, count(distinct od.OrderID), sum(odt.Quantity), " +
+                            "sum(distinct od.TotalPrice) " +
+                            "from Orders od join OrderDetails odt on odt.OrderID = od.OrderID " +
+                            "where od.OrderDate >=('%s') and od.OrderDate <= ('%s') " +
+                            "group by  od.OrderDate", startTime, endTime);
                 } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setHeaderText(null);
