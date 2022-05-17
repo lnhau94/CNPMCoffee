@@ -22,6 +22,12 @@ public class DAO {
 
 //    private String DBuser = "sa";
 //    private String DBpass = "123456";
+    /*
+    private String DBpass = "123456";
+            "serverName=" +
+                    "databaseName=CNPM;" +
+                    "encrypt=true;trustServerCertificate=true";
+    */
     private String DBuser = "admin";
     private String DBpass = "1248163264128";
 
