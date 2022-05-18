@@ -16,13 +16,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminController implements Initializable {
+public class AdminController implements Initializable{
     @FXML
     private Label txtUserName;
 
     public void setTxtUserName(String name){
         txtUserName.setText(name);
     }
+
     public void changeSceneEmployee(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         stage.centerOnScreen();
