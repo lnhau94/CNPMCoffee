@@ -195,6 +195,12 @@ public class ControlBar extends VBox {
             //changeLocation();
         });
         EoDsBtn.setOnAction(e->{
+            try {
+                eodScreen = new Scene(FXMLLoader.load(new File("Sales/ReportEndDay/View/ReportEndDay.fxml").toURI().toURL()));
+                eodScreen.getStylesheets().add(new File("Sales/ReportEndDay/View/CSS/ReportEndDay.css").toURI().toURL().toExternalForm());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             owner.setScene(eodScreen);
             //changeLocation();
         });

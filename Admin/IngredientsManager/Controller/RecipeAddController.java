@@ -54,7 +54,7 @@ public class RecipeAddController extends MasterController implements Initializab
 
     public void addNewIngredient(ActionEvent e) {
         if(productIdTxtField.getText() == "" || ingredientIdTxtField.getText() == "" ||
-                ingredientQtyTxtField.getText() == "" || productQtyTxtField.getText() == "") {
+                ingredientQtyTxtField.getText() == "") {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Input");
@@ -62,10 +62,16 @@ public class RecipeAddController extends MasterController implements Initializab
             alert.showAndWait();
         } else {
             try {
+                int i;
+                if(productQtyTxtField.getText() == "") {
+                    i = 0;
+                } else {
+                    i = Integer.parseInt(productQtyTxtField.getText());
+                }
                 pr = new ProductRecipe(
                         productIdTxtField.getText(),
                         ingredientIdTxtField.getText(),
-                        Integer.parseInt(productQtyTxtField.getText()),
+                        i,
                         Integer.parseInt(ingredientQtyTxtField.getText())
                 );
                 ((Stage) ((Node)e.getSource()).getScene().getWindow()).close();
