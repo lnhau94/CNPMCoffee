@@ -64,18 +64,20 @@ public class CategoryStatistic extends ScreenManager implements Initializable {
         ResultSet rs = null;
         Connection cnn = null;
         try {
-//            String url = "jdbc:sqlserver://;" +
-//                        "serverName=localhost;" +
-//                        "databaseName=CNPM;" +
-//                        "encrypt=true;trustServerCertificate=true";
+            String url = "jdbc:sqlserver://;" +
+                        "serverName=localhost;" +
+                        "databaseName=CNPM;" +
+                        "encrypt=true;trustServerCertificate=true";
 //            String user = "admin";
 //            String pass = "123456";
-            String url = "jdbc:sqlserver://;" +
-                    "serverName=" +
-                    "databaseName=CNPM;" +
-                    "encrypt=true;trustServerCertificate=true";
-            String user = "admin";
-            String pass = "1248163264128";
+            String user = "sa";
+            String pass = "reallyStrongPwd123";
+//            String url = "jdbc:sqlserver://;" +
+//                    "serverName=database-1.czhlmlnnya7d.ap-southeast-1.rds.amazonaws.com;" +
+//                    "databaseName=CNPM;" +
+//                    "encrypt=true;trustServerCertificate=true";
+//            String user = "admin";
+//            String pass = "1248163264128";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cnn = DriverManager.getConnection(url, user, pass);
             Statement state = cnn.createStatement();
