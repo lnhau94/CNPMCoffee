@@ -13,6 +13,7 @@ public class SalesApplicationModelTest {
 
     ArrayList<OrderDetail> currentChoices;
     private Order currentOrders = new Order();
+//    Hello
 
     public void calculatePrice(){
         int totalPrice = 0;

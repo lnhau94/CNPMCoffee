@@ -13,6 +13,7 @@ import static org.junit.Assert.assertNotSame;
 public class SalaryTest {
     public int getDataSalary(String ComboBoxMonth, String empID) throws SQLException {
         DAO sqlEMP = new DAO();
+//        Hello
         int month ;
         if(ComboBoxMonth==null){
             month = Month("May");
