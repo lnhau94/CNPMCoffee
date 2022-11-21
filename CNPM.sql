@@ -325,18 +325,18 @@ insert into Category(CategoryName) values
 
 --Tạo dữ liệu sản phẩm
 insert into Product(ProductName, CategoryID) values
-(N'Cà phê đen', 'CAT002'),
-(N'Cà phê sữa đá', 'CAT002'),
-(N'Bạc xỉu đá', 'CAT002'),
-(N'Espresso', 'CAT002'),
-(N'Trà sen vàng', 'CAT003'),
-(N'Trà thanh đào', 'CAT003'),
-(N'Trà thạch vải', 'CAT003'),
-(N'Trà xanh đậu đỏ', 'CAT003'),
-(N'Bánh mì ốp la', 'CAT004'),
-(N'Bánh mì thịt', 'CAT004'),
-(N'Bánh mì cá ngừ', 'CAT004'),
-(N'Bánh mì gà xé', 'CAT004')
+(N'Cà phê đen', 'CAT001'),
+(N'Cà phê sữa đá', 'CAT001'),
+(N'Bạc xỉu đá', 'CAT001'),
+(N'Espresso', 'CAT001'),
+(N'Trà sen vàng', 'CAT002'),
+(N'Trà thanh đào', 'CAT002'),
+(N'Trà thạch vải', 'CAT002'),
+(N'Trà xanh đậu đỏ', 'CAT002'),
+(N'Bánh mì ốp la', 'CAT003'),
+(N'Bánh mì thịt', 'CAT003'),
+(N'Bánh mì cá ngừ', 'CAT003'),
+(N'Bánh mì gà xé', 'CAT003')
 
 -- Tạo dữ liệu giá sản phẩm theo size
 insert into ProductPrice(ProductID, ProductSize, ProductPrice) values
@@ -424,3 +424,18 @@ INSERT INTO PositionType VALUES
 ('WP002','WT001','25000'),
 ('WP002','WT002','35000'),
 ('WP003','WT002','50000')
+
+select * from Employee
+select * from Account
+select * from WorkType
+select * from WorkPosition
+
+insert into Employee(EmployeeName, EmployeePhone, WorkPositionID, WorkTypeID) values
+(N'Nguyen Thi Thanh Huyen', '0909090909', 'WP003', 'WT002')
+
+insert into Account(AccountUsername, AccountPassword, EmployeeID) values
+('thanhhuyen', '123456', 'EMP0001')
+
+
+update WorkPosition set WorkPositionLVL = 1 where WorkPositionID != 'WP003'
+alter table ORDERs drop CONSTRAINT FK_Orders_DailySales

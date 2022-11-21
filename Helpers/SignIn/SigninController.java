@@ -66,7 +66,6 @@ public class SigninController {
             }catch (SQLException e){
                 System.out.println("DatabaseError");
             }
-
             switch (flag){
                 case -1:
                     a.setContentText("Account not exist");
